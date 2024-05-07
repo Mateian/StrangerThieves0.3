@@ -327,7 +327,6 @@ public class UI {
     }
 
     public void drawFPS(double FPS) {
-        // Draw FPS
         graph2.setColor(Color.white);
         graph2.setFont(console_40B);
         graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
