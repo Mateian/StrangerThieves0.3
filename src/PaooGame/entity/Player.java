@@ -307,7 +307,6 @@ public class Player extends Entity {
         invincible = false;
     }
     public void pickUpObject(int i) {
-
         if(i != invalidIndex) {
             String objectName = gp.obj[i].name;
 

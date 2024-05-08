@@ -103,8 +103,6 @@ public class UI {
             if(gp.gameState == gp.menuState) {
                 drawMenu();
             }
-
-
             if(gp.gameState == gp.playState) {
                 graph2.setFont(arial_40);
                 graph2.setColor(Color.white);
@@ -138,6 +136,9 @@ public class UI {
                 // Player's Life
                 drawLife();
 
+                // Current Weapon
+                currentWeapon();
+
             }
             if(gp.gameState == gp.pauseState) {
                 drawPauseScreen();
@@ -150,6 +151,16 @@ public class UI {
                 drawDeathScreen();
             }
         }
+    }
+    public void currentWeapon() {
+        BufferedImage frame;
+        try{
+            frame = ImageIO.read(getClass().getResourceAsStream("/gui/current-weapon-frame.png"));
+            graph2.drawImage(frame, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
+        } catch (IOException e) {
+            System.out.println("Error reading current-weapon-frame file.");
+        }
+
     }
     public void drawDeathScreen() {
         String text = "You are dead";
@@ -209,14 +220,14 @@ public class UI {
         // Reset
         x = gp.tileSize / 2  + gp.tileSize * gp.player.maxLife / 2;
         y = gp.screenHeight - gp.tileSize - 16;
-        i = 0;
 
         if(gp.player.life < 0) {
             gp.player.life = 0;
         }
-        String hp = "" + gp.player.life;
+        String hp = (int)((double)gp.player.life / (double)gp.player.maxLife * 100) + "%";
         // HP Text
         graph2.setColor(Color.white);
+        graph2.setFont(console_40B);
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 24));
         graph2.drawString(hp, x, y);
     }
