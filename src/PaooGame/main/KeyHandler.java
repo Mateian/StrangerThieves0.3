@@ -80,8 +80,8 @@ public class KeyHandler implements KeyListener {
                 ePressed = true;
             }
             if(code == KeyEvent.VK_G) {
-                if(Player.hasWeapon) {
-                    Player.hasWeapon = false;
+                if(gp.player.hasWeapon) {
+                    gp.player.hasWeapon = false;
                 }
             }
             if(code == KeyEvent.VK_SPACE) {

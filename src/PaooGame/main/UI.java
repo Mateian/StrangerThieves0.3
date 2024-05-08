@@ -4,14 +4,13 @@ import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
 import PaooGame.entity.Entity;
 import PaooGame.objects.OBJ_Heart;
+import PaooGame.objects.OBJ_Skargun;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.TimerTask;
 
 public class UI {
 
@@ -25,6 +24,9 @@ public class UI {
     // Images
     BufferedImage full_heart, half_heart, black_heart;
     BufferedImage enemyImage;
+    BufferedImage weapon;
+    BufferedImage weaponFrame;
+
 
     // Booleans
     public boolean messageOn = false;
@@ -59,6 +61,15 @@ public class UI {
         full_heart = heart.image;
         half_heart = heart.image2;
         black_heart = heart.image3;
+
+        // Current Weapon
+        try {
+            weaponFrame = ImageIO.read(getClass().getResourceAsStream("/gui/current-weapon-frame.png"));
+        } catch(IOException e) {
+            System.out.println("Error reading current-weapon-frame file.");
+        }
+        Entity currentWeapon = new OBJ_Skargun(gp);
+        weapon = currentWeapon.image;
     }
 
     public void showMessage(String text) {
@@ -137,8 +148,8 @@ public class UI {
                 drawLife();
 
                 // Current Weapon
-                currentWeapon();
-
+                currentWeaponFrame();
+                drawCurrentWeapon();
             }
             if(gp.gameState == gp.pauseState) {
                 drawPauseScreen();
@@ -152,14 +163,13 @@ public class UI {
             }
         }
     }
-    public void currentWeapon() {
-        BufferedImage frame;
-        try{
-            frame = ImageIO.read(getClass().getResourceAsStream("/gui/current-weapon-frame.png"));
-            graph2.drawImage(frame, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
-        } catch (IOException e) {
-            System.out.println("Error reading current-weapon-frame file.");
+    public void drawCurrentWeapon() {
+        if(gp.player.hasWeapon) {
+            graph2.drawImage(weapon, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
         }
+    }
+    public void currentWeaponFrame() {
+        graph2.drawImage(weaponFrame, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
 
     }
     public void drawDeathScreen() {

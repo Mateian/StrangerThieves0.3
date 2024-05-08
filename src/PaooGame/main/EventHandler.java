@@ -55,7 +55,7 @@ public class EventHandler {
         gp.gameState = gameState;
         gp.ui.dialogText = "Ai luat damage!";
         gp.player.life--;
-//        eventRect[column][row].eventDone = true;
+        eventRect[column][row].eventDone = true;
         canTouchEvent = false;
     }
 

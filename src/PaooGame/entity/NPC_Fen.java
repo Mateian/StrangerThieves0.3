@@ -21,7 +21,7 @@ public class NPC_Fen extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-                setDialog();
+        setDialog();
         getImage();
     }
 

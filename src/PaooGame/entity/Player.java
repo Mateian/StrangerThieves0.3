@@ -26,7 +26,7 @@ public class Player extends Entity {
 
     // Boolean
     public boolean moving = false;
-    public static boolean hasWeapon = false;
+    public  boolean hasWeapon = false;
 
     // Counters
     int counterGun = 0;
@@ -334,11 +334,6 @@ public class Player extends Entity {
                     gp.ui.showMessage("Speed up!");
                     break;
                 case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playFX(4);
-                    break;
-                case "Skargun":
                     counterGun++;
                         if(!hasWeapon) {
                             System.out.println("You picked Skargun!");

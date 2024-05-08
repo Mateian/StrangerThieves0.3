@@ -15,9 +15,13 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gp.obj[0] = new OBJ_Skargun(gp);
+        gp.obj[0] = new OBJ_Chest(gp);
         gp.obj[0].worldX = 22 * gp.tileSize;
         gp.obj[0].worldY = 30 * gp.tileSize;
+
+        gp.obj[1] = new OBJ_Heart(gp);
+        gp.obj[1].worldX = 21 * gp.tileSize;
+        gp.obj[1].worldY = 30 * gp.tileSize;
     }
 
     public void setNPC() {
