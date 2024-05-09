@@ -53,7 +53,7 @@ public class UI {
     public UI(Game gp) {
         this.gp = gp;
         arial_40 = new Font("Comic Sans MS", Font.PLAIN, 40);
-        console_40B = new Font("Console", Font.BOLD, 40);
+        console_40B = new Font("Consolas", Font.BOLD, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
         MST_Enemy enemy = new MST_Enemy(gp);
         enemyImage = enemy.down1;
@@ -73,12 +73,10 @@ public class UI {
         Entity currentWeapon = new OBJ_Skargun(gp);
         weapon = currentWeapon.image;
     }
-
     public void showMessage(String text) {
         message = text;
         messageOn = true;
     }
-
     public void draw(Graphics2D graph2) {
         this.graph2 = graph2;
         if(gameFinished) {
@@ -192,6 +190,7 @@ public class UI {
     public void options_draw(int frameX, int frameY) {
         int textX;
         int textY;
+        graph2.setFont(console_40B);
 
         // Title
         String text = "Options";
@@ -233,7 +232,7 @@ public class UI {
 
         // Exit
         textY += gp.tileSize;
-        graph2.drawString("Exit Game", textX, textY);
+        graph2.drawString("Save & Exit", textX, textY);
         if(commandNumber == 3) {
             graph2.setFont(graph2.getFont().deriveFont(25F));
             graph2.drawString("->", textX - 30, textY);
@@ -244,8 +243,13 @@ public class UI {
         }
         graph2.setFont(graph2.getFont().deriveFont(30F));
 
+        textY += gp.tileSize;
+        graph2.setFont(graph2.getFont().deriveFont(15F));
+        graph2.drawString("W, S, ENTER - select and confirm", textX, textY);
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
         // Back
-        textY += gp.tileSize * 2;
+        textY += gp.tileSize;
         graph2.drawString("Back", textX, textY);
         if(commandNumber == 4) {
             graph2.setFont(graph2.getFont().deriveFont(25F));
@@ -279,6 +283,7 @@ public class UI {
     public void controls_draw(int frameX, int frameY) {
         int textX;
         int textY;
+        graph2.setFont(console_40B);
 
         // Title
         String text = "Control";
@@ -288,10 +293,12 @@ public class UI {
 
         textX = frameX + gp.tileSize;
         textY += gp.tileSize;
+        graph2.setFont(graph2.getFont().deriveFont(25F));
         graph2.drawString("Move", textX, textY); textY += gp.tileSize;
         graph2.drawString("Confirm", textX, textY); textY += gp.tileSize;
         graph2.drawString("Use", textX, textY); textY += gp.tileSize;
         graph2.drawString("Shoot", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Pause", textX, textY); textY += gp.tileSize;
         graph2.drawString("Options", textX, textY); textY += gp.tileSize;
 
         textX = frameX + gp.tileSize * 5;
@@ -300,6 +307,7 @@ public class UI {
         graph2.drawString("Enter", textX, textY); textY += gp.tileSize;
         graph2.drawString("E", textX, textY); textY += gp.tileSize;
         graph2.drawString("Space", textX, textY); textY += gp.tileSize;
+        graph2.drawString("P", textX, textY); textY += gp.tileSize;
         graph2.drawString("Esc", textX, textY); textY += gp.tileSize;
 
         // Back
@@ -396,7 +404,7 @@ public class UI {
     public void drawMenu() {
         // Background
         try {
-            BufferedImage backGroundImage = ImageIO.read(getClass().getResourceAsStream("/icons/icon.png"));
+            BufferedImage backGroundImage = ImageIO.read(getClass().getResourceAsStream("/icons/background-image.png"));
 //            int width = backGroundImage.getWidth();
 //            int height = backGroundImage.getHeight();
             graph2.drawImage(backGroundImage, 0, 0, gp.screenWidth, gp.screenHeight, null);
@@ -404,21 +412,28 @@ public class UI {
             e.printStackTrace();
         }
 
+        graph2.setFont(new Font("Consolas", Font.PLAIN,50));
+
         // Game Name
         graph2.setFont(graph2.getFont().deriveFont(Font.BOLD, 80F));
         String name = "Stranger Thieves";
         int x = xCenterText(name);
         int y = 4 * gp.tileSize;
+        graph2.setColor(Color.darkGray);
+        graph2.fillRoundRect(x - 10, y - 70, 720, 100, 20, 20);
         graph2.setColor(Color.white);
         graph2.drawString(name, x, y);
 
         // Menu
         String option;
-        graph2.setFont(graph2.getFont().deriveFont(Font.BOLD, gp.tileSize));
-
+        graph2.setFont(graph2.getFont().deriveFont(Font.BOLD, 55));
+        graph2.setColor(Color.darkGray);
+        graph2.fillRect(xCenterText("New Game") - gp.tileSize / 2, y + 2 * gp.tileSize, 290, 180);
         option = "New Game";
         x = xCenterText(option);
         y += 3 * gp.tileSize;
+
+
         if(commandNumber == 0) {
             graph2.setColor(new Color(255, 255 ,255));
             graph2.fillRect(x, y + 5, (int)graph2.getFontMetrics().getStringBounds(option, graph2).getWidth(), 2);
@@ -444,6 +459,17 @@ public class UI {
             graph2.setColor(new Color(255, 255 ,255));
             graph2.fillRect(x, y + 5, (int)graph2.getFontMetrics().getStringBounds(option, graph2).getWidth(), 2);
         }
+        graph2.setColor(Color.white);
+        graph2.drawString(option, x, y);
+
+
+        option = "W, S, ENTER - select and confirm";
+        graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 30));
+        graph2.setColor(Color.darkGray);
+        graph2.fillRect(xCenterText("W, S, ENTER - select and confirm") - 10, y + 10 + gp.tileSize - (int)graph2.getFontMetrics().getStringBounds("W, S, ENTER - select and confirm", graph2).getHeight(), (int)graph2.getFontMetrics().getStringBounds("W, S, ENTER - select and confirm", graph2).getWidth() + 20, (int)graph2.getFontMetrics().getStringBounds("W, S, ENTER - select and confirm", graph2).getHeight());
+
+        x = xCenterText(option);
+        y += gp.tileSize;
         graph2.setColor(Color.white);
         graph2.drawString(option, x, y);
     }

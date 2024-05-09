@@ -34,13 +34,13 @@ public class KeyHandler implements KeyListener {
 
         // Menu State
         if(gp.gameState == gp.menuState) {
-            if(code == KeyEvent.VK_UP) {
+            if(code == KeyEvent.VK_W) {
                 gp.ui.commandNumber--;
                 if(gp.ui.commandNumber < 0) {
                     gp.ui.commandNumber = 2;
                 }
             }
-            if(code == KeyEvent.VK_DOWN) {
+            if(code == KeyEvent.VK_S) {
                 gp.ui.commandNumber++;
                 if(gp.ui.commandNumber > 2) {
                     gp.ui.commandNumber = 0;
@@ -91,6 +91,9 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_SPACE) {
                 shotPressed = true;
             }
+            if(code == KeyEvent.VK_P) {
+                gp.gameState = gp.pauseState;
+            }
 
             // Debug
             if(code == KeyEvent.VK_T) {
@@ -107,7 +110,7 @@ public class KeyHandler implements KeyListener {
 
         // Pause State
         else if(gp.gameState == gp.pauseState) {
-            if(code == KeyEvent.VK_ESCAPE) {
+            if(code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
             }
         }
