@@ -273,6 +273,8 @@ public class UI {
         graph2.drawRect(textX, textY, 120 + gp.tileSize, 24);
         volumeWidth = 42 * gp.fx.volumeScale;
         graph2.fillRect(textX, textY, volumeWidth, 24);
+
+        gp.config.saveConfig();
     }
     public void controls_draw(int frameX, int frameY) {
         int textX;

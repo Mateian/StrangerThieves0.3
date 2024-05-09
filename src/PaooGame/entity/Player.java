@@ -68,7 +68,7 @@ public class Player extends Entity {
         worldY = gp.tileSize * 30 - 1;
         speed = 4;
         direction = "up";
-        maxLife = 10;
+        maxLife = 6;
         life = maxLife;
         projectile = new OBJ_Bullet(gp);
     }

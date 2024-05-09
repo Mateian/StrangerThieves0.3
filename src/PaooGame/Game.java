@@ -45,6 +45,7 @@ public class Game extends JPanel implements Runnable {
     public Thread gameThread;
     public CollisionChecker colChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public Config config = new Config(this);
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
@@ -85,6 +86,7 @@ public class Game extends JPanel implements Runnable {
     public void setupGame() {
         wnd = new GameWindow("Stranger Thieves", tileSize * maxScreenColumn, tileSize * maxScreenRow, this);
         wnd.BuildGameWindow();
+        config.loadConfig();
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
