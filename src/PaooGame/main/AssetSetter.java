@@ -2,6 +2,7 @@ package PaooGame.main;
 
 import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
+import PaooGame.enemy.MST_MegaEnemy;
 import PaooGame.entity.NPC_Fen;
 import PaooGame.objects.*;
 
@@ -56,8 +57,47 @@ public class AssetSetter {
         }
 
         // Level 2 Monsters
+        mapNum = 1;
+        k = 0;
 
+        // Zona 1
+        for(int i = 0; i < 5; ++i) {
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * (31 + i);
+            k++;
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * (32 + i);
+            k++;
+        }
+
+        // Zona 2
+        for(int i = 0; i < 2; ++i) {
+            gp.mst[mapNum][k] = new MST_MegaEnemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (17 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
+            k++;
+        }
+
+        // Zona 3
+        for(int i = 0; i < 2; ++i) {
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (31 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
+            k++;
+        }
+
+        // Zona 4
+        for(int i = 0; i < 2; ++i) {
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (14 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 7;
+            k++;
+        }
 
         // Level 3 Monsters
+        mapNum = 2;
+        k = 0;
     }
 }

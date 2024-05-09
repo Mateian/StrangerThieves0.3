@@ -294,21 +294,23 @@ public class UI {
         textX = frameX + gp.tileSize;
         textY += gp.tileSize;
         graph2.setFont(graph2.getFont().deriveFont(25F));
-        graph2.drawString("Move", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Confirm", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Use", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Shoot", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Pause", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Options", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Move", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Confirm", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Use", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Shoot", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Pause", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Drop weapon", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Options", textX, textY); textY += gp.tileSize / 2;
 
         textX = frameX + gp.tileSize * 5;
         textY = frameY + gp.tileSize * 2;
-        graph2.drawString("W A S D", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Enter", textX, textY); textY += gp.tileSize;
-        graph2.drawString("E", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Space", textX, textY); textY += gp.tileSize;
-        graph2.drawString("P", textX, textY); textY += gp.tileSize;
-        graph2.drawString("Esc", textX, textY); textY += gp.tileSize;
+        graph2.drawString("W A S D", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Enter", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("E", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Space", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("P", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("G", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Esc", textX, textY); textY += gp.tileSize / 2;
 
         // Back
         textX = frameX + gp.tileSize;

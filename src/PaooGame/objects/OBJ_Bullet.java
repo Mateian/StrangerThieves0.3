@@ -5,6 +5,7 @@ import PaooGame.Game;
 
 public class OBJ_Bullet extends Projectile {
     Game gp;
+
     public OBJ_Bullet(Game gp) {
         super(gp);
         this.gp = gp;

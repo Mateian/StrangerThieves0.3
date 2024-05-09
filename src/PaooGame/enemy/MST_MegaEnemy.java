@@ -1,30 +1,30 @@
 package PaooGame.enemy;
 
-import PaooGame.objects.OBJ_Bullet;
-import PaooGame.entity.Entity;
 import PaooGame.Game;
+import PaooGame.entity.Entity;
+import PaooGame.objects.OBJ_Bullet;
+import PaooGame.objects.OBJ_MegaBullet;
 
 import java.util.Random;
 
-public class MST_Enemy extends Entity {
-
+public class MST_MegaEnemy extends Entity {
     // Base Settings
     Game gp;
 
-    public MST_Enemy(Game gp) {
+    public MST_MegaEnemy(Game gp) {
         super(gp);
 
         this.gp = gp;
 
         spriteNumber = 1;
-        name = "Enemy";
-        speed = 2;
-        maxLife = 4;
+        name = "Mega_Enemy";
+        speed = 3;
+        maxLife = 6;
         life = maxLife;
         type = 2;
-        projectile = new OBJ_Bullet(gp);
-        projectile.attack = 2;
-        attack = 1;
+        projectile = new OBJ_MegaBullet(gp);
+        attack = 2;
+        projectile.attack = 3;
 
         solidArea.x = 3;
         solidArea.y = 10;
@@ -37,20 +37,20 @@ public class MST_Enemy extends Entity {
     }
 
     public void getImage() {
-        up1 = setup(0, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        up2 = setup(1, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        down1 = setup(2, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        down2 = setup(3, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        left1 = setup(4, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        left2 = setup(5, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        right1 = setup(6,0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        right2 = setup(7, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        up1 = setup(6, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        up2 = setup(7, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        down1 = setup(4, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        down2 = setup(5, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        left1 = setup(2, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        left2 = setup(3, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        right1 = setup(0,0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        right2 = setup(1, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
 
     public void setAction() {
         actionCounter++;
 
-        if(actionCounter == 120) {
+        if(actionCounter == 60) {
             Random random = new Random();
             int i = random.nextInt(100) + 1;
             if(i <= 25) {

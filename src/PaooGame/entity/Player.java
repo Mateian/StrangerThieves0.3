@@ -206,6 +206,9 @@ public class Player extends Entity {
         if(shotCounter < 30) {
             shotCounter++;
         }
+        if (life <= 0) {
+            gp.gameState = gp.deadState;
+        }
     }
     public void teleport(int map, int col, int row) {
         gp.currentMap = map;
@@ -292,10 +295,7 @@ public class Player extends Entity {
     public void damageFromMonster(int i) {
         if(i != invalidIndex) {
             if(!invincible) {
-                life--;
-                if (life <= 0) {
-                    gp.gameState = gp.deadState;
-                }
+                life -= gp.mst[gp.currentMap][i].attack;
                 invincible = true;
             }
         }

@@ -318,7 +318,7 @@ public abstract class Entity {
             if(damage < 0) {
                 damage = 0;
             }
-            gp.player.life--;
+            gp.player.life -= damage;
             gp.player.invincible = true;
         }
     }
