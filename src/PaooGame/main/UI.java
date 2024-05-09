@@ -27,6 +27,8 @@ public class UI {
     BufferedImage weapon;
     BufferedImage weaponFrame;
 
+    // State
+    int subState = 0;
 
     // Booleans
     public boolean messageOn = false;
@@ -114,11 +116,14 @@ public class UI {
             if(gp.gameState == gp.menuState) {
                 drawMenu();
             }
+            if(gp.gameState == gp.optionsState) {
+                drawOptionsScreen();
+            }
             if(gp.gameState == gp.playState) {
                 graph2.setFont(arial_40);
                 graph2.setColor(Color.white);
                 graph2.drawImage(enemyImage, 25, 25, gp.tileSize, gp.tileSize, null);
-                graph2.drawString(gp.lvl1ObjectiveCounter + " | " + gp.lvl1Objective, 74, 65);
+                graph2.drawString(gp.levelObjectiveCounter + " | " + gp.lvlObjective, 74, 65);
 
                 // Time
                 if(gp.gameState == gp.playState) {
@@ -161,6 +166,151 @@ public class UI {
             if(gp.gameState == gp.deadState) {
                 drawDeathScreen();
             }
+        }
+    }
+    public void drawOptionsScreen() {
+        graph2.setColor(Color.white);
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // Sub Window
+        int frameX = gp.tileSize * 4;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize * 8;
+        int frameHeight = gp.tileSize * 9;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        switch (subState) {
+            case 0:
+                options_draw(frameX, frameY);
+                break;
+            case 1:
+                controls_draw(frameX, frameY);
+                break;
+        }
+        gp.keyH.enterPressed = false;
+    }
+    public void options_draw(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // Title
+        String text = "Options";
+        textX = xCenterText(text);
+        textY = frameY + gp.tileSize;
+        graph2.drawString(text, textX, textY);
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // Music
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize * 2;
+        graph2.drawString("Music", textX, textY);
+        if(commandNumber == 0) {
+            graph2.setFont(graph2.getFont().deriveFont(25F));
+            graph2.drawString("->", textX - 30, textY);
+        }
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // SE
+        textY += gp.tileSize;
+        graph2.drawString("FX", textX, textY);
+        if(commandNumber == 1) {
+            graph2.setFont(graph2.getFont().deriveFont(25F));
+            graph2.drawString("->", textX - 30, textY);
+        }
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // Control
+        textY += gp.tileSize;
+        graph2.drawString("Control", textX, textY);
+        if(commandNumber == 2) {
+            graph2.setFont(graph2.getFont().deriveFont(25F));
+            graph2.drawString("->", textX - 30, textY);
+            if(gp.keyH.enterPressed) {
+                subState = 1;
+            }
+        }
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // Exit
+        textY += gp.tileSize;
+        graph2.drawString("Exit Game", textX, textY);
+        if(commandNumber == 3) {
+            graph2.setFont(graph2.getFont().deriveFont(25F));
+            graph2.drawString("->", textX - 30, textY);
+            if(gp.keyH.enterPressed) {
+                gp.gameState = gp.menuState;
+                commandNumber = 0;
+            }
+        }
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+        // Back
+        textY += gp.tileSize * 2;
+        graph2.drawString("Back", textX, textY);
+        if(commandNumber == 4) {
+            graph2.setFont(graph2.getFont().deriveFont(25F));
+            graph2.drawString("->", textX - 30, textY);
+            if(gp.keyH.enterPressed) {
+                gp.gameState = gp.playState;
+                commandNumber = 0;
+            }
+        }
+        graph2.setFont(graph2.getFont().deriveFont(30F));
+
+
+        // Options Settings
+        textX = frameX + gp.tileSize * 4;
+        textY = frameY + gp.tileSize - 22;
+
+        // Music Volume
+        textY += gp.tileSize * 2;
+        graph2.drawRect(textX, textY, 120 + gp.tileSize, 24);
+        int volumeWidth = 42 * gp.music.volumeScale;
+        graph2.fillRect(textX, textY, volumeWidth, 24);
+
+        // FX Volume
+        textY += gp.tileSize;
+        graph2.drawRect(textX, textY, 120 + gp.tileSize, 24);
+        volumeWidth = 42 * gp.fx.volumeScale;
+        graph2.fillRect(textX, textY, volumeWidth, 24);
+    }
+    public void controls_draw(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // Title
+        String text = "Control";
+        textX = xCenterText(text);
+        textY = frameY + gp.tileSize;
+        graph2.drawString(text, textX, textY);
+
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize;
+        graph2.drawString("Move", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Confirm", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Use", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Shoot", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Options", textX, textY); textY += gp.tileSize;
+
+        textX = frameX + gp.tileSize * 5;
+        textY = frameY + gp.tileSize * 2;
+        graph2.drawString("W A S D", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Enter", textX, textY); textY += gp.tileSize;
+        graph2.drawString("E", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Space", textX, textY); textY += gp.tileSize;
+        graph2.drawString("Esc", textX, textY); textY += gp.tileSize;
+
+        // Back
+        textX = frameX + gp.tileSize;
+        textY = frameY + gp.tileSize * 8;
+        graph2.drawString("Back", textX, textY);
+        if(commandNumber == 0) {
+            graph2.drawString("->", textX - 30, textY);
+            if(gp.keyH.enterPressed) {
+                subState = 0;
+            }
+        } else {
+            commandNumber = 0;
         }
     }
     public void drawCurrentWeapon() {
@@ -241,7 +391,6 @@ public class UI {
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 24));
         graph2.drawString(hp, x, y);
     }
-
     public void drawMenu() {
         // Background
         try {
@@ -296,7 +445,6 @@ public class UI {
         graph2.setColor(Color.white);
         graph2.drawString(option, x, y);
     }
-
     public void drawDialogScreen() {
         // Window - fereastra dialogului
         int x = gp.tileSize * 2;
@@ -318,12 +466,11 @@ public class UI {
         y = gp.screenHeight / 2 + gp.tileSize - gp.tileSize / 2 + 10;
         int NPCIndex = gp.colChecker.checkEntity(gp.player, gp.NPC);
         if(NPCIndex != Entity.invalidIndex) {
-            graph2.drawImage(gp.NPC[NPCIndex].down, x, y, null);
+            graph2.drawImage(gp.NPC[gp.currentMap][NPCIndex].down, x, y, null);
         }
 
 
     }
-
     public void drawSubWindow(int x, int y, int width, int height) {
         Color clr = new Color(0, 0 ,0, 210);
         graph2.setColor(clr);
@@ -335,7 +482,6 @@ public class UI {
         graph2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
         graph2.setColor(Color.white);
     }
-
     public void drawPauseScreen() {
         graph2.setColor(Color.white);
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 80));
@@ -346,7 +492,6 @@ public class UI {
 
         graph2.drawString(text, x, y);
     }
-
     public void drawFPS(double FPS) {
         // Draw FPS
         graph2.setColor(Color.white);
@@ -355,7 +500,6 @@ public class UI {
         String text = "FPS: " + FPS;
         graph2.drawString(text, gp.screenWidth - 2 * gp.tileSize, gp.originalTileSize);
     }
-
     public int xCenterText(String text) {
         int length = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
         int x = gp.screenWidth / 2 - length / 2;

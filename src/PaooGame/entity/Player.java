@@ -6,7 +6,6 @@ import PaooGame.main.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -204,12 +203,18 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
-
         if(shotCounter < 30) {
             shotCounter++;
         }
     }
-
+    public void teleport(int map, int col, int row) {
+        gp.currentMap = map;
+        gp.player.worldX = gp.tileSize * col;
+        gp.player.worldY = gp.tileSize * row;
+        gp.eventH.previousEventX = gp.player.worldX;
+        gp.eventH.previousEventY = gp.player.worldY;
+        gp.eventH.canTouchEvent = false;
+    }
     public void attacking() {
         spriteCounter++;
 
@@ -260,31 +265,30 @@ public class Player extends Entity {
     }
     public void damageEnemy(int i, int attack) {
         if(i != invalidIndex) {
-            if(!gp.mst[i].invincible && !gp.mst[i].dead) {
+            if(!gp.mst[gp.currentMap][i].invincible && !gp.mst[gp.currentMap][i].dead) {
                 gp.playFX(5);
 
-                int damage = attack - gp.mst[i].defense;
+                int damage = attack - gp.mst[gp.currentMap][i].defense;
                 if(damage < 0) {
                     damage = 0;
                 }
 
-                gp.mst[i].life -= damage;
+                gp.mst[gp.currentMap][i].life -= damage;
 
-                gp.mst[i].invincible = true;
-                gp.mst[i].dmgReact();
+                gp.mst[gp.currentMap][i].invincible = true;
+                gp.mst[gp.currentMap][i].dmgReact();
 
-                if(gp.mst[i].life <= 0) {
-                    gp.mst[i].dead = true;
+                if(gp.mst[gp.currentMap][i].life <= 0) {
+                    gp.mst[gp.currentMap][i].dead = true;
                     gp.playFX(6);
-                    gp.lvl1ObjectiveCounter++;
-                    if(gp.lvl1ObjectiveCounter == gp.lvl1Objective) {
+                    gp.levelObjectiveCounter++;
+                    if(gp.levelObjectiveCounter == gp.lvlObjective) {
                         gp.lvl1Completion = true;
                     }
                 }
             }
         }
     }
-
     public void damageFromMonster(int i) {
         if(i != invalidIndex) {
             if(!invincible) {
@@ -308,19 +312,19 @@ public class Player extends Entity {
     }
     public void pickUpObject(int i) {
         if(i != invalidIndex) {
-            String objectName = gp.obj[i].name;
+            String objectName = gp.obj[gp.currentMap][i].name;
 
             switch(objectName) {
                 case "Key":
                     gp.playFX(1);
                     hasKey++;
-                    gp.obj[i] = null;
+                    gp.obj[gp.currentMap][i] = null;
                     gp.ui.showMessage("You got a key!");
                     break;
                 case "Door":
                     if(hasKey > 0) {
                         gp.playFX(3);
-                        gp.obj[i] = null;
+                        gp.obj[gp.currentMap][i] = null;
                         hasKey--;
                         gp.ui.showMessage("You opened the door!");
                     } else {
@@ -330,7 +334,7 @@ public class Player extends Entity {
                 case "Boots":
                     gp.playFX(2);
                     speed += 2;
-                    gp.obj[i] = null;
+                    gp.obj[gp.currentMap][i] = null;
                     gp.ui.showMessage("Speed up!");
                     break;
                 case "Chest":
@@ -350,19 +354,17 @@ public class Player extends Entity {
             }
         }
     }
-
     public void intersectNPC(int i) {
         if(gp.keyH.ePressed) {
             if(i != invalidIndex) {
                 gp.gameState = gp.dialogState;
-                gp.NPC[i].talk();
+                gp.NPC[gp.currentMap][i].talk();
             } else {
                 attacking = true;
             }
         }
         gp.keyH.ePressed = false;
     }
-
     public void draw(Graphics2D graph2) {
         BufferedImage image = null;
 

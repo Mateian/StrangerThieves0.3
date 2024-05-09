@@ -20,7 +20,7 @@ public class TileManager {
     // Tile SpriteSheet
     public BufferedImage spriteSheetMap1, spriteSheetMap2;
     // Map - a matrix with all tiles ID placed all over the width X height map
-    public int[][] mapTile;
+    public int[][][] mapTile;
 
     public TileManager(Game gp) {
         this.gp = gp;
@@ -32,10 +32,11 @@ public class TileManager {
             e.printStackTrace();
         }
 
-        mapTile = new int[gp.maxWorldColumn][gp.maxWorldRow];
+        mapTile = new int[gp.maxMap][gp.maxWorldColumn][gp.maxWorldRow];
 
         getImage();
-        loadMap("/maps/level01.txt");
+        loadMap("/maps/level01.txt", 0);
+        loadMap("/maps/level02.txt", 1);
     }
 
     public void getImage() {
@@ -54,8 +55,9 @@ public class TileManager {
         setup(9, 12, 0, spriteSheetMap1, false);    // stairs - 12
         setup(2, 13, 0, spriteSheetMap1, true);     // tree - 13
         setup(14, 0, 0, spriteSheetMap2, false);    // ship floor - 14
-        setup(15, 1, 0, spriteSheetMap2, true);    // ship wall - 14
-        setup(16, 2, 0, spriteSheetMap2, true);    // space - 14
+        setup(15, 1, 0, spriteSheetMap2, true);    // ship wall - 15
+        setup(16, 2, 0, spriteSheetMap2, true);    // space - 16
+        setup(17, 3, 0, spriteSheetMap2, true);    // ship-part - 17
     }
 
     public void setup(int index, int indexX, int indexY, BufferedImage image, boolean collision) {
@@ -70,7 +72,7 @@ public class TileManager {
         }
     }
 
-    public void loadMap(String path) {
+    public void loadMap(String path, int map) {
         try{
             InputStream in = getClass().getResourceAsStream(path);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -82,7 +84,7 @@ public class TileManager {
                 while(column < gp.maxWorldColumn) {
                     String[] numbers = line.split(" ");
                     int number = Integer.parseInt(numbers[column]);
-                    mapTile[column][row] = number;
+                    mapTile[map][column][row] = number;
                     column += 1;
                 }
                 if(column == gp.maxWorldColumn) {
@@ -101,7 +103,7 @@ public class TileManager {
         int worldRow = 0;
 
         while(worldColumn < gp.maxWorldColumn && worldRow < gp.maxWorldRow) {
-            int tileNumber = mapTile[worldColumn][worldRow];
+            int tileNumber = mapTile[gp.currentMap][worldColumn][worldRow];
 
             int worldX = worldColumn * gp.tileSize;
             int worldY = worldRow * gp.tileSize;

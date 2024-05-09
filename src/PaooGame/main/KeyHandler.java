@@ -5,6 +5,7 @@ import PaooGame.entity.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class KeyHandler implements KeyListener {
 
@@ -13,7 +14,7 @@ public class KeyHandler implements KeyListener {
 
     // keyPressed - is the key pressed?
     public boolean upPressed, downPressed, leftPressed, rightPressed;
-    public boolean ePressed;
+    public boolean ePressed, enterPressed;
     public boolean shotPressed;
 
     // Debug
@@ -58,7 +59,10 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
+        // Options state
+        else if(gp.gameState == gp.optionsState) {
+            optionsState(code);
+        }
         // Play State
         else if(gp.gameState == gp.playState) {
             if(code == KeyEvent.VK_W) {
@@ -74,7 +78,7 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if(code == KeyEvent.VK_ESCAPE) {
-                gp.gameState = gp.pauseState;
+                gp.gameState = gp.optionsState;
             }
             if(code == KeyEvent.VK_E) {
                 ePressed = true;
@@ -97,7 +101,7 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if(code == KeyEvent.VK_R) {
-                gp.tileMng.loadMap("/maps/level01.txt");
+                gp.tileMng.loadMap("/maps/level0" + (gp.currentMap + 1) + ".txt", gp.currentMap);
             }
         }
 
@@ -114,10 +118,69 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.playState;
             }
         }
+
+        // Dead State
         else if(gp.gameState == gp.deadState) {
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
                 gp.restart();
+            }
+        }
+
+        // Level Complete State
+        else if(gp.gameState == gp.levelCompleteState) {
+            if(code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.playState;
+                gp.player.teleport(1, 40, 42);
+            }
+        }
+    }
+    public void optionsState(int code) {
+        if(code == KeyEvent.VK_ESCAPE) {
+            gp.gameState = gp.playState;
+            gp.ui.subState = 0;
+        }
+        if(code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+        int maxCommandNum = 0;
+        switch(gp.ui.subState) {
+            case 0:
+                maxCommandNum = 4;
+            break;
+        }
+        if (code == KeyEvent.VK_W) {
+            gp.ui.commandNumber--;
+            if(gp.ui.commandNumber < 0) {
+                gp.ui.commandNumber = 0;
+            }
+        }
+        if(code == KeyEvent.VK_S) {
+            gp.ui.commandNumber++;
+            if(gp.ui.commandNumber > 4) {
+                gp.ui.commandNumber = 4;
+            }
+        }
+        if(code == KeyEvent.VK_A) {
+            if(gp.ui.subState == 0) {
+                if(gp.ui.commandNumber == 0 && gp.music.volumeScale > 0) {
+                    gp.music.volumeScale--;
+                    gp.music.checkVolume();
+                }
+                if(gp.ui.commandNumber == 1 && gp.fx.volumeScale > 0) {
+                    gp.fx.volumeScale--;
+                }
+            }
+        }
+        if(code == KeyEvent.VK_D) {
+            if(gp.ui.subState == 0) {
+                if(gp.ui.commandNumber == 0 && gp.music.volumeScale < 4) {
+                    gp.music.volumeScale++;
+                    gp.music.checkVolume();
+                }
+                if(gp.ui.commandNumber == 1 && gp.fx.volumeScale < 4) {
+                    gp.fx.volumeScale++;
+                }
             }
         }
     }

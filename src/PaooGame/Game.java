@@ -10,7 +10,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.TimerTask;
 
 public class Game extends JPanel implements Runnable {
 
@@ -29,6 +28,8 @@ public class Game extends JPanel implements Runnable {
     // World Settings
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
+    public final int maxMap = 5;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
@@ -37,8 +38,8 @@ public class Game extends JPanel implements Runnable {
     // System
     public TileManager tileMng = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-    Sound music = new Sound();
-    Sound fx = new Sound();
+    public Sound music = new Sound();
+    public Sound fx = new Sound();
     public UI ui = new UI(this);
     public EventHandler eventH = new EventHandler(this);
     public Thread gameThread;
@@ -47,9 +48,9 @@ public class Game extends JPanel implements Runnable {
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
-    public Entity[] obj = new Entity[10];
-    public Entity[] NPC = new Entity[10];
-    public Entity[] mst = new Entity[30];
+    public Entity[][] obj = new Entity[maxMap][10];
+    public Entity[][] NPC = new Entity[maxMap][10];
+    public Entity[][] mst = new Entity[maxMap][30];
     ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
 
@@ -59,13 +60,18 @@ public class Game extends JPanel implements Runnable {
     public final int playState = 1;
     public final int dialogState = 2;
     public final int menuState = 3;
-    public final int lvl1CompleteState = 4;
+    public final int levelCompleteState = 4;
+    public final int optionsState = 5;
+
     public int gameState = menuState;
 
     // Objectives
     public boolean lvl1Completion = false;
-    public int lvl1ObjectiveCounter = 0;
-    public int lvl1Objective = 5;
+    public int levelObjectiveCounter = 0;
+    public int lvlObjective = 5;
+
+    // Debug
+    int contor = 0;
 
     public Game() {
         wnd = new GameWindow("Stranger Thieves", screenWidth, screenHeight, this);
@@ -83,6 +89,9 @@ public class Game extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         gameState = menuState;
+
+        // Debug
+//        contor = 0;
     }
 
     public void startGame() {
@@ -127,18 +136,18 @@ public class Game extends JPanel implements Runnable {
     public void update() {
         if(gameState == playState) {
             player.update();
-            for(int i = 0; i < NPC.length; ++i) {
-                if(NPC[i] != null) {
-                    NPC[i].update();
+            for(int i = 0; i < NPC[1].length; ++i) {
+                if(NPC[currentMap][i] != null) {
+                    NPC[currentMap][i].update();
                 }
             }
-            for(int i = 0; i < mst.length; ++i) {
-                if(mst[i] != null) {
-                    if(mst[i].alive && !mst[i].dead) {
-                        mst[i].update();
+            for(int i = 0; i < mst[1].length; ++i) {
+                if(mst[currentMap][i] != null) {
+                    if(mst[currentMap][i].alive && !mst[currentMap][i].dead) {
+                        mst[currentMap][i].update();
                     }
-                    if(!mst[i].alive) {
-                        mst[i] = null;
+                    if(!mst[currentMap][i].alive) {
+                        mst[currentMap][i] = null;
                     }
                 }
             }
@@ -156,8 +165,17 @@ public class Game extends JPanel implements Runnable {
         if(gameState == pauseState) {
             ui.drawPauseScreen();
         }
-        if(lvl1ObjectiveCounter == lvl1Objective) {
-            gameState = lvl1CompleteState;
+        if(levelObjectiveCounter == lvlObjective) {
+          gameState = levelCompleteState;
+          levelObjectiveCounter = 0;
+          lvlObjective = -1;
+//            currentMap = 1;
+        }
+        // Debug
+
+        if(contor == 0 && currentMap == 1) {
+            eventH.teleport(1, 40, 42);
+            contor++;
         }
     }
     public void restart() {
@@ -190,19 +208,19 @@ public class Game extends JPanel implements Runnable {
         //  Add all entities in the List
             entityList.add(player);
 
-            for(int i = 0; i < NPC.length; ++i) {
-                if(NPC[i] != null) {
-                    entityList.add(NPC[i]);
+            for(int i = 0; i < NPC[1].length; ++i) {
+                if(NPC[currentMap][i] != null) {
+                    entityList.add(NPC[currentMap][i]);
                 }
             }
-            for(int i = 0; i < obj.length; ++i) {
-                if(obj[i] != null) {
-                    entityList.add(obj[i]);
+            for(int i = 0; i < obj[1].length; ++i) {
+                if(obj[currentMap][i] != null) {
+                    entityList.add(obj[currentMap][i]);
                 }
             }
-            for(int i = 0; i < mst.length; ++i) {
-                if(mst[i] != null) {
-                    entityList.add(mst[i]);
+            for(int i = 0; i < mst[1].length; ++i) {
+                if(mst[currentMap][i] != null) {
+                    entityList.add(mst[currentMap][i]);
                 }
             }
             for(int i = 0; i < projectileList.size(); ++i) {
@@ -232,7 +250,7 @@ public class Game extends JPanel implements Runnable {
             ui.draw(graph2);
         }
 
-        if(gameState == lvl1CompleteState) {
+        if(gameState == levelCompleteState) {
             ui.drawWin();
         }
 
