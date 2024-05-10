@@ -35,7 +35,7 @@ public class Player extends Entity {
 
     // Counters
     int counterGun = 0;
-    public int hasKey = 0;
+    public int keyNumber = 0;
 
     private Player(Game gp, KeyHandler keyH) {
         super(gp);
@@ -68,8 +68,7 @@ public class Player extends Entity {
         return null;
     }
     public void setDefaultValues() {
-        worldX = gp.tileSize * 24;
-        worldY = gp.tileSize * 30 - 1;
+        setDefaultPosition();
         speed = 4;
         direction = "up";
         maxLife = 6;
@@ -305,8 +304,16 @@ public class Player extends Entity {
         }
     }
     public void setDefaultPosition() {
-        worldX = gp.tileSize * 24;
-        worldY = gp.tileSize * 30 - 1;
+        switch(gp.currentMap) {
+            case 0:
+                worldX = gp.tileSize * 24;
+                worldY = gp.tileSize * 30 - 1;
+                break;
+            case 1:
+                worldX = gp.tileSize * 40;
+                worldY = gp.tileSize * 42;
+                break;
+        }
         direction = "down";
         hasWeapon = false;
     }
@@ -316,53 +323,71 @@ public class Player extends Entity {
     }
     public void pickUpObject(int i) {
         if(i != invalidIndex) {
-            String text;
             String objectName = gp.obj[gp.currentMap][i].name;
-            if(inventory.size() != maxInventorySize && gp.obj[gp.currentMap][i].pickUpable) {
-                inventory.add(gp.obj[gp.currentMap][i]);
-                text = "Picked up a " + objectName + "!";
-                gp.obj[gp.currentMap][i] = null;
-            } else {
-                if (inventory.size() == maxInventorySize) {
-                    text = "Inventory full!";
+
+            // No store object
+            if(gp.obj[gp.currentMap][i].type == type_noStore) {
+                gp.obj[gp.currentMap][i].use(this);
+                if(objectName.equals("Door")) {
+                    if(gp.player.keyNumber != 0) {
+                        gp.obj[gp.currentMap][i] = null;
+                        gp.player.keyNumber--;
+                        gp.openedDoors++;
+                    } else {
+                        gp.ui.showMessage("You need a Key!");
+                    }
                 } else {
-                    text = "";
+                    gp.obj[gp.currentMap][i] = null;
                 }
             }
-            gp.ui.showMessage(text);
-
-            // Weapon Switch
-            if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].isWeapon) {
-                switch(gp.obj[gp.currentMap][i].name) {
-                    case "Electron":
-                        currentWeapon = new OBJ_Electron(gp);
-                        break;
-                    case "KTPY":
-                        currentWeapon = new OBJ_KTPY(gp);
-                        break;
-                    case "Skargun":
-                        currentWeapon = new OBJ_Skargun(gp);
-                        break;
-                    case "Snaipa":
-                        currentWeapon = new OBJ_Snaipa(gp);
-                        break;
-                }
-                counterGun++;
-                if(!hasWeapon) {
-                    gp.ui.showMessage("You picked Skargun!");
-                    hasWeapon = true;
-
+            // Inventory Items
+            else {
+                String text;
+                if(inventory.size() != maxInventorySize && gp.obj[gp.currentMap][i].pickUpable) {
+                    inventory.add(gp.obj[gp.currentMap][i]);
+                    text = "Picked up a " + objectName + "!";
+                    gp.obj[gp.currentMap][i] = null;
                 } else {
-                    if(counterGun > 20) {
-                        gp.ui.showMessage("You already have a weapon!");
-                        counterGun = 0;
+                    if (inventory.size() == maxInventorySize) {
+                        text = "Inventory full!";
+                    } else {
+                        text = "";
                     }
                 }
-            }
+                gp.ui.showMessage(text);
 
-            switch(objectName) {
-                case "Skargun Chest":
+                // Weapon Switch
+                if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].isWeapon) {
+                    switch(gp.obj[gp.currentMap][i].name) {
+                        case "Electron":
+                            currentWeapon = new OBJ_Electron(gp);
+                            break;
+                        case "KTPY":
+                            currentWeapon = new OBJ_KTPY(gp);
+                            break;
+                        case "Skargun":
+                            currentWeapon = new OBJ_Skargun(gp);
+                            break;
+                        case "Snaipa":
+                            currentWeapon = new OBJ_Snaipa(gp);
+                            break;
+                    }
                     counterGun++;
+                    if(!hasWeapon) {
+                        gp.ui.showMessage("You picked Skargun!");
+                        hasWeapon = true;
+
+                    } else {
+                        if(counterGun > 20) {
+                            gp.ui.showMessage("You already have a weapon!");
+                            counterGun = 0;
+                        }
+                    }
+                }
+
+                switch(objectName) {
+                    case "Skargun Chest":
+                        counterGun++;
                         if(!hasWeapon) {
                             gp.ui.showMessage("You picked Skargun!");
                             currentWeapon = new OBJ_Skargun(gp);
@@ -374,9 +399,11 @@ public class Player extends Entity {
                                 counterGun = 0;
                             }
                         }
-                    break;
+                        break;
+                }
             }
-        }
+
+            }
     }
     public void intersectNPC(int i) {
         if(gp.keyH.ePressed) {

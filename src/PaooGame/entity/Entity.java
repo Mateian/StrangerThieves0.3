@@ -62,6 +62,7 @@ public abstract class Entity {
     public final int type_monster = 2;
     public final int type_weapon = 3;
     public final int type_consumable = 4;
+    public final int type_noStore = 5;
 
     // Character Status
     public String name;
@@ -80,6 +81,7 @@ public abstract class Entity {
     // Item Status
     public int attackValue;
     public boolean isWeapon = false;
+    public int value = 0;
 
     public Entity(Game gp) {
         this.gp = gp;

@@ -5,12 +5,12 @@ import PaooGame.entity.Entity;
 
 public class OBJ_HealPotion extends Entity {
     Game gp;
-    int value = 3;
 
     public OBJ_HealPotion(Game gp) {
         super(gp);
         this.gp = gp;
 
+        value = 3;
         pickUpable = true;
         type = type_consumable;
         name = "Heal Potion";

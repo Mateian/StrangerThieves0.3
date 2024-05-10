@@ -30,10 +30,80 @@ public class AssetSetter {
         // Level 2 Objects
         k = 0;
         mapNum++;
+
+        // Weapons
         gp.obj[mapNum][k] = new OBJ_Electron(gp);
         gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
         ++k;
+
+        // Doors
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 37 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 13 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 38 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 32 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 30 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 14 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 9 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 38 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        gp.obj[mapNum][k] = new OBJ_Door(gp);
+        gp.obj[mapNum][k].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 10 * gp.tileSize;
+        ++k;
+        gp.spawnedDoors++;
+
+        // Cards
+        gp.obj[mapNum][k] = new OBJ_Card(gp);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Card(gp);
+        gp.obj[mapNum][k].worldX = 39 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Card(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Card(gp);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 39 * gp.tileSize;
+        ++k;
+
 
 
         // Level 3 Objects

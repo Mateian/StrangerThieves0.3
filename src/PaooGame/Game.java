@@ -49,8 +49,8 @@ public class Game extends JPanel implements Runnable {
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
-    public Entity[][] obj = new Entity[maxMap][10];
-    public Entity[][] NPC = new Entity[maxMap][10];
+    public Entity[][] obj = new Entity[maxMap][30];
+    public Entity[][] NPC = new Entity[maxMap][20];
     public Entity[][] mst = new Entity[maxMap][30];
     ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -68,6 +68,9 @@ public class Game extends JPanel implements Runnable {
     public int gameState = menuState;
 
     // Objectives
+    public int spawnedDoors;
+    public int openedDoors = 0;
+
     public int level1Score;
     public int level2Score;
     public int level3Score;
@@ -94,12 +97,7 @@ public class Game extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
-        gameState = menuState;
-        levelCounter = 0;
-        levelScore = level1Score;
-
-        // Debug
-//        contor = 0;
+        levelSettings();
     }
 
     public void startGame() {
@@ -187,10 +185,6 @@ public class Game extends JPanel implements Runnable {
 
         // Debug
 
-        if(contor == 0 && currentMap == 1) {
-            eventH.teleport(1, 40, 42);
-            contor++;
-        }
     }
     public void restart() {
         player.setDefaultPosition();
@@ -303,5 +297,24 @@ public class Game extends JPanel implements Runnable {
     public void playFX(int i) {
         fx.setFile(i);
         fx.play();
+    }
+
+    void levelSettings() {
+        gameState = menuState;
+        levelCounter = 0;
+        switch(currentMap) {
+            case 0:
+                levelScore = level1Score;
+                break;
+            case 1:
+                levelScore = level2Score;
+                break;
+            case 2:
+                levelScore = level3Score;
+                break;
+        }
+
+        // Debug
+//        contor = 0;
     }
 }
