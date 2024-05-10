@@ -196,6 +196,7 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
                 gp.levelCounter = 0;
+                gp.currentMap++;
                 switch(gp.currentMap) {
                     case 0:
                         gp.levelScore = gp.level1Score;
@@ -207,7 +208,6 @@ public class KeyHandler implements KeyListener {
                         gp.levelScore = gp.level3Score;
                         break;
                 }
-                gp.currentMap++;
                 gp.player.teleport(gp.currentMap, 40, 42);
             }
         }
