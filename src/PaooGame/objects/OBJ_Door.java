@@ -12,7 +12,7 @@ public class OBJ_Door extends Entity {
         super(gp);
         this.gp = gp;
 
-        type = type_noStore;
+        type = type_obstacle;
         name = "Door";
         image = down = setup(17, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;

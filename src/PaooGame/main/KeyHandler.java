@@ -103,8 +103,10 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_T) {
                 if(!toggleDebugInfo) {
                     toggleDebugInfo = true;
+                    gp.tileMng.drawPath = true;
                 } else {
                     toggleDebugInfo = false;
+                    gp.tileMng.drawPath = false;
                 }
             }
             if(code == KeyEvent.VK_R) {

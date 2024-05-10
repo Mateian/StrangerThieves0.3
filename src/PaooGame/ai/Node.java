@@ -4,9 +4,9 @@ public class Node {
     Node parent;
     public int col;
     public int row;
-    int gCost;
-    int hCost;
-    int fCost;
+    public int gCost;
+    public int hCost;
+    public int fCost;
     boolean solid;
     boolean open;
     boolean checked;

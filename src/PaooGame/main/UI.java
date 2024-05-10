@@ -3,6 +3,7 @@ package PaooGame.main;
 import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
 import PaooGame.entity.Entity;
+import PaooGame.objects.OBJ_Card;
 import PaooGame.objects.OBJ_Door;
 import PaooGame.objects.OBJ_Heart;
 
@@ -26,6 +27,7 @@ public class UI {
     BufferedImage enemyImage;
     BufferedImage weaponFrame;
     BufferedImage doorImage;
+    BufferedImage cardImage;
 
     // State
     int subState = 0;
@@ -59,10 +61,14 @@ public class UI {
         arial_40 = new Font("Comic Sans MS", Font.PLAIN, 40);
         console_40B = new Font("Consolas", Font.BOLD, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
+
+        // Images
         MST_Enemy enemy = new MST_Enemy(gp);
         enemyImage = enemy.down1;
         OBJ_Door door = new OBJ_Door(gp);
         doorImage = door.image;
+        OBJ_Card card = new OBJ_Card(gp);
+        cardImage = card.image;
 
         // HUD
         Entity heart = new OBJ_Heart(gp);
@@ -117,6 +123,10 @@ public class UI {
                     graph2.drawImage(doorImage, 30, 35 + gp.tileSize, gp.tileSize- 10, gp.tileSize - 10, null);
                     graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
                     graph2.drawString(gp.openedDoors + "|" + gp.spawnedDoors, 74, 65 + gp.tileSize);
+
+                    graph2.drawImage(cardImage, 30, 35 + 2 * gp.tileSize, gp.tileSize - 10, gp.tileSize - 10, null);
+                    graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
+                    graph2.drawString(String.valueOf(gp.player.keyNumber), 74, 65 + 2 * gp.tileSize);
                 }
 
                 // Time

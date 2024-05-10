@@ -281,7 +281,6 @@ public class Player extends Entity {
                 if(damage < 0) {
                     damage = 0;
                 }
-
                 gp.mst[gp.currentMap][i].life -= damage;
 
                 gp.mst[gp.currentMap][i].invincible = true;
@@ -326,18 +325,17 @@ public class Player extends Entity {
             String objectName = gp.obj[gp.currentMap][i].name;
 
             // No store object
-            if(gp.obj[gp.currentMap][i].type == type_noStore) {
+            if(gp.obj[gp.currentMap][i].type == type_pickup) {
                 gp.obj[gp.currentMap][i].use(this);
-                if(objectName.equals("Door")) {
-                    if(gp.player.keyNumber != 0) {
-                        gp.obj[gp.currentMap][i] = null;
-                        gp.player.keyNumber--;
-                        gp.openedDoors++;
-                    } else {
-                        gp.ui.showMessage("You need a Key!");
-                    }
-                } else {
+                gp.obj[gp.currentMap][i] = null;
+            } else if(gp.obj[gp.currentMap][i].type == type_obstacle) {
+                if(gp.player.keyNumber != 0) {
                     gp.obj[gp.currentMap][i] = null;
+                    gp.player.keyNumber--;
+                    gp.openedDoors++;
+                }
+                else {
+                    gp.ui.showMessage("You need a Key!");
                 }
             }
             // Inventory Items

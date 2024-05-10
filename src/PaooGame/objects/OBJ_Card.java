@@ -11,7 +11,7 @@ public class OBJ_Card extends Entity {
         super(gp);
         this.gp = gp;
 
-        type = type_noStore;
+        type = type_pickup;
         name = "Card";
         image = down = setup(18, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;

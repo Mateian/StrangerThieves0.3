@@ -21,6 +21,7 @@ public class TileManager {
     public BufferedImage spriteSheetMap1, spriteSheetMap2;
     // Map - a matrix with all tiles ID placed all over the width X height map
     public int[][][] mapTile;
+    public boolean drawPath = false;
 
     public TileManager(Game gp) {
         this.gp = gp;
@@ -117,6 +118,17 @@ public class TileManager {
             if(worldColumn == gp.maxWorldColumn) {
                 worldColumn = 0;
                 worldRow += 1;
+            }
+        }
+        if(drawPath) {
+            graph2.setColor(new Color(0,0,255, 50));
+            for(int i = 0; i < gp.pather.pathList.size(); ++i) {
+                int worldX = gp.pather.pathList.get(i).col * gp.tileSize;
+                int worldY = gp.pather.pathList.get(i).row * gp.tileSize;
+                int screenX = worldX - gp.player.worldX + gp.player.screenX;
+                int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+                graph2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
             }
         }
     }

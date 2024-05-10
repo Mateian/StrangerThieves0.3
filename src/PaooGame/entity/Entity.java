@@ -53,7 +53,6 @@ public abstract class Entity {
     int dialogIndex = 0;
     public BufferedImage image, image2, image3;
     public boolean collision = false;
-//    public boolean onPath = false;
 
     // Type
     public int type; // 0 - player, 1 - npc, 2 - monster
@@ -62,7 +61,8 @@ public abstract class Entity {
     public final int type_monster = 2;
     public final int type_weapon = 3;
     public final int type_consumable = 4;
-    public final int type_noStore = 5;
+    public final int type_pickup = 5;
+    public final int type_obstacle = 6;
 
     // Character Status
     public String name;
@@ -75,6 +75,7 @@ public abstract class Entity {
     public Projectile projectile;
     public int useCost;
     public Entity currentWeapon;
+    public boolean onPath = false;
 //    public int maxMana;
 //    public int mana;
 
@@ -122,6 +123,17 @@ public abstract class Entity {
             case "right":
                 direction = "left";
                 break;
+        }
+    }
+    public void checkDrop() {}
+    public void dropItem(Entity item) {
+        for (int i = 0; i < gp.obj[gp.currentMap].length; ++i) {
+            if(gp.obj[gp.currentMap][i] == null) {
+                gp.obj[gp.currentMap][i] = item;
+                gp.obj[gp.currentMap][i].worldX = worldX;
+                gp.obj[gp.currentMap][i].worldY = worldY;
+                break;
+            }
         }
     }
     public void draw(Graphics2D graph2) {
@@ -274,16 +286,7 @@ public abstract class Entity {
         setAction();
 
         // Collision
-        collisionOn = false;
-        gp.colChecker.checkTile(this);
-        gp.colChecker.checkObject(this, false);
-        gp.colChecker.checkEntity(this, gp.NPC);
-        gp.colChecker.checkEntity(this, gp.mst);
-        boolean contactPlayer = gp.colChecker.checkPlayer(this);
-
-        if (this.type == type_monster && contactPlayer) {
-            dmgPlayer(attack);
-        }
+        checkCollision();
 
         if (!collisionOn) {
             switch (direction) {
@@ -334,4 +337,75 @@ public abstract class Entity {
         }
     }
     public void use(Entity entity) {}
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / gp.tileSize;
+        int startRow = (worldY + solidArea.y) / gp.tileSize;
+
+        gp.pather.setNodes(startCol, startRow, goalCol, goalRow);
+        if(gp.pather.search()) {
+            int nextX = gp.pather.pathList.get(0).col * gp.tileSize;
+            int nextY = gp.pather.pathList.get(0).row * gp.tileSize;
+
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) {
+                direction = "up";
+            } else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize) {
+                direction = "down";
+            } else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize) {
+                if(enLeftX > nextX) {
+                    direction = "left";
+                }
+                if(enLeftX < nextX) {
+                    direction = "right";
+                }
+            } else if(enTopY > nextY && enLeftX > nextX) {
+                direction = "up";
+                checkCollision();
+                if(collisionOn) {
+                    direction = "left";
+                }
+            } else if(enTopY > nextY && enLeftX < nextX) {
+                direction = "up";
+                checkCollision();
+                if(collisionOn) {
+                    direction = "right";
+                }
+            } else if(enTopY < nextY && enLeftX > nextX) {
+                direction = "down";
+                checkCollision();
+                if(collisionOn) {
+                    direction = "left";
+                }
+            } else if(enTopY < nextY && enLeftX < nextX) {
+                direction = "down";
+                checkCollision();
+                if(collisionOn) {
+                    direction = "right";
+                }
+            }
+
+            // If the goal is reached, the entity will stop following the goal
+//            int nextCol = gp.pather.pathList.get(0).col;
+//            int nextRow = gp.pather.pathList.get(0).row;
+//            if(nextCol == goalCol && nextRow == goalRow) {
+//                onPath = false;
+//            }
+        }
+    }
+    public void checkCollision() {
+        collisionOn = false;
+        gp.colChecker.checkTile(this);
+        gp.colChecker.checkObject(this, false);
+        gp.colChecker.checkEntity(this, gp.NPC);
+        gp.colChecker.checkEntity(this, gp.mst);
+        boolean contactPlayer = gp.colChecker.checkPlayer(this);
+
+        if (this.type == type_monster && contactPlayer) {
+            dmgPlayer(attack);
+        }
+    }
 }

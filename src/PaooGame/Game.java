@@ -1,5 +1,6 @@
 package PaooGame;
 
+import PaooGame.ai.PathFinder;
 import PaooGame.entity.Entity;
 import PaooGame.entity.Player;
 import PaooGame.main.*;
@@ -7,6 +8,7 @@ import PaooGame.tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,7 +31,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 0;
+    public int currentMap = 1;
 
     // FPS
     int FPS = 60;
@@ -46,12 +48,13 @@ public class Game extends JPanel implements Runnable {
     public CollisionChecker colChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Config config = new Config(this);
+    public PathFinder pather = new PathFinder(this);
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
     public Entity[][] obj = new Entity[maxMap][30];
     public Entity[][] NPC = new Entity[maxMap][20];
-    public Entity[][] mst = new Entity[maxMap][30];
+    public Entity[][] mst = new Entity[maxMap][20];
     ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
 
@@ -153,6 +156,7 @@ public class Game extends JPanel implements Runnable {
                         mst[currentMap][i].update();
                     }
                     if(!mst[currentMap][i].alive) {
+                        mst[currentMap][i].checkDrop();
                         mst[currentMap][i] = null;
                     }
                 }

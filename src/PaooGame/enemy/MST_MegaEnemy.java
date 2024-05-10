@@ -46,26 +46,58 @@ public class MST_MegaEnemy extends Entity {
         right1 = setup(0,0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
         right2 = setup(1, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
+    
+    // De adaugat atunci cand vrem sa un inamic sa ne urmareasca doar cand ne apropiem noi
 
+//    public void update() {
+//        super.update();
+//
+//        int xDistance = Math.abs(worldX - gp.player.worldX);
+//        int yDistance = Math.abs(worldY - gp.player.worldY);
+//        int tileDistance = (xDistance + yDistance) / gp.tileSize;
+//
+//        if(onPath == false && tileDistance < 4) {
+//            int i = new Random().nextInt(100) + 1;
+//            if(i > 50) {
+//                onPath = true;
+//            }
+//        }
+//        if(onPath == true && tileDistance > 7) {
+//            onPath = false;
+//        }
+//    }
     public void setAction() {
-        actionCounter++;
-
-        if(actionCounter == 60) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;
-            if(i <= 25) {
-                direction = "up";
-            } else if(i > 25 && i <= 50) {
-                direction = "left";
-            } else if(i > 50 && i <= 75) {
-                direction = "right";
-            } else if(i > 75 && i <= 100) {
-                direction = "down";
+        if(onPath) {
+            actionCounter++;
+            if(actionCounter != 600) {
+                int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+                int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+                searchPath(goalCol, goalRow);
+            } else {
+                actionCounter = 0;
+                onPath = false;
             }
-            actionCounter = 0;
+        } else {
+
+            actionCounter++;
+
+            if (actionCounter == 60) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i > 25 && i <= 50) {
+                    direction = "left";
+                } else if (i > 50 && i <= 75) {
+                    direction = "right";
+                } else if (i > 75 && i <= 100) {
+                    direction = "down";
+                }
+                actionCounter = 0;
+            }
         }
         int i = new Random().nextInt(100) + 1;
-        if(i > 99 && !projectile.alive && shotCounter == 30) {
+        if (i > 99 && !projectile.alive && shotCounter == 30) {
             projectile.set(worldX, worldY, direction, true, this);
             gp.projectileList.add(projectile);
             shotCounter = 0;
@@ -73,6 +105,20 @@ public class MST_MegaEnemy extends Entity {
     }
     public void dmgReact() {
         actionCounter = 0;
-        direction = gp.player.direction;
+//        switch(direction) {
+//            case "down":
+//                direction = "up";
+//                break;
+//            case "up":
+//                direction = "down";
+//                break;
+//            case "left":
+//                direction = "right";
+//                break;
+//            case "right":
+//                direction = "left";
+//                break;
+//        }
+        onPath = true;
     }
 }

@@ -63,7 +63,7 @@ public class CollisionChecker {
 
     // Check Collision with an Object
     public int checkObject(Entity entity, boolean player) {
-        int index = entity.invalidIndex;
+        int index = Entity.invalidIndex;
 
         for(int i = 0; i < gp.obj[1].length; ++i) {
             if(gp.obj[gp.currentMap][i] != null) {
@@ -109,7 +109,7 @@ public class CollisionChecker {
 
     // Check collision with an Entity
     public int checkEntity(Entity entity, Entity[][] tg) {
-        int index = entity.invalidIndex;
+        int index = Entity.invalidIndex;
 
         for(int i = 0; i < tg[1].length; ++i) {
             if(tg[gp.currentMap][i] != null) {
