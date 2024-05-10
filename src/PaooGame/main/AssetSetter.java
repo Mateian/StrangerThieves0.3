@@ -14,24 +14,40 @@ public class AssetSetter {
     public AssetSetter(Game gp) {
         this.gp = gp;
     }
-
     public void setObject() {
         // Level 1 Objects
         int mapNum = 0;
-        gp.obj[mapNum][0] = new OBJ_Chest(gp);
-        gp.obj[mapNum][0].worldX = 22 * gp.tileSize;
-        gp.obj[mapNum][0].worldY = 30 * gp.tileSize;
-
-        gp.obj[mapNum][1] = new OBJ_Heart(gp);
-        gp.obj[mapNum][1].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][1].worldY = 30 * gp.tileSize;
+        int k = 0;
+        gp.obj[mapNum][k] = new OBJ_SkargunChest(gp);
+        gp.obj[mapNum][k].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Heart(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Heart(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 25 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Heart(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 26 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Heart(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 24 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Heart(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 23 * gp.tileSize;
+        ++k;
 
         // Level 2 Objects
 
 
         // Level 3 Objects
     }
-
     public void setNPC() {
         // Level 1 NPCs
         int mapNum = 0;
@@ -44,7 +60,6 @@ public class AssetSetter {
 
         // Level 3 NPCs
     }
-
     public void setMonster() {
         // Level 1 Monsters
         int mapNum = 0;

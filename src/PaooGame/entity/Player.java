@@ -3,9 +3,12 @@ package PaooGame.entity;
 import PaooGame.objects.OBJ_Bullet;
 import PaooGame.Game;
 import PaooGame.main.KeyHandler;
+import PaooGame.objects.OBJ_Electron;
+import PaooGame.objects.OBJ_Skargun;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -19,6 +22,11 @@ public class Player extends Entity {
     public BufferedImage weapUp, weapUp1, weapDown, weapDown1, weapLeft, weapLeft1, weapRight, weapRight1;
 //    ArrayList<BufferedImage> defArray = new ArrayList<>();
 
+    // Variables
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 3;
+    public int weapAttack;
+
     // Position
     public final int screenX;
     public final int screenY;
@@ -26,6 +34,7 @@ public class Player extends Entity {
     // Boolean
     public boolean moving = false;
     public  boolean hasWeapon = false;
+    public boolean attackCancelled = false;
 
     // Counters
     int counterGun = 0;
@@ -49,12 +58,11 @@ public class Player extends Entity {
 
         attackArea.width = 36;
         attackArea.height = 36;
-        attack = 1;
 
         setDefaultValues();
         getImage();
+        setItems();
     }
-
     public static Player CreatePlayer(Game gp, KeyHandler keyH) {
         if(instances == 0) {
             instances++;
@@ -62,7 +70,6 @@ public class Player extends Entity {
         }
         return null;
     }
-
     public void setDefaultValues() {
         worldX = gp.tileSize * 24;
         worldY = gp.tileSize * 30 - 1;
@@ -70,9 +77,18 @@ public class Player extends Entity {
         direction = "up";
         maxLife = 6;
         life = maxLife;
-        projectile = new OBJ_Bullet(gp);
+        strength = 1;
+        currentWeapon = new OBJ_Electron(gp);
+        weapAttack = getAttack();
+        attack = 1;
     }
-
+    public void setItems() {
+        inventory.add(new OBJ_Skargun(gp));
+        inventory.add(new OBJ_Skargun(gp));
+        inventory.add(new OBJ_Skargun(gp));
+        inventory.add(new OBJ_Skargun(gp));
+        inventory.add(new OBJ_Skargun(gp));
+    }
     public void getImage() {
         // Moving Images
         up = setup(8, 0, "/player/skar_spritesheet", gp.originalTileSize, gp.originalTileSize);
@@ -108,7 +124,6 @@ public class Player extends Entity {
         weapRight = setup(21, 0, "/player/skar_spritesheet", gp.originalTileSize, gp.originalTileSize);
         weapRight1 = setup(20, 0, "/player/skar_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
-
     public void update() {
 
         if(attacking) {
@@ -188,10 +203,10 @@ public class Player extends Entity {
             spriteNumber = 0;
         }
 
-        if(gp.keyH.shotPressed && !projectile.alive && shotCounter == 30 && hasWeapon) {
-            projectile.set(worldX, worldY, direction, true, this);
+        if(gp.keyH.shotPressed && !currentWeapon.projectile.alive && shotCounter == 30 && hasWeapon) {
+            currentWeapon.projectile.set(worldX, worldY, direction, true, this);
 
-            gp.projectileList.add(projectile);
+            gp.projectileList.add(currentWeapon.projectile);
 
             shotCounter = 0;
         }
@@ -208,6 +223,13 @@ public class Player extends Entity {
         }
         if (life <= 0) {
             gp.gameState = gp.deadState;
+        }
+    }
+    public int getAttack() {
+        if (currentWeapon != null) {
+            return weapAttack = currentWeapon.attackValue;
+        } else {
+            return weapAttack = 0;
         }
     }
     public void teleport(int map, int col, int row) {
@@ -270,7 +292,6 @@ public class Player extends Entity {
         if(i != invalidIndex) {
             if(!gp.mst[gp.currentMap][i].invincible && !gp.mst[gp.currentMap][i].dead) {
                 gp.playFX(5);
-
                 int damage = attack - gp.mst[gp.currentMap][i].defense;
                 if(damage < 0) {
                     damage = 0;
@@ -312,40 +333,31 @@ public class Player extends Entity {
     }
     public void pickUpObject(int i) {
         if(i != invalidIndex) {
+            String text;
             String objectName = gp.obj[gp.currentMap][i].name;
+            if(inventory.size() != maxInventorySize && gp.obj[gp.currentMap][i].pickUpable) {
+                inventory.add(gp.obj[gp.currentMap][i]);
+                text = "Picked up a " + objectName + "!";
+                gp.obj[gp.currentMap][i] = null;
+            } else {
+                if (inventory.size() == maxInventorySize) {
+                    text = "Inventory full!";
+                } else {
+                    text = "";
+                }
+            }
+            gp.ui.showMessage(text);
 
             switch(objectName) {
-                case "Key":
-                    gp.playFX(1);
-                    hasKey++;
-                    gp.obj[gp.currentMap][i] = null;
-                    gp.ui.showMessage("You got a key!");
-                    break;
-                case "Door":
-                    if(hasKey > 0) {
-                        gp.playFX(3);
-                        gp.obj[gp.currentMap][i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened the door!");
-                    } else {
-                        gp.ui.showMessage("You need a key!");
-                    }
-                    break;
-                case "Boots":
-                    gp.playFX(2);
-                    speed += 2;
-                    gp.obj[gp.currentMap][i] = null;
-                    gp.ui.showMessage("Speed up!");
-                    break;
                 case "Chest":
                     counterGun++;
                         if(!hasWeapon) {
-                            System.out.println("You picked Skargun!");
+                            gp.ui.showMessage("You picked Skargun!");
 
                             hasWeapon = true;
                         } else {
                             if(counterGun > 20) {
-                                System.out.println("You already have a weapon!");
+                                gp.ui.showMessage("You already have a weapon!");
                                 counterGun = 0;
                             }
                         }

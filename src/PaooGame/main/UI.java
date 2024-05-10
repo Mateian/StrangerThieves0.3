@@ -8,6 +8,7 @@ import PaooGame.objects.OBJ_Skargun;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -29,6 +30,10 @@ public class UI {
 
     // State
     int subState = 0;
+
+    // Variables
+    public int slotCol = 0;
+    public int slotRow = 0;
 
     // Booleans
     public boolean messageOn = false;
@@ -79,37 +84,7 @@ public class UI {
     }
     public void draw(Graphics2D graph2) {
         this.graph2 = graph2;
-        if(gameFinished) {
-            graph2.setFont(arial_40);
-            graph2.setColor(Color.white);
 
-            String text;
-            int textLength;
-            int x;
-            int y;
-
-            text = "You found the treasure!";
-            textLength = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
-            x = gp.screenWidth / 2 - textLength / 2;
-            y = gp.screenHeight / 2 - (gp.tileSize * 3);
-            graph2.drawString(text, x, y);
-
-            text = "Your time is: " + dFormat.format(playTime);
-            textLength = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
-            x = gp.screenWidth / 2 - textLength / 2;
-            y = gp.screenHeight / 2 + (gp.tileSize * 4);
-            graph2.drawString(text, x, y);
-
-            graph2.setFont(arial_80B);
-            graph2.setColor(Color.yellow);
-            text = "Congratulations!";
-            textLength = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
-            x = gp.screenWidth / 2 - textLength / 2;
-            y = gp.screenHeight / 2 + (gp.tileSize * 2);
-            graph2.drawString(text, x, y);
-
-            gp.gameThread = null;
-        } else {
             // Menu
             if(gp.gameState == gp.menuState) {
                 drawMenu();
@@ -124,9 +99,7 @@ public class UI {
                 graph2.drawString(gp.levelObjectiveCounter + " | " + gp.lvlObjective, 74, 65);
 
                 // Time
-                if(gp.gameState == gp.playState) {
-                    playTime +=(double)1/60;
-                }
+                playTime +=(double)1/60;
                 graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
                 graph2.drawString("Time: " + dFormat.format(playTime), gp.tileSize*12 + gp.tileSize - 10, 65);
 
@@ -164,7 +137,49 @@ public class UI {
             if(gp.gameState == gp.deadState) {
                 drawDeathScreen();
             }
+            if(gp.gameState == gp.inventoryState) {
+                drawInventory();
+            }
+    }
+    public void drawInventory() {
+
+        // Window
+        int frameX = gp.tileSize * 10;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize * 5;
+        int frameHeight = gp.tileSize * 3;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // Slots
+        final int slotXstart = frameX + 20;
+        final int slotYstart =frameY + 20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+        int slotSize = gp.tileSize + 3;
+
+        // Items
+        for(int i = 0; i < gp.player.inventory.size(); ++i) {
+
+            // Equip
+//            if(gp.player.inventory.get(i) == );
+
+            graph2.drawImage(gp.player.inventory.get(i).image, slotX, slotY, null);
+            slotX += slotSize;
+            if(i == 2) {
+                slotX = slotXstart;
+                slotY += slotSize;
+            }
         }
+
+        // Select
+        int selectX = slotXstart + (slotSize * slotCol);
+        int selectY = slotYstart + (slotSize * slotRow);
+        int selectWidth = gp.tileSize;
+        int selectHeight = gp.tileSize;
+
+        // Draw Select
+        graph2.setColor(Color.white);
+        graph2.drawRoundRect(selectX, selectY, selectWidth, selectHeight, 10, 10);
     }
     public void drawOptionsScreen() {
         graph2.setColor(Color.white);

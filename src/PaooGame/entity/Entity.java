@@ -27,6 +27,7 @@ public abstract class Entity {
     public boolean alive = true;
     public boolean dead = false;
     boolean toggleHpBar = false;
+    public boolean pickUpable = false;
 //    boolean shooting = false;
 
     // Index
@@ -52,25 +53,29 @@ public abstract class Entity {
     int dialogIndex = 0;
     public BufferedImage image, image2, image3;
     public boolean collision = false;
-    public int type; // 0 - player, 1 - npc, 2 - monster
 //    public boolean onPath = false;
 
     // Character Status
     public String name;
+    public int type; // 0 - player, 1 - npc, 2 - monster
     public int maxLife;
     public int life;
     public int speed;
     public int attack = 0;
     public int defense = 0;
+    public int strength = 0;
     public Projectile projectile;
     public int useCost;
+    public Entity currentWeapon;
 //    public int maxMana;
 //    public int mana;
+
+    // Item Status
+    public int attackValue;
 
     public Entity(Game gp) {
         this.gp = gp;
     }
-
     public BufferedImage setup(int indexX, int indexY, String path, int width, int height) {
         Tools tool = new Tools();
         BufferedImage image = null;
@@ -109,7 +114,6 @@ public abstract class Entity {
                 break;
         }
     }
-
     public void draw(Graphics2D graph2) {
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -232,9 +236,7 @@ public abstract class Entity {
     }
     public void setAction() {
     }
-
     public void dmgReact() {}
-
 //    Functie de adaugat in clasele in care se doreste implementarea AI-ului
 
     //    public void setAction() {
@@ -311,7 +313,6 @@ public abstract class Entity {
             shotCounter++;
         }
     }
-
     public void dmgPlayer(int attack) {
         if (!gp.player.invincible) {
             int damage = attack - gp.player.defense;

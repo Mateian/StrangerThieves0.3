@@ -29,7 +29,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 1;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
@@ -63,6 +63,7 @@ public class Game extends JPanel implements Runnable {
     public final int menuState = 3;
     public final int levelCompleteState = 4;
     public final int optionsState = 5;
+    public final int inventoryState = 6;
 
     public int gameState = menuState;
 

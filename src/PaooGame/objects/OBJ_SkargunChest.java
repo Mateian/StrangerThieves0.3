@@ -3,8 +3,8 @@ package PaooGame.objects;
 import PaooGame.entity.Entity;
 import PaooGame.Game;
 
-public class OBJ_Chest extends Entity {
-    public OBJ_Chest(Game gp) {
+public class OBJ_SkargunChest extends Entity {
+    public OBJ_SkargunChest(Game gp) {
         super(gp);
         name = "Chest";
         down = setup(7, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
