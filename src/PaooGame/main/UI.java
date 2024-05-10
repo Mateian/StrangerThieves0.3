@@ -25,7 +25,6 @@ public class UI {
     // Images
     BufferedImage full_heart, half_heart, black_heart;
     BufferedImage enemyImage;
-    BufferedImage weapon;
     BufferedImage weaponFrame;
 
     // State
@@ -75,8 +74,6 @@ public class UI {
         } catch(IOException e) {
             System.out.println("Error reading current-weapon-frame file.");
         }
-        Entity currentWeapon = new OBJ_Skargun(gp);
-        weapon = currentWeapon.image;
     }
     public void showMessage(String text) {
         message = text;
@@ -161,7 +158,10 @@ public class UI {
         for(int i = 0; i < gp.player.inventory.size(); ++i) {
 
             // Equip
-//            if(gp.player.inventory.get(i) == );
+            if(gp.player.inventory.get(i) == gp.player.currentWeapon) {
+                graph2.setColor(new Color(100, 0, 0));
+                graph2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+            }
 
             graph2.drawImage(gp.player.inventory.get(i).image, slotX, slotY, null);
             slotX += slotSize;
@@ -342,7 +342,7 @@ public class UI {
     }
     public void drawCurrentWeapon() {
         if(gp.player.hasWeapon) {
-            graph2.drawImage(weapon, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
+            graph2.drawImage(gp.player.currentWeapon.image, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
         }
     }
     public void currentWeaponFrame() {
@@ -549,5 +549,8 @@ public class UI {
         int length = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
         int x = gp.screenWidth / 2 - length / 2;
         return x;
+    }
+    public int getItemIndexOnSlot() {
+        return slotCol + (slotRow * 3);
     }
 }

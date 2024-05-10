@@ -7,7 +7,7 @@ public class OBJ_SkargunChest extends Entity {
     public OBJ_SkargunChest(Game gp) {
         super(gp);
         name = "Skargun Chest";
-        down = setup(7, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        image = down = setup(7, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;
         solidArea.x = 0;
         solidArea.y = 20;

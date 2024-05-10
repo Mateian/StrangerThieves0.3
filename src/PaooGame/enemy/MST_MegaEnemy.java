@@ -21,7 +21,7 @@ public class MST_MegaEnemy extends Entity {
         speed = 3;
         maxLife = 6;
         life = maxLife;
-        type = 2;
+        type = type_monster;
         projectile = new OBJ_MegaBullet(gp);
         attack = 2;
         projectile.attack = 3;

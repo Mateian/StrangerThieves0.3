@@ -8,6 +8,8 @@ public class OBJ_Snaipa extends Entity {
     public OBJ_Snaipa(Game gp) {
         super(gp);
 
+        pickUpable = true;
+        type = type_weapon;
         isWeapon = true;
         name = "Snaipa";
         image = setup(13, 0, "/objects/object_spritesheet", gp.tileSize, gp.tileSize);

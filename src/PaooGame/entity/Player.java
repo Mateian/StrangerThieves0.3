@@ -78,11 +78,6 @@ public class Player extends Entity {
         attack = 1;
     }
     public void setItems() {
-        inventory.add(new OBJ_Skargun(gp));
-        inventory.add(new OBJ_Skargun(gp));
-        inventory.add(new OBJ_Skargun(gp));
-        inventory.add(new OBJ_Skargun(gp));
-        inventory.add(new OBJ_Skargun(gp));
     }
     public void getImage() {
         // Moving Images
@@ -374,6 +369,7 @@ public class Player extends Entity {
                         if(!hasWeapon) {
                             gp.ui.showMessage("You picked Skargun!");
                             currentWeapon = new OBJ_Skargun(gp);
+                            inventory.add(currentWeapon);
                             hasWeapon = true;
                         } else {
                             if(counterGun > 20) {
@@ -395,6 +391,22 @@ public class Player extends Entity {
             }
         }
         gp.keyH.ePressed = false;
+    }
+    public void selectItem() {
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+
+        if(itemIndex < inventory.size()) {
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if(selectedItem.type == type_weapon) {
+                currentWeapon = selectedItem;
+                hasWeapon = true;
+                attack = getAttack();
+            }
+            if(selectedItem.type == type_consumable) {
+                // later
+            }
+        }
     }
     public void draw(Graphics2D graph2) {
         BufferedImage image = null;

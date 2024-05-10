@@ -7,6 +7,8 @@ public class OBJ_Electron extends Entity {
     public OBJ_Electron(Game gp) {
         super(gp);
 
+        pickUpable = true;
+        type = type_weapon;
         isWeapon = true;
         name = "Electron";
         down = image = setup(13, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);

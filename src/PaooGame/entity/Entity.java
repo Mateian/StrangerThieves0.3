@@ -55,9 +55,16 @@ public abstract class Entity {
     public boolean collision = false;
 //    public boolean onPath = false;
 
+    // Type
+    public int type; // 0 - player, 1 - npc, 2 - monster
+    public final int type_player = 0;
+    public final int type_npc = 1;
+    public final int type_monster = 2;
+    public final int type_weapon = 3;
+    public final int type_consumable = 4;
+
     // Character Status
     public String name;
-    public int type; // 0 - player, 1 - npc, 2 - monster
     public int maxLife;
     public int life;
     public int speed;
@@ -169,7 +176,7 @@ public abstract class Entity {
             }
 
             // Enemy HP
-            if(type == 2 && toggleHpBar) {
+            if(type == type_monster && toggleHpBar) {
                 double oneScale = (double) gp.tileSize / maxLife;
                 double hpBar = oneScale * life;
 
@@ -272,7 +279,7 @@ public abstract class Entity {
         gp.colChecker.checkEntity(this, gp.mst);
         boolean contactPlayer = gp.colChecker.checkPlayer(this);
 
-        if (this.type == 2 && contactPlayer) {
+        if (this.type == type_monster && contactPlayer) {
             dmgPlayer(attack);
         }
 

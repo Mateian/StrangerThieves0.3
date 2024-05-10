@@ -21,7 +21,7 @@ public class MST_Enemy extends Entity {
         speed = 2;
         maxLife = 4;
         life = maxLife;
-        type = 2;
+        type = type_monster;
         projectile = new OBJ_Bullet(gp);
         projectile.attack = 2;
         attack = 1;

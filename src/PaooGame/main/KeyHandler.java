@@ -86,6 +86,7 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_G) {
                 if(gp.player.hasWeapon) {
                     gp.player.hasWeapon = false;
+                    gp.player.inventory.remove(gp.player.currentWeapon);
                 }
             }
             if(code == KeyEvent.VK_SPACE) {
@@ -114,6 +115,19 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.inventoryState) {
             if(code == KeyEvent.VK_I) {
                 gp.gameState = gp.playState;
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                gp.player.selectItem();
+            }
+            if(code == KeyEvent.VK_G) {
+                for(int i = 0; i < gp.player.inventory.size(); ++i) {
+                    if (gp.player.currentWeapon != null && gp.player.inventory.get(gp.ui.getItemIndexOnSlot()) == gp.player.currentWeapon) {
+                        gp.player.hasWeapon = false;
+                        gp.player.currentWeapon = null;
+                        break;
+                    }
+                }
+                gp.player.inventory.remove(gp.ui.getItemIndexOnSlot());
             }
             if(code == KeyEvent.VK_W) {
                 if(gp.ui.slotRow != 0) {
