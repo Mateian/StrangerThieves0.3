@@ -11,14 +11,17 @@ public class OBJ_Card extends Entity {
         super(gp);
         this.gp = gp;
 
+        // De "decomentat" daca se doreste sa se foloseasca cheile ca un obiect in inventar
+//        type = type_consumable;
+//        pickUpable = true;
         type = type_pickup;
         name = "Card";
         image = down = setup(18, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;
-        solidArea.x = 0;
+        solidArea.x = 3;
         solidArea.y = 24;
-        solidArea.width = gp.tileSize;
-        solidArea.height = gp.tileSize;
+        solidArea.width = 45;
+        solidArea.height = 3;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
@@ -26,5 +29,14 @@ public class OBJ_Card extends Entity {
     public void use(Entity entity) {
         gp.ui.showMessage("You got a key!");
         gp.player.keyNumber++;
+
+        // De "decomentat" daca se doreste sa se foloseasca cheile ca un obiect in inventar
+//
+//        int objIndex = detectEntity(entity, gp.obj, "Door");
+//
+//        if(objIndex != Entity.invalidIndex) {
+//            gp.player.keyNumber++;
+//            gp.obj[gp.currentMap][objIndex] = null;
+//        }
     }
 }

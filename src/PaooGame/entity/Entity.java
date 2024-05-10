@@ -337,6 +337,7 @@ public abstract class Entity {
         }
     }
     public void use(Entity entity) {}
+    public void interact() {}
     public void searchPath(int goalCol, int goalRow) {
         int startCol = (worldX + solidArea.x) / gp.tileSize;
         int startRow = (worldY + solidArea.y) / gp.tileSize;
@@ -407,5 +408,56 @@ public abstract class Entity {
         if (this.type == type_monster && contactPlayer) {
             dmgPlayer(attack);
         }
+    }
+    public int detectEntity(Entity player, Entity[][] target, String targetName) {
+        int index = Entity.invalidIndex;
+
+        int nextWorldX = player.leftX();
+        int nextWorldY = player.topY();
+
+        switch(player.direction) {
+            case "up":
+                nextWorldY = player.topY() - 1;
+                break;
+            case "down":
+                nextWorldY = player.bottomY() + 1;
+                break;
+            case "left":
+                nextWorldX = player.leftX() - 1;
+                break;
+            case "right":
+                nextWorldX = player.rightX() + 1;
+                break;
+        }
+        int col = nextWorldX / gp.tileSize;
+        int row = nextWorldY / gp.tileSize;
+
+        for(int i = 0; i < target[1].length; ++i) {
+            if(target[gp.currentMap][i] != null) {
+                if(target[gp.currentMap][i].getCol() == col && target[gp.currentMap][i].getRow() == row && target[gp.currentMap][i].name.equals(targetName)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+    public int leftX() {
+        return worldX + solidArea.x;
+    }
+    public int rightX() {
+        return worldX + solidArea.x + solidArea.width;
+    }
+    public int topY() {
+        return worldY + solidArea.y;
+    }
+    public int bottomY() {
+        return worldY + solidArea.y + solidArea.height;
+    }
+    public int getCol() {
+        return (worldX + solidArea.x) / gp.tileSize;
+    }
+    public int getRow() {
+        return (worldY + solidArea.y) / gp.tileSize;
     }
 }

@@ -3,8 +3,12 @@ package PaooGame.main;
 import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
 import PaooGame.enemy.MST_MegaEnemy;
+import PaooGame.entity.Entity;
 import PaooGame.entity.NPC_Fen;
 import PaooGame.objects.*;
+
+import java.util.ArrayList;
+import java.util.stream.Collector;
 
 public class AssetSetter {
 
@@ -15,9 +19,12 @@ public class AssetSetter {
         this.gp = gp;
     }
     public void setObject() {
+        int mapNum;
+        int k;
+        ArrayList<Entity> chest = new ArrayList<>();
         // Level 1 Objects
-        int mapNum = 0;
-        int k = 0;
+        mapNum = 0;
+        k = 0;
         gp.obj[mapNum][k] = new OBJ_SkargunChest(gp);
         gp.obj[mapNum][k].worldX = 22 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
@@ -30,12 +37,9 @@ public class AssetSetter {
         // Level 2 Objects
         k = 0;
         mapNum++;
+        gp.spawnedDoors = 0;
 
         // Weapons
-        gp.obj[mapNum][k] = new OBJ_Electron(gp);
-        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
-        ++k;
 
         // Doors
         gp.obj[mapNum][k] = new OBJ_Door(gp);
@@ -102,6 +106,15 @@ public class AssetSetter {
         gp.obj[mapNum][k] = new OBJ_Card(gp);
         gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 39 * gp.tileSize;
+        ++k;
+
+        // Chests
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 41 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 41 * gp.tileSize;
         ++k;
 
 

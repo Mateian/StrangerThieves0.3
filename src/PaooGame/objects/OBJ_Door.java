@@ -23,7 +23,9 @@ public class OBJ_Door extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
-    public void use(Entity entity) {
-
+    public void interact() {
+        if(gp.player.keyNumber != 0) {
+            gp.player.keyNumber--;
+        }
     }
 }

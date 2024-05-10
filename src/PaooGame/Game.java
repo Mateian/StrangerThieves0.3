@@ -52,7 +52,7 @@ public class Game extends JPanel implements Runnable {
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
-    public Entity[][] obj = new Entity[maxMap][30];
+    public Entity[][] obj = new Entity[maxMap][50];
     public Entity[][] NPC = new Entity[maxMap][20];
     public Entity[][] mst = new Entity[maxMap][20];
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -67,6 +67,7 @@ public class Game extends JPanel implements Runnable {
     public final int levelCompleteState = 4;
     public final int optionsState = 5;
     public final int inventoryState = 6;
+    public final int chestState = 7;
 
     public int gameState = menuState;
 
@@ -196,6 +197,9 @@ public class Game extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setObject();
+        player.resetInventory();
+        openedDoors = 0;
+        levelCounter = 0;
     }
     public void paintComponent(Graphics graph) {
 

@@ -116,16 +116,16 @@ public class UI {
                 }
                 levelCounter = gp.levelCounter;
                 graph2.setColor(Color.white);
-                graph2.drawImage(enemyImage, 25, 25, gp.tileSize, gp.tileSize, null);
-                graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
+                graph2.drawImage(enemyImage, 40, 45, gp.tileSize / 2, gp.tileSize / 2, null);
+                graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
                 graph2.drawString(levelCounter + "|" + levelScore, 74, 65);
                 if(gp.currentMap == 1) {
-                    graph2.drawImage(doorImage, 30, 35 + gp.tileSize, gp.tileSize- 10, gp.tileSize - 10, null);
-                    graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
-                    graph2.drawString(gp.openedDoors + "|" + gp.spawnedDoors, 74, 65 + gp.tileSize);
+                    graph2.drawImage(doorImage, 40, 45 + gp.tileSize, gp.tileSize / 2, gp.tileSize / 2, null);
+                    graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
+                    graph2.drawString(gp.spawnedDoors - gp.openedDoors + " remaining", 74, 65 + gp.tileSize);
 
-                    graph2.drawImage(cardImage, 30, 35 + 2 * gp.tileSize, gp.tileSize - 10, gp.tileSize - 10, null);
-                    graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
+                    graph2.drawImage(cardImage, 40, 45 + 2 * gp.tileSize, gp.tileSize / 2, gp.tileSize / 2, null);
+                    graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
                     graph2.drawString(String.valueOf(gp.player.keyNumber), 74, 65 + 2 * gp.tileSize);
                 }
 
@@ -171,6 +171,9 @@ public class UI {
             if(gp.gameState == gp.inventoryState) {
                 drawInventory();
             }
+//            if(gp.gameState == gp.chestState) {
+//                openChest();
+//            }
     }
     public void drawInventory() {
 
@@ -588,5 +591,47 @@ public class UI {
     }
     public int getItemIndexOnSlot() {
         return slotCol + (slotRow * 3);
+    }
+    public void openChest(Entity entity) {
+        // Window
+        int frameX = gp.tileSize * 5;
+        int frameY = gp.tileSize;
+        int frameWidth = gp.tileSize * 6;
+        int frameHeight = gp.tileSize * 5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // Slots
+        final int slotXstart = frameX + 20;
+        final int slotYstart = frameY + 20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+        int slotSize = gp.tileSize + 3;
+
+        // Items
+        for(int i = 0; i < gp.player.inventory.size(); ++i) {
+
+            // Equip
+            if(gp.player.inventory.get(i) == gp.player.currentWeapon) {
+                graph2.setColor(new Color(100, 0, 0));
+                graph2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+            }
+
+            graph2.drawImage(gp.player.inventory.get(i).image, slotX, slotY, null);
+            slotX += slotSize;
+            if(i == 2) {
+                slotX = slotXstart;
+                slotY += slotSize;
+            }
+        }
+
+        // Select
+        int selectX = slotXstart + (slotSize * slotCol);
+        int selectY = slotYstart + (slotSize * slotRow);
+        int selectWidth = gp.tileSize;
+        int selectHeight = gp.tileSize;
+
+        // Draw Select
+        graph2.setColor(Color.white);
+        graph2.drawRoundRect(selectX, selectY, selectWidth, selectHeight, 10, 10);
     }
 }

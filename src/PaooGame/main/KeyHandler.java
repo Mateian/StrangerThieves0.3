@@ -84,8 +84,11 @@ public class KeyHandler implements KeyListener {
                 ePressed = true;
             }
             if(code == KeyEvent.VK_G) {
+                gp.player.checkCollision();
                 if(gp.player.hasWeapon) {
                     gp.player.hasWeapon = false;
+                    gp.player.canPickup = false;
+                    gp.player.dropItem(gp.player.currentWeapon);
                     gp.player.inventory.remove(gp.player.currentWeapon);
                 }
             }
@@ -113,6 +116,12 @@ public class KeyHandler implements KeyListener {
                 gp.tileMng.loadMap("/maps/level0" + (gp.currentMap + 1) + ".txt", gp.currentMap);
             }
         }
+        // Chest State
+        else if(gp.gameState == gp.chestState) {
+            if(code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = gp.playState;
+            }
+        }
         // Inventory State
         else if(gp.gameState == gp.inventoryState) {
             if(code == KeyEvent.VK_I) {
@@ -130,6 +139,8 @@ public class KeyHandler implements KeyListener {
                     }
                 }
                 if(gp.ui.getItemIndexOnSlot() < gp.player.inventory.size() && !gp.player.inventory.isEmpty()) {
+                    gp.player.canPickup = false;
+                    gp.player.dropItem(gp.player.inventory.get(gp.ui.getItemIndexOnSlot()));
                     gp.player.inventory.remove(gp.ui.getItemIndexOnSlot());
                 }
             }

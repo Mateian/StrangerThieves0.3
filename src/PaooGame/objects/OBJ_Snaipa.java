@@ -12,7 +12,7 @@ public class OBJ_Snaipa extends Entity {
         type = type_weapon;
         isWeapon = true;
         name = "Snaipa";
-        image = setup(13, 0, "/objects/object_spritesheet", gp.tileSize, gp.tileSize);
+        down = image = setup(15, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         projectile = new OBJ_MegaBullet(gp);
     }
 }

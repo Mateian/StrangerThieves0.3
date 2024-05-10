@@ -29,7 +29,7 @@ public class Player extends Entity {
     public final int screenY;
 
     // Boolean
-    public boolean moving = false;
+    public boolean canPickup = true;
     public  boolean hasWeapon = false;
     public boolean attackCancelled = false;
 
@@ -75,6 +75,7 @@ public class Player extends Entity {
         life = maxLife;
         strength = 1;
         attack = 1;
+        inventory.add(new OBJ_Snaipa(gp));
     }
     public void setItems() {
     }
@@ -213,6 +214,13 @@ public class Player extends Entity {
         if (life <= 0) {
             gp.gameState = gp.deadState;
         }
+        if(!canPickup) {
+            actionCounter++;
+            if(actionCounter == 60) {
+                canPickup = true;
+                actionCounter = 0;
+            }
+        }
     }
     public int getAttack() {
         return attack = strength;
@@ -320,22 +328,36 @@ public class Player extends Entity {
         life = maxLife;
         invincible = false;
     }
+    public void resetInventory() {
+        inventory.clear();
+        keyNumber = 0;
+    }
     public void pickUpObject(int i) {
-        if(i != invalidIndex) {
+        if(i != invalidIndex && canPickup) {
             String objectName = gp.obj[gp.currentMap][i].name;
 
-            // No store object
+            // Pickup Object
             if(gp.obj[gp.currentMap][i].type == type_pickup) {
                 gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null;
             } else if(gp.obj[gp.currentMap][i].type == type_obstacle) {
-                if(gp.player.keyNumber != 0) {
-                    gp.obj[gp.currentMap][i] = null;
-                    gp.player.keyNumber--;
-                    gp.openedDoors++;
-                }
-                else {
-                    gp.ui.showMessage("You need a Key!");
+                if(gp.obj[gp.currentMap][i].name.equals("Chest")) {
+                    if(gp.keyH.ePressed) {
+                        gp.obj[gp.currentMap][i].interact();
+                        gp.obj[gp.currentMap][i] = null;
+                    }
+                } else
+                if(gp.obj[gp.currentMap][i].name.equals("Door")) {
+                    int oldKeyNumber = keyNumber;
+                    gp.obj[gp.currentMap][i].interact();
+                    if(gp.player.keyNumber != oldKeyNumber) {
+                        gp.obj[gp.currentMap][i] = null;
+                        gp.openedDoors++;
+                    } else {
+                        gp.ui.showMessage("You need a Key.");
+                    }
+                } else {
+                    gp.obj[gp.currentMap][i].interact();
                 }
             }
             // Inventory Items
