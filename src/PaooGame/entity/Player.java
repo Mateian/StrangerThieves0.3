@@ -377,7 +377,7 @@ public class Player extends Entity {
                 gp.ui.showMessage(text);
 
                 // Weapon Switch
-                if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].isWeapon) {
+                if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].isWeapon && inventory.size() != maxInventorySize) {
                     switch(gp.obj[gp.currentMap][i].name) {
                         case "Electron":
                             currentWeapon = new OBJ_Electron(gp);

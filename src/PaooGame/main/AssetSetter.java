@@ -91,33 +91,54 @@ public class AssetSetter {
         gp.spawnedDoors++;
 
         // Cards
-        gp.obj[mapNum][k] = new OBJ_Card(gp);
-        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Card(gp);
-        gp.obj[mapNum][k].worldX = 39 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Card(gp);
-        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 19 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Card(gp);
-        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 39 * gp.tileSize;
-        ++k;
 
         // Chests
         chest.add(new OBJ_HealPotion(gp));
         chest.add(new OBJ_Electron(gp));
         chest.add(new OBJ_Card(gp));
         gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
-        gp.obj[mapNum][k].worldX = 41 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 41 * gp.tileSize;
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 42 * gp.tileSize;
         ++k;
-
-
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 20 * gp.tileSize;
+        ++k;
+        chest.clear();
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 44 * gp.tileSize;
+        ++k;
+        chest.clear();
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 25 * gp.tileSize;
+        ++k;
+        chest.clear();
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 18 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        chest.clear();
+        chest.add(new OBJ_HealPotion(gp));
+        chest.add(new OBJ_Electron(gp));
+        chest.add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 15 * gp.tileSize;
+        ++k;
 
         // Level 3 Objects
         k = 0;

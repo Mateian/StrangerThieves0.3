@@ -15,6 +15,7 @@ public class OBJ_Card extends Entity {
 //        type = type_consumable;
 //        pickUpable = true;
         type = type_pickup;
+        pickUpable = true;
         name = "Card";
         image = down = setup(18, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;

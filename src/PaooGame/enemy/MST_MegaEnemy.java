@@ -2,8 +2,7 @@ package PaooGame.enemy;
 
 import PaooGame.Game;
 import PaooGame.entity.Entity;
-import PaooGame.objects.OBJ_Bullet;
-import PaooGame.objects.OBJ_MegaBullet;
+import PaooGame.objects.*;
 
 import java.util.Random;
 
@@ -46,7 +45,7 @@ public class MST_MegaEnemy extends Entity {
         right1 = setup(0,0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
         right2 = setup(1, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
-    
+
     // De adaugat atunci cand vrem sa un inamic sa ne urmareasca doar cand ne apropiem noi
 
 //    public void update() {
@@ -120,5 +119,18 @@ public class MST_MegaEnemy extends Entity {
 //                break;
 //        }
         onPath = true;
+    }
+    public void checkDrop() {
+        int n = new Random().nextInt(100) + 1;
+        dropItem(new OBJ_Card(gp));
+        if(n < 5) {
+            dropItem(new OBJ_Snaipa(gp));
+        }
+        if(n >= 5 && n < 10) {
+            dropItem(new OBJ_KTPY(gp));
+        }
+        if(n >= 10 && n < 50) {
+            dropItem(new OBJ_HealPotion(gp));
+        }
     }
 }
