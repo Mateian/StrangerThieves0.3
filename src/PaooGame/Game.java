@@ -68,9 +68,12 @@ public class Game extends JPanel implements Runnable {
     public int gameState = menuState;
 
     // Objectives
-    public boolean lvl1Completion = false;
-    public int levelObjectiveCounter = 0;
-    public int lvlObjective = 5;
+    public int level1Score;
+    public int level2Score;
+    public int level3Score;
+    public int levelScore;
+    public int levelCounter;
+
 
     // Debug
     int contor = 0;
@@ -92,6 +95,8 @@ public class Game extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setMonster();
         gameState = menuState;
+        levelCounter = 0;
+        levelScore = level1Score;
 
         // Debug
 //        contor = 0;
@@ -168,12 +173,18 @@ public class Game extends JPanel implements Runnable {
         if(gameState == pauseState) {
             ui.drawPauseScreen();
         }
-        if(levelObjectiveCounter == lvlObjective) {
+
+        // Level 1 Completion
+        if(currentMap == 0 && levelCounter == levelScore) {
           gameState = levelCompleteState;
-          levelObjectiveCounter = 0;
-          lvlObjective = -1;
 //            currentMap = 1;
         }
+
+        //Level 2 Completion
+        if(currentMap == 1 && levelCounter == levelScore) {
+            gameState = levelCompleteState;
+        }
+
         // Debug
 
         if(contor == 0 && currentMap == 1) {

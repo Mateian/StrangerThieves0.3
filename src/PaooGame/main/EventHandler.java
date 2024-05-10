@@ -50,9 +50,9 @@ public class EventHandler {
         }
         if(canTouchEvent) {
             // Level 1 Events
-            if(hit(0, 20, 30, "any")) {
-                giveDamage(22, 30, gp.dialogState);
-            }
+//            if(hit(0, 20, 30, "any")) {
+//                giveDamage(22, 30, gp.dialogState);
+//            }
             if(hit(0, 21, 30, "any")) {
                 heal(25, 40, gp.dialogState);
             }

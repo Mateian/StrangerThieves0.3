@@ -331,4 +331,5 @@ public abstract class Entity {
             gp.player.invincible = true;
         }
     }
+    public void use(Entity entity) {}
 }

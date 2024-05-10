@@ -4,11 +4,9 @@ import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
 import PaooGame.entity.Entity;
 import PaooGame.objects.OBJ_Heart;
-import PaooGame.objects.OBJ_Skargun;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -90,10 +88,27 @@ public class UI {
                 drawOptionsScreen();
             }
             if(gp.gameState == gp.playState) {
-                graph2.setFont(arial_40);
+                int levelScore;
+                int levelCounter;
+                switch(gp.currentMap) {
+                    case 0:
+                        levelScore = gp.level1Score;
+                        break;
+                    case 1:
+                        levelScore = gp.level2Score;
+                        break;
+                    case 2:
+                        levelScore = gp.level3Score;
+                        break;
+                    default:
+                        levelScore = -1;
+                        break;
+                }
+                levelCounter = gp.levelCounter;
                 graph2.setColor(Color.white);
                 graph2.drawImage(enemyImage, 25, 25, gp.tileSize, gp.tileSize, null);
-                graph2.drawString(gp.levelObjectiveCounter + " | " + gp.lvlObjective, 74, 65);
+                graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
+                graph2.drawString(levelCounter + "|" + levelScore, 74, 65);
 
                 // Time
                 playTime +=(double)1/60;
@@ -143,8 +158,8 @@ public class UI {
         // Window
         int frameX = gp.tileSize * 10;
         int frameY = gp.tileSize;
-        int frameWidth = gp.tileSize * 5;
-        int frameHeight = gp.tileSize * 3;
+        int frameWidth = gp.tileSize * 4;
+        int frameHeight = gp.tileSize * 2;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         // Slots
@@ -315,6 +330,7 @@ public class UI {
         graph2.drawString("Shoot", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Pause", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Drop weapon", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Inventory", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Options", textX, textY); textY += gp.tileSize / 2;
 
         textX = frameX + gp.tileSize * 5;
@@ -325,6 +341,7 @@ public class UI {
         graph2.drawString("Space", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("P", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("G", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("I", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Esc", textX, textY); textY += gp.tileSize / 2;
 
         // Back

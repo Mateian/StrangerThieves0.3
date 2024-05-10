@@ -121,13 +121,15 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_G) {
                 for(int i = 0; i < gp.player.inventory.size(); ++i) {
-                    if (gp.player.currentWeapon != null && gp.player.inventory.get(gp.ui.getItemIndexOnSlot()) == gp.player.currentWeapon) {
+                    if (gp.ui.getItemIndexOnSlot() < gp.player.inventory.size() && gp.player.currentWeapon != null && gp.player.inventory.get(gp.ui.getItemIndexOnSlot()) == gp.player.currentWeapon) {
                         gp.player.hasWeapon = false;
                         gp.player.currentWeapon = null;
                         break;
                     }
                 }
-                gp.player.inventory.remove(gp.ui.getItemIndexOnSlot());
+                if(gp.ui.getItemIndexOnSlot() < gp.player.inventory.size() && !gp.player.inventory.isEmpty()) {
+                    gp.player.inventory.remove(gp.ui.getItemIndexOnSlot());
+                }
             }
             if(code == KeyEvent.VK_W) {
                 if(gp.ui.slotRow != 0) {
@@ -145,9 +147,12 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if(code == KeyEvent.VK_D) {
-                if(gp.ui.slotCol != 2) {
-                    gp.ui.slotCol++;
+                if(gp.ui.getItemIndexOnSlot() < gp.player.inventory.size()) {
+                    if(gp.ui.slotCol != gp.player.inventory.size() - 1) {
+                        gp.ui.slotCol++;
+                    }
                 }
+
             }
         }
 
@@ -177,7 +182,20 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.levelCompleteState) {
             if(code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
-                gp.player.teleport(1, 40, 42);
+                gp.levelCounter = 0;
+                switch(gp.currentMap) {
+                    case 0:
+                        gp.levelScore = gp.level1Score;
+                        break;
+                    case 1:
+                        gp.levelScore = gp.level2Score;
+                        break;
+                    case 2:
+                        gp.levelScore = gp.level3Score;
+                        break;
+                }
+                gp.currentMap++;
+                gp.player.teleport(gp.currentMap, 40, 42);
             }
         }
     }

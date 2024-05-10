@@ -291,10 +291,7 @@ public class Player extends Entity {
                 if(gp.mst[gp.currentMap][i].life <= 0) {
                     gp.mst[gp.currentMap][i].dead = true;
                     gp.playFX(6);
-                    gp.levelObjectiveCounter++;
-                    if(gp.levelObjectiveCounter == gp.lvlObjective) {
-                        gp.lvl1Completion = true;
-                    }
+                    gp.levelCounter++;
                 }
             }
         }
@@ -404,7 +401,8 @@ public class Player extends Entity {
                 attack = getAttack();
             }
             if(selectedItem.type == type_consumable) {
-                // later
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
             }
         }
     }

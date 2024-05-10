@@ -26,31 +26,20 @@ public class AssetSetter {
         gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
         ++k;
-        gp.obj[mapNum][k] = new OBJ_Heart(gp);
-        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 25 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Heart(gp);
-        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 26 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Heart(gp);
-        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 24 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Heart(gp);
-        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 23 * gp.tileSize;
-        ++k;
-        gp.obj[mapNum][k] = new OBJ_Electron(gp);
-        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][k].worldY = 22 * gp.tileSize;
-        ++k;
 
         // Level 2 Objects
+        k = 0;
+        mapNum++;
+        gp.obj[mapNum][k] = new OBJ_Electron(gp);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
+        ++k;
 
 
         // Level 3 Objects
+        k = 0;
+        mapNum++;
+
     }
     public void setNPC() {
         // Level 1 NPCs
@@ -68,12 +57,23 @@ public class AssetSetter {
         // Level 1 Monsters
         int mapNum = 0;
         int k = 0;
+
+        // Zona 1
         for(int i = 0; i < 5; ++i) {
             gp.mst[mapNum][k] = new MST_Enemy(gp);
             gp.mst[mapNum][k].worldX = gp.tileSize * (23 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * (15 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 15;
             k++;
         }
+
+        // Zona 2
+        for(int i = 0; i < 5; ++i) {
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (15 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 19;
+            k++;
+        }
+        gp.level1Score = k;
 
         // Level 2 Monsters
         mapNum = 1;
@@ -114,9 +114,11 @@ public class AssetSetter {
             gp.mst[mapNum][k].worldY = gp.tileSize * 7;
             k++;
         }
+        gp.level2Score = k;
 
         // Level 3 Monsters
         mapNum = 2;
         k = 0;
+        gp.level3Score = k;
     }
 }
