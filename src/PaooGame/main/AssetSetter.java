@@ -42,6 +42,10 @@ public class AssetSetter {
         gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 23 * gp.tileSize;
         ++k;
+        gp.obj[mapNum][k] = new OBJ_Electron(gp);
+        gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 22 * gp.tileSize;
+        ++k;
 
         // Level 2 Objects
 

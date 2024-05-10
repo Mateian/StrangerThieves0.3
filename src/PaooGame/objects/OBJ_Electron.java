@@ -7,10 +7,10 @@ public class OBJ_Electron extends Entity {
     public OBJ_Electron(Game gp) {
         super(gp);
 
+        isWeapon = true;
         name = "Electron";
-        image = setup(13, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        attackValue = 10;
-        projectile = new OBJ_Bullet(gp);
+        down = image = setup(13, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        projectile = new OBJ_MegaBullet(gp);
 //        attackArea.width = 36;
 //        attackArea.height = 36;
     }

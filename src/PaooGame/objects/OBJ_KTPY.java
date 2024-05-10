@@ -8,10 +8,9 @@ public class OBJ_KTPY extends Entity {
     public OBJ_KTPY(Game gp) {
         super(gp);
 
-        name = "Electron";
+        isWeapon = true;
+        name = "KTPY";
         image = setup(13, 0, "/objects/object_spritesheet", gp.tileSize, gp.tileSize);
-        attack = 1;
-        attackArea.width = 36;
-        attackArea.height = 36;
+        projectile = new OBJ_MegaBullet(gp);
     }
 }

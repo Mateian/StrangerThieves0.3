@@ -72,6 +72,7 @@ public abstract class Entity {
 
     // Item Status
     public int attackValue;
+    public boolean isWeapon = false;
 
     public Entity(Game gp) {
         this.gp = gp;

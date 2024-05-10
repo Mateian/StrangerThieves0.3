@@ -1,10 +1,8 @@
 package PaooGame.entity;
 
-import PaooGame.objects.OBJ_Bullet;
+import PaooGame.objects.*;
 import PaooGame.Game;
 import PaooGame.main.KeyHandler;
-import PaooGame.objects.OBJ_Electron;
-import PaooGame.objects.OBJ_Skargun;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,7 +23,6 @@ public class Player extends Entity {
     // Variables
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 3;
-    public int weapAttack;
 
     // Position
     public final int screenX;
@@ -78,8 +75,6 @@ public class Player extends Entity {
         maxLife = 6;
         life = maxLife;
         strength = 1;
-        currentWeapon = new OBJ_Electron(gp);
-        weapAttack = getAttack();
         attack = 1;
     }
     public void setItems() {
@@ -203,7 +198,7 @@ public class Player extends Entity {
             spriteNumber = 0;
         }
 
-        if(gp.keyH.shotPressed && !currentWeapon.projectile.alive && shotCounter == 30 && hasWeapon) {
+        if(currentWeapon != null && gp.keyH.shotPressed && !currentWeapon.projectile.alive && shotCounter == 30 && hasWeapon) {
             currentWeapon.projectile.set(worldX, worldY, direction, true, this);
 
             gp.projectileList.add(currentWeapon.projectile);
@@ -226,11 +221,7 @@ public class Player extends Entity {
         }
     }
     public int getAttack() {
-        if (currentWeapon != null) {
-            return weapAttack = currentWeapon.attackValue;
-        } else {
-            return weapAttack = 0;
-        }
+        return attack = strength;
     }
     public void teleport(int map, int col, int row) {
         gp.currentMap = map;
@@ -348,12 +339,41 @@ public class Player extends Entity {
             }
             gp.ui.showMessage(text);
 
+            // Weapon Switch
+            if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].isWeapon) {
+                switch(gp.obj[gp.currentMap][i].name) {
+                    case "Electron":
+                        currentWeapon = new OBJ_Electron(gp);
+                        break;
+                    case "KTPY":
+                        currentWeapon = new OBJ_KTPY(gp);
+                        break;
+                    case "Skargun":
+                        currentWeapon = new OBJ_Skargun(gp);
+                        break;
+                    case "Snaipa":
+                        currentWeapon = new OBJ_Snaipa(gp);
+                        break;
+                }
+                counterGun++;
+                if(!hasWeapon) {
+                    gp.ui.showMessage("You picked Skargun!");
+                    hasWeapon = true;
+
+                } else {
+                    if(counterGun > 20) {
+                        gp.ui.showMessage("You already have a weapon!");
+                        counterGun = 0;
+                    }
+                }
+            }
+
             switch(objectName) {
-                case "Chest":
+                case "Skargun Chest":
                     counterGun++;
                         if(!hasWeapon) {
                             gp.ui.showMessage("You picked Skargun!");
-
+                            currentWeapon = new OBJ_Skargun(gp);
                             hasWeapon = true;
                         } else {
                             if(counterGun > 20) {
@@ -361,7 +381,6 @@ public class Player extends Entity {
                                 counterGun = 0;
                             }
                         }
-
                     break;
             }
         }
