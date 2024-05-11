@@ -27,6 +27,7 @@ public class MST_Enemy extends Entity {
         projectile = new OBJ_Bullet(gp);
         projectile.attack = 2;
         attack = 1;
+        difficulty = 1;
 
         solidArea.x = 3;
         solidArea.y = 10;
@@ -36,8 +37,16 @@ public class MST_Enemy extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         getImage();
+        setAmmoProps();
     }
-
+    void setAmmoProps() {
+        projectile.speed = 20;
+        projectile.maxLife = 15;
+        projectile.life = maxLife;
+        projectile.attack = 2;
+        projectile.useCost = 1;
+        projectile.alive = false;
+    }
     public void getImage() {
         up1 = setup(0, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
         up2 = setup(1, 0, "/enemy/enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);

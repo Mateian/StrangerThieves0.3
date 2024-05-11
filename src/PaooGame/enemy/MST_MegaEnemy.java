@@ -23,6 +23,7 @@ public class MST_MegaEnemy extends Entity {
         type = type_monster;
         projectile = new OBJ_MegaBullet(gp);
         attack = 2;
+        difficulty = 2;
         projectile.attack = 3;
 
         solidArea.x = 3;
@@ -33,6 +34,15 @@ public class MST_MegaEnemy extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         getImage();
+        setAmmoProps();
+    }
+    void setAmmoProps() {
+        projectile.speed = 30;
+        projectile.maxLife = 15;
+        projectile.life = maxLife;
+        projectile.attack = 4;
+        projectile.useCost = 1;
+        projectile.alive = false;
     }
 
     public void getImage() {

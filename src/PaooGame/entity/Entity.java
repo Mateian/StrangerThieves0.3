@@ -41,6 +41,7 @@ public abstract class Entity {
     public int shotCounter = 0;
     int barCounter = 0;
     int deadCounter = 0;
+    public int delay = 30;
 
     // Solid Areas and Collisions
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
@@ -76,6 +77,7 @@ public abstract class Entity {
     public int useCost;
     public Entity currentWeapon;
     public boolean onPath = false;
+    public int difficulty = 1;
 //    public int maxMana;
 //    public int mana;
 
@@ -214,7 +216,7 @@ public abstract class Entity {
                 barCounter = 0;
                 changeAlpha(graph2, 0.5f);
             }
-            if(dead == true) {
+            if(dead) {
                 deadAnim(graph2);
             }
             graph2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
@@ -317,7 +319,7 @@ public abstract class Entity {
         }
         if (invincible) {
             invincibleCounter++;
-            if (invincibleCounter > 40) {
+            if (invincibleCounter > 10 * difficulty) {
                 invincible = false;
                 invincibleCounter = 0;
             }

@@ -13,12 +13,12 @@ public class OBJ_MegaBullet extends Projectile {
         super(gp);
         this.gp = gp;
         name = "Bullet";
-        speed = 30;
-        maxLife = 15;
-        life = maxLife;
-        attack = 4;
-        useCost = 1;
-        alive = false;
+//        speed = 30;
+//        maxLife = 15;
+//        life = maxLife;
+//        attack = 4;
+//        useCost = 1;
+//        alive = false;
         getImage();
     }
 

@@ -23,6 +23,7 @@ public class Player extends Entity {
     // Variables
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 3;
+    Entity oldWeapon;
 
     // Position
     public final int screenX;
@@ -32,6 +33,7 @@ public class Player extends Entity {
     public boolean canPickup = true;
     public  boolean hasWeapon = false;
     public boolean attackCancelled = false;
+    public boolean weaponSwitch = false;
 
     // Counters
     int counterGun = 0;
@@ -75,7 +77,8 @@ public class Player extends Entity {
         life = maxLife;
         strength = 1;
         attack = 1;
-        inventory.add(new OBJ_Snaipa(gp));
+        difficulty = 4;
+        inventory.add(new OBJ_KTPY(gp));
     }
     public void setItems() {
     }
@@ -192,8 +195,9 @@ public class Player extends Entity {
         } else {
             spriteNumber = 0;
         }
-
-        if(currentWeapon != null && gp.keyH.shotPressed && !currentWeapon.projectile.alive && shotCounter == 30 && hasWeapon) {
+        if(currentWeapon != null)
+//            System.out.println(currentWeapon.name + "|" + gp.keyH.shotPressed + "|" + currentWeapon.projectile.alive + "|" + shotCounter + "|" + currentWeapon.projectile.delay + "|" + hasWeapon);
+        if(currentWeapon != null && gp.keyH.shotPressed && !currentWeapon.projectile.alive && shotCounter == currentWeapon.projectile.delay && hasWeapon) {
             currentWeapon.projectile.set(worldX, worldY, direction, true, this);
 
             gp.projectileList.add(currentWeapon.projectile);
@@ -208,9 +212,17 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
-        if(shotCounter < 30) {
-            shotCounter++;
+        if(currentWeapon != oldWeapon){
+            oldWeapon = currentWeapon;
+            weaponSwitch = true;
+            shotCounter = 0;
         }
+        if(currentWeapon != null) {
+            if(shotCounter < currentWeapon.projectile.delay) {
+                shotCounter++;
+            }
+        }
+
         if (life <= 0) {
             gp.gameState = gp.deadState;
         }
@@ -440,6 +452,8 @@ public class Player extends Entity {
         int itemIndex = gp.ui.getItemIndexOnSlot();
 
         if(itemIndex < inventory.size()) {
+            oldWeapon = currentWeapon;
+
             Entity selectedItem = inventory.get(itemIndex);
 
             if(selectedItem.type == type_weapon) {

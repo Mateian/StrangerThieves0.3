@@ -13,5 +13,13 @@ public class OBJ_Skargun extends Entity {
         name = "Skargun";
         down = image = setup(8, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         projectile = new OBJ_Bullet(gp);
+        setAmmoProps();
+    }
+    public void setAmmoProps() {
+        projectile.attack = 2;
+        projectile.speed = 20;
+        projectile.maxLife = 15;
+        projectile.life = maxLife;
+        projectile.alive = false;
     }
 }
