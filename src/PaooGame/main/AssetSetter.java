@@ -2,9 +2,11 @@ package PaooGame.main;
 
 import PaooGame.Game;
 import PaooGame.enemy.MST_Enemy;
+import PaooGame.enemy.MST_HEAD;
 import PaooGame.enemy.MST_MegaEnemy;
 import PaooGame.entity.Entity;
 import PaooGame.entity.NPC_Fen;
+import PaooGame.entity.NPC_HEAD;
 import PaooGame.objects.*;
 
 import java.util.ArrayList;
@@ -146,16 +148,32 @@ public class AssetSetter {
 
     }
     public void setNPC() {
+        int mapNum;
+        int k;
         // Level 1 NPCs
-        int mapNum = 0;
-        gp.NPC[mapNum][0] = new NPC_Fen(gp);
-        gp.NPC[mapNum][0].worldX = gp.tileSize * 23;
-        gp.NPC[mapNum][0].worldY = gp.tileSize * 30 - 1;
-
+        mapNum = 0;
+        k = 0;
+        gp.NPC[mapNum][k] = new NPC_Fen(gp);
+        gp.NPC[mapNum][k].worldX = gp.tileSize * 23;
+        gp.NPC[mapNum][k].worldY = gp.tileSize * 30;
+        k++;
         // Level 2 NPCs
+        mapNum++;
+        // HEAD
+        gp.NPC[mapNum][k] = new NPC_HEAD(gp);
+        gp.NPC[mapNum][k].worldX = gp.tileSize * 40;
+        gp.NPC[mapNum][k].worldY = gp.tileSize * 12; //12
+        k++;
 
+        // Fen
+        gp.NPC[mapNum][k] = new NPC_Fen(gp);
+        gp.NPC[mapNum][k].worldX = gp.tileSize * 41; // 41
+        gp.NPC[mapNum][k].worldY = gp.tileSize * 12; // 12
+        k++;
 
         // Level 3 NPCs
+        mapNum++;
+        k = 0;
     }
     public void setMonster() {
         // Level 1 Monsters

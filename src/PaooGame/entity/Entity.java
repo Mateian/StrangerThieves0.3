@@ -50,10 +50,11 @@ public abstract class Entity {
     public boolean collisionOn = false;
 
     // Dialogs
-    String[] dialogs = new String[25];
+    public String[] dialogs = new String[25];
     int dialogIndex = 0;
     public BufferedImage image, image2, image3;
     public boolean collision = false;
+    public boolean dialogFinished = true;
 
     // Type
     public int type; // 0 - player, 1 - npc, 2 - monster
@@ -107,10 +108,12 @@ public abstract class Entity {
 
     public void talk() {
         if (dialogs[dialogIndex] == null) {
+            dialogFinished = true;
             dialogIndex = 0;
         }
         gp.ui.dialogText = dialogs[dialogIndex];
         dialogIndex++;
+        dialogFinished = false;
 
         switch (gp.player.direction) {
             case "up":
@@ -128,7 +131,7 @@ public abstract class Entity {
         }
     }
     public void checkDrop() {}
-    public void dropItem(Entity item) {
+    public void dropItem(Entity item)  {
         for (int i = 0; i < gp.obj[gp.currentMap].length; ++i) {
             if(gp.obj[gp.currentMap][i] == null) {
                 gp.obj[gp.currentMap][i] = item;

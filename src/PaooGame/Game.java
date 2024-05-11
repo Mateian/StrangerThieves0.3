@@ -31,7 +31,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 1;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
@@ -49,6 +49,7 @@ public class Game extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public Config config = new Config(this);
     public PathFinder pather = new PathFinder(this);
+    public CutsceneManager cutsceneMng = new CutsceneManager(this);
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
@@ -68,12 +69,14 @@ public class Game extends JPanel implements Runnable {
     public final int optionsState = 5;
     public final int inventoryState = 6;
     public final int chestState = 7;
+    public final int cutsceneState = 8;
 
     public int gameState = menuState;
 
     // Objectives
     public int spawnedDoors;
     public int openedDoors = 0;
+    public boolean level2HeadInteraction = false;
 
     public int level1Score;
     public int level2Score;
@@ -184,7 +187,7 @@ public class Game extends JPanel implements Runnable {
         }
 
         //Level 2 Completion
-        if(currentMap == 1 && levelCounter == levelScore) {
+        if(currentMap == 1 && level2HeadInteraction) {
             gameState = levelCompleteState;
         }
 
@@ -261,6 +264,9 @@ public class Game extends JPanel implements Runnable {
 
             // Empty Entity List
             entityList.clear();
+
+            // Cutscene
+            cutsceneMng.draw(graph2);
 
             // UI
             ui.draw(graph2);

@@ -549,6 +549,7 @@ public class UI {
         x = gp.tileSize * 2 - gp.tileSize / 2 + 10;
         y = gp.screenHeight / 2 + gp.tileSize - gp.tileSize / 2 + 10;
         int NPCIndex = gp.colChecker.checkEntity(gp.player, gp.NPC);
+        int MSTIndex = gp.colChecker.checkEntity(gp.player, gp.mst);
         if(NPCIndex != Entity.invalidIndex) {
             graph2.drawImage(gp.NPC[gp.currentMap][NPCIndex].down, x, y, null);
         }

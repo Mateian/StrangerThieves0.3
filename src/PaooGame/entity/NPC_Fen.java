@@ -67,31 +67,6 @@ public class NPC_Fen extends Entity {
 //    }
 
     public void update() {
-//        Test pentru miscare NPC
-//        setAction();
-
-//        // Collision
-//        collisionOn = false;
-//        gp.cChecker.checkTile(this);
-//        gp.cChecker.checkObject(this, false);
-//        gp.cChecker.checkPlayer(this);
-//        if(!collisionOn) {
-//            switch(direction) {
-//                case "up":
-//                    worldy -= speed;
-//                    break;
-//                case "down":
-//                    worldy += speed;
-//                    break;
-//                case "left":
-//                    worldx -= speed;
-//                    break;
-//                case "right":
-//                    worldx += speed;
-//                    break;
-//            }
-//        }
-
         // Sprite changer
         spriteCounter++;
         if (spriteCounter > 30) {

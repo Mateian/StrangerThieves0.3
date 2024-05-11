@@ -56,6 +56,9 @@ public class EventHandler {
             if(hit(0, 21, 30, "any")) {
                 heal(25, 40, gp.dialogState);
             }
+//            if(hit(1, 40, 40, "any")) {
+//                found();
+//            }
             // Level 2 Events
             // Level 3 Events
         }
@@ -106,5 +109,9 @@ public class EventHandler {
         previousEventX = gp.player.worldX;
         previousEventY = gp.player.worldY;
         canTouchEvent = false;
+    }
+    public void found() {
+        gp.gameState = gp.cutsceneState;
+        gp.cutsceneMng.sceneNum = gp.cutsceneMng.HEAD;
     }
 }

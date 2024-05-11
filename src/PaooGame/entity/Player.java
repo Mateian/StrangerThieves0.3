@@ -150,6 +150,8 @@ public class Player extends Entity {
             // Check NPC collision
             int NPCIdx = gp.colChecker.checkEntity(this, gp.NPC);
             intersectNPC(NPCIdx);
+            int HEADIdx = gp.colChecker.checkEntity(this, gp.mst);
+            intersectNPC(HEADIdx);
 
             // Check Monster collision
             int monsterIndex = gp.colChecker.checkEntity(this, gp.mst);
@@ -447,6 +449,7 @@ public class Player extends Entity {
             }
         }
         gp.keyH.ePressed = false;
+
     }
     public void selectItem() {
         int itemIndex = gp.ui.getItemIndexOnSlot();
