@@ -66,6 +66,9 @@ public abstract class Entity {
     public final int type_pickup = 5;
     public final int type_obstacle = 6;
 
+    // Variables
+    public int size;
+
     // Character Status
     public String name;
     public int maxLife;
@@ -89,6 +92,7 @@ public abstract class Entity {
 
     public Entity(Game gp) {
         this.gp = gp;
+        size = gp.tileSize;
     }
     public BufferedImage setup(int indexX, int indexY, String path, int width, int height) {
         Tools tool = new Tools();
@@ -222,7 +226,7 @@ public abstract class Entity {
             if(dead) {
                 deadAnim(graph2);
             }
-            graph2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            graph2.drawImage(image, screenX, screenY, size, size, null);
 
             graph2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
             changeAlpha(graph2, 1f);

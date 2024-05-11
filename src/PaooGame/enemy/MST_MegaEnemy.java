@@ -2,6 +2,7 @@ package PaooGame.enemy;
 
 import PaooGame.Game;
 import PaooGame.entity.Entity;
+import PaooGame.main.Tools;
 import PaooGame.objects.*;
 
 import java.util.Random;
@@ -25,10 +26,11 @@ public class MST_MegaEnemy extends Entity {
         attack = 2;
         difficulty = 2;
         projectile.attack = 3;
+        size = gp.tileSize + 10;
 
         solidArea.x = 3;
-        solidArea.y = 10;
-        solidArea.width = 42;
+        solidArea.y = 16;
+        solidArea.width = 32;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;

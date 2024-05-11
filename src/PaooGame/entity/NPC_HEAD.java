@@ -15,6 +15,7 @@ public class NPC_HEAD extends Entity {
         spriteNumber = 1;
         name = "HEAD NPC";
 
+        size = gp.tileSize * 2;
         solidArea.x = 3;
         solidArea.y = 10;
         solidArea.width = 42;

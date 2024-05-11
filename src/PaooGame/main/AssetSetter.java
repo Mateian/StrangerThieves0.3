@@ -167,7 +167,7 @@ public class AssetSetter {
 
         // Fen
         gp.NPC[mapNum][k] = new NPC_Fen(gp);
-        gp.NPC[mapNum][k].worldX = gp.tileSize * 41; // 41
+        gp.NPC[mapNum][k].worldX = gp.tileSize * 42; // 41
         gp.NPC[mapNum][k].worldY = gp.tileSize * 12; // 12
         k++;
 
