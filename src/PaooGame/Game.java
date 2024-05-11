@@ -31,7 +31,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 1;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;

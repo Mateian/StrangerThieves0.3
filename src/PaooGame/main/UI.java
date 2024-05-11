@@ -353,6 +353,7 @@ public class UI {
         graph2.drawString("Pause", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Drop weapon", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Inventory", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Restart Level", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Options", textX, textY); textY += gp.tileSize / 2;
 
         textX = frameX + gp.tileSize * 5;
@@ -364,6 +365,7 @@ public class UI {
         graph2.drawString("P", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("G", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("I", textX, textY); textY += gp.tileSize / 2;
+        graph2.drawString("Up Arrow", textX, textY); textY += gp.tileSize / 2;
         graph2.drawString("Esc", textX, textY); textY += gp.tileSize / 2;
 
         // Back

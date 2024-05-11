@@ -23,7 +23,11 @@ public class AssetSetter {
     public void setObject() {
         int mapNum;
         int k;
-        ArrayList<Entity> chest = new ArrayList<>();
+        ArrayList<Entity>[] chest = new ArrayList[30];
+        for(int i = 0; i < 30; ++i) {
+            chest[i] = new ArrayList<Entity>();
+        }
+        int chestNum = 0;
         // Level 1 Objects
         mapNum = 0;
         k = 0;
@@ -95,52 +99,51 @@ public class AssetSetter {
         // Cards
 
         // Chests
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chest[chestNum].add(new OBJ_HealPotion(gp));
+        chest[chestNum].add(new OBJ_Electron(gp));
+        chest[chestNum].add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 42 * gp.tileSize;
         ++k;
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chestNum++;
+        chest[chestNum].add(new OBJ_HealPotion(gp));
+        chest[chestNum].add(new OBJ_KTPY(gp));
+        chest[chestNum].add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 31 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 20 * gp.tileSize;
         ++k;
-        chest.clear();
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chestNum++;
+        chest[chestNum].add(new OBJ_HealPotion(gp));
+        chest[chestNum].add(new OBJ_Electron(gp));
+        chest[chestNum].add(new OBJ_Snaipa(gp));
+        chest[chestNum].add(new OBJ_HealPotion(gp));
+        chest[chestNum].add(new OBJ_Card(gp));
+        chest[chestNum].add(new OBJ_Card(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 44 * gp.tileSize;
         ++k;
-        chest.clear();
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chestNum++;
+        chest[chestNum].add(new MST_Enemy(gp));;
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 25 * gp.tileSize;
         ++k;
-        chest.clear();
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chestNum++;
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 18 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
         ++k;
-        chest.clear();
-        chest.add(new OBJ_HealPotion(gp));
-        chest.add(new OBJ_Electron(gp));
-        chest.add(new OBJ_Card(gp));
-        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest);
+        chestNum++;
+        chest[chestNum].add(new OBJ_HealPotion(gp));
+        chest[chestNum].add(new OBJ_Electron(gp));
+        gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 15 * gp.tileSize;
         ++k;
+        chestNum++;
 
         // Level 3 Objects
         k = 0;
