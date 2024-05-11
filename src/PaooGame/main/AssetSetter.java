@@ -214,7 +214,7 @@ public class AssetSetter {
         }
 
         // Zona 2
-        for(int i = 0; i < 2; ++i) {
+        for(int i = 0; i < 4; ++i) {
             gp.mst[mapNum][k] = new MST_MegaEnemy(gp);
             gp.mst[mapNum][k].worldX = gp.tileSize * (17 + i);
             gp.mst[mapNum][k].worldY = gp.tileSize * 20;

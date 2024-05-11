@@ -78,7 +78,7 @@ public class Player extends Entity {
         strength = 1;
         attack = 1;
         difficulty = 4;
-        inventory.add(new OBJ_KTPY(gp));
+//        inventory.add(new OBJ_KTPY(gp));
     }
     public void setItems() {
     }
@@ -362,13 +362,16 @@ public class Player extends Entity {
                     }
                 } else
                 if(gp.obj[gp.currentMap][i].name.equals("Door")) {
-                    int oldKeyNumber = keyNumber;
-                    gp.obj[gp.currentMap][i].interact();
-                    if(gp.player.keyNumber != oldKeyNumber) {
-                        gp.obj[gp.currentMap][i] = null;
-                        gp.openedDoors++;
-                    } else {
-                        gp.ui.showMessage("You need a Key.");
+                    if(gp.levelCounter == gp.levelScore || gp.levelCounter == 0)
+                    {
+                        int oldKeyNumber = keyNumber;
+                        gp.obj[gp.currentMap][i].interact();
+                        if(gp.player.keyNumber != oldKeyNumber) {
+                            gp.obj[gp.currentMap][i] = null;
+                            gp.openedDoors++;
+                        } else {
+                            gp.ui.showMessage("You need a Key.");
+                        }
                     }
                 } else {
                     gp.obj[gp.currentMap][i].interact();
