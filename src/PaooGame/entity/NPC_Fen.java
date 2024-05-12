@@ -12,6 +12,7 @@ public class NPC_Fen extends Entity {
     public NPC_Fen(Game gp) {
         super(gp);
 
+        name = "Fen NPC";
         direction = "down";
         speed = 1;
         solidArea.x = 0;

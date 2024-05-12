@@ -185,8 +185,10 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_E) {
                 gp.gameState = gp.playState;
                 int index = gp.colChecker.checkEntity(gp.player, gp.NPC);
-                if(index != Entity.invalidIndex && gp.NPC[gp.currentMap][index].name.equals("HEAD NPC")) {
-                    gp.level2HeadInteraction = true;
+                if(gp.NPC[gp.currentMap][index] != null) {
+                    if(index != Entity.invalidIndex && gp.NPC[gp.currentMap][index].name.equals("HEAD NPC")) {
+                        gp.level2HeadInteraction = true;
+                    }
                 }
             }
         }
