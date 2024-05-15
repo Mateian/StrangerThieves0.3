@@ -18,17 +18,18 @@ public class TileManager {
     // Tile Array - all tiles in one array
     public Tile[] tile;
     // Tile SpriteSheet
-    public BufferedImage spriteSheetMap1, spriteSheetMap2;
+    public BufferedImage spriteSheetMap1, spriteSheetMap2, spriteSheetMap3;
     // Map - a matrix with all tiles ID placed all over the width X height map
     public int[][][] mapTile;
     public boolean drawPath = false;
 
     public TileManager(Game gp) {
         this.gp = gp;
-        tile = new Tile[20];
+        tile = new Tile[50];
         try {
             spriteSheetMap1 = ImageIO.read(getClass().getResourceAsStream("/tiles/level01/map01Tiles.png"));
             spriteSheetMap2 = ImageIO.read(getClass().getResourceAsStream("/tiles/level02/map02Tiles.png"));
+            spriteSheetMap3 = ImageIO.read(getClass().getResourceAsStream("/tiles/level03/map03Tiles.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +39,7 @@ public class TileManager {
         getImage();
         loadMap("/maps/level01.txt", 0);
         loadMap("/maps/level02.txt", 1);
+        loadMap("/maps/level03.txt", 2);
     }
 
     public void getImage() {
@@ -59,6 +61,13 @@ public class TileManager {
         setup(15, 1, 0, spriteSheetMap2, true);    // ship wall - 15
         setup(16, 2, 0, spriteSheetMap2, true);    // space - 16
         setup(17, 3, 0, spriteSheetMap2, true);    // ship-part - 17
+        setup(18, 0, 0, spriteSheetMap3, true);    // cactus - 18
+        setup(19, 1, 0, spriteSheetMap3, true);    // pyramid-door - 19
+        setup(20, 2, 0, spriteSheetMap3, true);    // fence - 20
+        setup(21, 3, 0, spriteSheetMap3, true);    // pyramid - 21
+        setup(22, 4, 0, spriteSheetMap3, false);    // sand - 22
+        setup(23, 5, 0, spriteSheetMap3, true);    // ship-light - 23
+        setup(24, 6, 0, spriteSheetMap3, true);    // ship-part - 24
     }
 
     public void setup(int index, int indexX, int indexY, BufferedImage image, boolean collision) {
