@@ -68,6 +68,8 @@ public class TileManager {
         setup(22, 4, 0, spriteSheetMap3, false);    // sand - 22
         setup(23, 5, 0, spriteSheetMap3, true);    // ship-light - 23
         setup(24, 6, 0, spriteSheetMap3, true);    // ship-part - 24
+        setup(25, 7, 0, spriteSheetMap3, false);    // black-tile - 25
+        setup(26, 8, 0, spriteSheetMap3, false);    // pyramid-floor - 26
     }
 
     public void setup(int index, int indexX, int indexY, BufferedImage image, boolean collision) {

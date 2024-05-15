@@ -335,8 +335,8 @@ public class Player extends Entity {
                 worldY = gp.tileSize * 42;
                 break;
             case 2:
-                worldX = gp.tileSize * 8;
-                worldY = gp.tileSize * 45;
+                worldX = gp.tileSize * 15;
+                worldY = gp.tileSize * 42;
                 break;
         }
         direction = "down";
