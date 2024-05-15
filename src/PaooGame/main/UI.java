@@ -6,6 +6,7 @@ import PaooGame.entity.Entity;
 import PaooGame.objects.OBJ_Card;
 import PaooGame.objects.OBJ_Door;
 import PaooGame.objects.OBJ_Heart;
+import PaooGame.objects.OBJ_Key;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class UI {
     BufferedImage weaponFrame;
     BufferedImage doorImage;
     BufferedImage cardImage;
+    BufferedImage keyImage;
 
     // State
     int subState = 0;
@@ -69,6 +71,8 @@ public class UI {
         doorImage = door.image;
         OBJ_Card card = new OBJ_Card(gp);
         cardImage = card.image;
+        OBJ_Key key = new OBJ_Key(gp);
+        keyImage = key.image;
 
         // HUD
         Entity heart = new OBJ_Heart(gp);
@@ -116,9 +120,13 @@ public class UI {
                 }
                 levelCounter = gp.levelCounter;
                 graph2.setColor(Color.white);
-                graph2.drawImage(enemyImage, 40, 45, gp.tileSize / 2, gp.tileSize / 2, null);
-                graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
-                graph2.drawString(levelCounter + "|" + levelScore, 74, 65);
+                if(gp.currentMap == 0 || gp.currentMap == 1 || (gp.currentMap == 2 && gp.levelScore != gp.levelCounter))
+                {
+                    graph2.drawImage(enemyImage, 40, 45, gp.tileSize / 2, gp.tileSize / 2, null);
+                    graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
+                    graph2.drawString(levelCounter + "|" + levelScore, 74, 65);
+                }
+
                 if(gp.currentMap == 1) {
                     graph2.drawImage(doorImage, 40, 45 + gp.tileSize, gp.tileSize / 2, gp.tileSize / 2, null);
                     graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
@@ -127,6 +135,11 @@ public class UI {
                     graph2.drawImage(cardImage, 40, 45 + 2 * gp.tileSize, gp.tileSize / 2, gp.tileSize / 2, null);
                     graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
                     graph2.drawString(String.valueOf(gp.player.keyNumber), 74, 65 + 2 * gp.tileSize);
+                }
+                if(gp.currentMap == 2) {
+                    graph2.drawImage(keyImage, 40, 45 + gp.tileSize, gp.tileSize / 2, gp.tileSize / 2, null);
+                    graph2.setFont(new Font("Consolas", Font.PLAIN, 20));
+                    graph2.drawString(String.valueOf(gp.player.keyNumber), 74, 65 + gp.tileSize);
                 }
 
                 // Time
@@ -171,9 +184,19 @@ public class UI {
             if(gp.gameState == gp.inventoryState) {
                 drawInventory();
             }
+            if(gp.gameState == gp.gameFinished) {
+                drawFinish();
+            }
 //            if(gp.gameState == gp.chestState) {
 //                openChest();
 //            }
+    }
+    public void drawFinish() {
+        graph2.setColor(Color.darkGray);
+        graph2.fillRect(xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2, graph2.getFontMetrics().getWidths()[0], graph2.getFontMetrics().getHeight());
+        graph2.setFont(new Font("Consolas", Font.BOLD, 40));
+        graph2.setColor(Color.white);
+        graph2.drawString("Congratulations! You saved, Fen!", xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2);
     }
     public void drawInventory() {
 
@@ -406,9 +429,9 @@ public class UI {
 
     }
     public void drawWin() {
-        graph2.setFont(arial_40);
+        graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
         graph2.setColor(Color.white);
-        graph2.drawString("Level 1 Completed", xCenterText("Level 1 Completed"), gp.screenHeight / 2);
+        graph2.drawString("Level Completed", xCenterText("Level Completed"), gp.screenHeight / 2);
     }
     public void drawLife() {
 

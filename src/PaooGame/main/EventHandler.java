@@ -56,6 +56,10 @@ public class EventHandler {
             if(hit(0, 21, 30, "any")) {
                 heal(25, 40, gp.dialogState);
             }
+            if(hit(2, 17, 26, "any") && gp.player.keyNumber == 1) {
+                gp.player.teleport(2, 8, 13);
+                gp.player.keyNumber--;
+            }
 //            if(hit(1, 40, 40, "any")) {
 //                found();
 //            }

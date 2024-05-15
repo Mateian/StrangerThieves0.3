@@ -4,6 +4,8 @@ import PaooGame.ai.PathFinder;
 import PaooGame.entity.Entity;
 import PaooGame.entity.Player;
 import PaooGame.main.*;
+import PaooGame.objects.OBJ_KTPY;
+import PaooGame.objects.OBJ_Key;
 import PaooGame.tiles.TileManager;
 
 import javax.swing.*;
@@ -31,7 +33,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 2;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
@@ -70,13 +72,16 @@ public class Game extends JPanel implements Runnable {
     public final int inventoryState = 6;
     public final int chestState = 7;
     public final int cutsceneState = 8;
+    public final int gameFinished = 9;
 
     public int gameState = menuState;
 
     // Objectives
     public int spawnedDoors;
     public int openedDoors = 0;
+    public int destroyedStone = 0;
     public boolean level2HeadInteraction = false;
+    public boolean level3Eliminated = false;
 
     public int level1Score;
     public int level2Score;
@@ -179,6 +184,17 @@ public class Game extends JPanel implements Runnable {
         if(gameState == pauseState) {
             ui.drawPauseScreen();
         }
+        if(currentMap == 2 && levelCounter == levelScore) {
+            for(int i = 0; i < obj[currentMap].length; ++i) {
+                if(obj[currentMap][i] == null) {
+                    obj[currentMap][i] = new OBJ_Key(this);
+                    obj[currentMap][i].worldX = tileSize * 19;
+                    obj[currentMap][i].worldY = tileSize * 26;
+                    break;
+                }
+            }
+            levelCounter = 0;
+        }
 
         // Level 1 Completion
         if(currentMap == 0 && levelCounter == levelScore) {
@@ -186,9 +202,15 @@ public class Game extends JPanel implements Runnable {
 //            currentMap = 1;
         }
 
-        //Level 2 Completion
+        // Level 2 Completion
         if(currentMap == 1 && level2HeadInteraction) {
             gameState = levelCompleteState;
+            player.keyNumber = 0;
+        }
+
+        // Level 3 Completion
+        if(currentMap == 2 && level3Eliminated) {
+            gameState = gameFinished;
         }
 
         // Debug

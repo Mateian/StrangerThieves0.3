@@ -148,7 +148,178 @@ public class AssetSetter {
         // Level 3 Objects
         k = 0;
         mapNum++;
-
+        gp.obj[mapNum][k] = new OBJ_BrokenChest(gp);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 9 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 11 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 12 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 14 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 15 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 16 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 20 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Chair(gp);
+        gp.obj[mapNum][k].worldX = 20 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 5 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 9 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 14 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 10 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 9 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 20 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 30 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 41 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 5 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 35 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 5 * gp.tileSize;
+        ++k;
+//        gp.obj[mapNum][k] = new OBJ_Stone(gp, true);
+//        gp.obj[mapNum][k].worldX = 33 * gp.tileSize;
+//        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+//        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 41 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 10 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 41 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 8 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Stone(gp, false);
+        gp.obj[mapNum][k].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 9 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 20 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 11 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Plant(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 8 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Chair(gp);
+        gp.obj[mapNum][k].worldX = 35 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 9 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Chair(gp);
+        gp.obj[mapNum][k].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_BrokenChest(gp);
+        gp.obj[mapNum][k].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 8 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_BrokenChest(gp);
+        gp.obj[mapNum][k].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 10 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 10 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 15 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 20 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Bottle(gp);
+        gp.obj[mapNum][k].worldX = 36 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
     }
     public void setNPC() {
         int mapNum;
@@ -177,6 +348,12 @@ public class AssetSetter {
         // Level 3 NPCs
         mapNum++;
         k = 0;
+
+        // Fen
+        gp.NPC[mapNum][k] = new NPC_Fen(gp);
+        gp.NPC[mapNum][k].worldX = gp.tileSize * 40; // 41
+        gp.NPC[mapNum][k].worldY = gp.tileSize * 22; // 12
+        k++;
     }
     public void setMonster() {
         // Level 1 Monsters
@@ -244,6 +421,30 @@ public class AssetSetter {
         // Level 3 Monsters
         mapNum = 2;
         k = 0;
+
+        for(int i = 0; i < 6; ++i) {
+            gp.mst[mapNum][k] = new MST_Enemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 26;
+            k++;
+        }
+        for(int i = 0; i < 4; ++i) {
+            gp.mst[mapNum][k] = new MST_MegaEnemy(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
+            gp.mst[mapNum][k].worldY = gp.tileSize * 27;
+            k++;
+        }
         gp.level3Score = k;
+
+        gp.mst[mapNum][k] = new OBJ_Stone(gp, true);
+        gp.mst[mapNum][k].worldX = 33 * gp.tileSize;
+        gp.mst[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+
+        // HEAD
+        gp.mst[mapNum][k] = new MST_HEAD(gp);
+        gp.mst[mapNum][k].worldX = 41 * gp.tileSize;
+        gp.mst[mapNum][k].worldY = 24 * gp.tileSize;
+        ++k;
     }
 }

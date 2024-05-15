@@ -78,7 +78,7 @@ public class Player extends Entity {
         strength = 1;
         attack = 1;
         difficulty = 4;
-//        inventory.add(new OBJ_KTPY(gp));
+//        inventory.add(new OBJ_Snaipa(gp));
     }
     public void setItems() {
     }
@@ -313,12 +313,25 @@ public class Player extends Entity {
                     gp.playFX(6);
                     gp.levelCounter++;
                 }
+                if(gp.mst[gp.currentMap][i].life <= 0 && gp.mst[gp.currentMap][i].attack <= 0) {
+                    for(int j = 0; j < gp.obj[gp.currentMap].length; ++j) {
+                        if(gp.obj[gp.currentMap][j] == null) {
+                            gp.obj[gp.currentMap][j] = new OBJ_Stairs(gp);
+                            gp.obj[gp.currentMap][j].worldX = gp.mst[gp.currentMap][i].worldX;
+                            gp.obj[gp.currentMap][j].worldY = gp.mst[gp.currentMap][i].worldY;
+                            break;
+                        }
+                    }
+                }
+                if(gp.mst[gp.currentMap][i].name.equals("HEAD") && gp.mst[gp.currentMap][i].life <= 0) {
+                    gp.level3Eliminated = true;
+                }
             }
         }
     }
     public void damageFromMonster(int i) {
         if(i != invalidIndex) {
-            if(!invincible) {
+            if(!invincible && gp.mst[gp.currentMap][i].attack > 0) {
                 life -= gp.mst[gp.currentMap][i].attack;
                 invincible = true;
             }
@@ -335,8 +348,8 @@ public class Player extends Entity {
                 worldY = gp.tileSize * 42;
                 break;
             case 2:
-                worldX = gp.tileSize * 15;
-                worldY = gp.tileSize * 42;
+                worldX = gp.tileSize * 15; // 15 - 8 - 40
+                worldY = gp.tileSize * 42; // 42 - 13 - 40
                 break;
         }
         direction = "down";

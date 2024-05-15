@@ -60,7 +60,7 @@ public class MST_MegaEnemy extends Entity {
 
     // De adaugat atunci cand vrem sa un inamic sa ne urmareasca doar cand ne apropiem noi
 
-//    public void update() {
+    //    public void update() {
 //        super.update();
 //
 //        int xDistance = Math.abs(worldX - gp.player.worldX);

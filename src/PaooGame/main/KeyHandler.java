@@ -192,7 +192,11 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
+        else if(gp.gameState == gp.gameFinished) {
+            if(code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.menuState;
+            }
+        }
         // Dead State
         else if(gp.gameState == gp.deadState) {
             if(code == KeyEvent.VK_ENTER) {
@@ -218,7 +222,15 @@ public class KeyHandler implements KeyListener {
                         gp.levelScore = gp.level3Score;
                         break;
                 }
-                gp.player.teleport(gp.currentMap, 40, 42);
+                switch(gp.currentMap) {
+                    case 1:
+                        gp.player.teleport(gp.currentMap, 40, 42);
+                        break;
+                    case 2:
+                        gp.player.teleport(2, 15, 42);
+                        break;
+                }
+                gp.player.keyNumber = 0;
             }
         }
     }

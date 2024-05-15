@@ -4,36 +4,40 @@ import PaooGame.Game;
 import PaooGame.entity.Entity;
 import PaooGame.objects.OBJ_MegaBullet;
 
+import java.util.Random;
+
 public class MST_HEAD extends Entity {
 
     // Base
     Game gp;
+    int scale;
 
     public MST_HEAD(Game gp) {
         super(gp);
         this.gp = gp;
 
         spriteNumber = 1;
-        name = "Mega_Enemy";
+        name = "HEAD";
         speed = 3;
-        maxLife = 6;
+        maxLife = 10;
         life = maxLife;
         type = type_monster;
         projectile = new OBJ_MegaBullet(gp);
         attack = 2;
         difficulty = 2;
         projectile.attack = 3;
+        scale = 3;
+        size = gp.tileSize * scale;
 
-        solidArea.x = 3;
-        solidArea.y = 10;
-        solidArea.width = 42;
-        solidArea.height = 32;
+        solidArea.x = gp.tileSize;
+        solidArea.y = gp.tileSize * 2;
+        solidArea.width = 40;
+        solidArea.height = 40;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
         getImage();
         setAmmoProps();
-        setDialog();
     }
     void setAmmoProps() {
         projectile.speed = 30;
@@ -53,27 +57,65 @@ public class MST_HEAD extends Entity {
         right1 = setup(6,0, "/enemy/head_spritesheet", gp.originalTileSize, gp.originalTileSize);
         right2 = setup(7, 0, "/enemy/head_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
-    public void update() {
-        // Sprite changer
-        spriteCounter++;
-        if (spriteCounter > 30) {
-            if (spriteNumber == 0) {
-                spriteNumber = 1;
+    public void setAction() {
+        if (onPath) {
+            actionCounter++;
+            if (actionCounter != 600) {
+                int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+                int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+                searchPath(goalCol, goalRow);
+            } else {
+                actionCounter = 0;
+                onPath = false;
             }
-            if (spriteNumber == 1) {
-                spriteNumber = 2;
-            } else if (spriteNumber == 2) {
-                spriteNumber = 1;
+            int i = new Random().nextInt(100) + 1;
+            if (i > 99 && !projectile.alive && shotCounter == 30) {
+                projectile.set(worldX + gp.tileSize, worldY + gp.tileSize * 2, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotCounter = 0;
             }
-            spriteCounter = 0;
+        } else {
+
+            actionCounter++;
+
+            if (actionCounter == 60) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i <= 50) {
+                    direction = "left";
+                } else if (i <= 75) {
+                    direction = "right";
+                } else {
+                    direction = "down";
+                }
+                actionCounter = 0;
+            }
+            int i = new Random().nextInt(100) + 1;
+            if (i > 99 && !projectile.alive && shotCounter == 30) {
+                projectile.set(worldX + gp.tileSize, worldY + gp.tileSize * 2, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotCounter = 0;
+            }
         }
     }
-    public void setDialog() {
-        dialogs[0] = "M-ai gasit, eh?";
-        dialogs[1] = "Lasa ca vezi tu...";
-        dialogs[2] = "Sa vad cum ma vei mai gasi de acum!";
-    }
-    public void talk() {
-        super.talk();
+    public void dmgReact() {
+        actionCounter = 0;
+//        switch(direction) {
+//            case "down":
+//                direction = "up";
+//                break;
+//            case "up":
+//                direction = "down";
+//                break;
+//            case "left":
+//                direction = "right";
+//                break;
+//            case "right":
+//                direction = "left";
+//                break;
+//        }
+        onPath = true;
     }
 }
