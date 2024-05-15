@@ -134,7 +134,9 @@ public class MST_MegaEnemy extends Entity {
     }
     public void checkDrop() {
         int n = new Random().nextInt(100) + 1;
-        dropItem(new OBJ_Card(gp));
+        if (gp.currentMap == 1) {
+            dropItem(new OBJ_Card(gp));
+        }
         if(n < 5) {
             dropItem(new OBJ_Snaipa(gp));
         }

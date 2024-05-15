@@ -78,7 +78,7 @@ public class Player extends Entity {
         strength = 1;
         attack = 1;
         difficulty = 4;
-//        inventory.add(new OBJ_Snaipa(gp));
+//        inventory.add(new OBJ_Electron(gp));
     }
     public void setItems() {
     }
