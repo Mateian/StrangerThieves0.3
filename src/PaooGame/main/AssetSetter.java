@@ -1,6 +1,7 @@
 package PaooGame.main;
 
 import PaooGame.Game;
+import PaooGame.enemy.MST_Ally;
 import PaooGame.enemy.MST_Enemy;
 import PaooGame.enemy.MST_HEAD;
 import PaooGame.enemy.MST_MegaEnemy;
@@ -460,6 +461,12 @@ public class AssetSetter {
         mapNum = 2;
         k = 0;
 
+        for(int i = 0; i < 3; ++i) {
+            gp.mst[mapNum][k] = new MST_Ally(gp);
+            gp.mst[mapNum][k].worldX = gp.tileSize * 20;
+            gp.mst[mapNum][k].worldY = gp.tileSize * (29 + i);
+            k++;
+        }
         for(int i = 0; i < 6; ++i) {
             gp.mst[mapNum][k] = new MST_Enemy(gp);
             gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);

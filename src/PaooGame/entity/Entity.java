@@ -331,7 +331,7 @@ public abstract class Entity {
                 invincibleCounter = 0;
             }
         }
-        if(shotCounter < 30) {
+        if(shotCounter < delay) {
             shotCounter++;
         }
     }

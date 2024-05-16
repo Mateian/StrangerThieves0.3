@@ -2,34 +2,34 @@ package PaooGame.enemy;
 
 import PaooGame.Game;
 import PaooGame.entity.Entity;
-import PaooGame.main.Tools;
 import PaooGame.objects.*;
 
 import java.util.Random;
 
-public class MST_MegaEnemy extends Entity {
+public class MST_Ally extends Entity {
     // Base Settings
     Game gp;
 
-    public MST_MegaEnemy(Game gp) {
+    public MST_Ally(Game gp) {
         super(gp);
 
         this.gp = gp;
 
         spriteNumber = 1;
-        name = "Mega Enemy";
-        speed = 3;
+        name = "Ally";
+        speed = 2;
         maxLife = 6;
         life = maxLife;
         type = type_monster;
-        projectile = new OBJ_MegaBullet(gp);
+        projectile = new OBJ_AllyBullet(gp);
         attack = 2;
         difficulty = 2;
         projectile.attack = 3;
-        size = gp.tileSize + 10;
+        size = gp.tileSize + gp.tileSize;
+        delay = 20;
 
-        solidArea.x = 3;
-        solidArea.y = 16;
+        solidArea.x = gp.tileSize / 2;
+        solidArea.y = gp.tileSize;
         solidArea.width = 32;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
@@ -39,44 +39,43 @@ public class MST_MegaEnemy extends Entity {
         setAmmoProps();
     }
     void setAmmoProps() {
-        projectile.speed = 30;
+        projectile.speed = 20;
         projectile.maxLife = 15;
         projectile.life = maxLife;
-        projectile.attack = 4;
-        projectile.useCost = 1;
+        projectile.attack = 1;
         projectile.alive = false;
     }
 
     public void getImage() {
-        up1 = setup(6, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        up2 = setup(7, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        down1 = setup(4, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        down2 = setup(5, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        left1 = setup(2, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        left2 = setup(3, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        right1 = setup(0,0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
-        right2 = setup(1, 0, "/enemy/mega_enemy_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        up1 = setup(3, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        up2 = setup(3, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        down1 = setup(0, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        down2 = setup(0, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        left1 = setup(1, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        left2 = setup(1, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        right1 = setup(2,0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        right2 = setup(2, 0, "/enemy/ally_spritesheet", gp.originalTileSize, gp.originalTileSize);
     }
 
     // De adaugat atunci cand vrem sa un inamic sa ne urmareasca doar cand ne apropiem noi
 
-    //    public void update() {
-//        super.update();
-//
-//        int xDistance = Math.abs(worldX - gp.player.worldX);
-//        int yDistance = Math.abs(worldY - gp.player.worldY);
-//        int tileDistance = (xDistance + yDistance) / gp.tileSize;
-//
-//        if(onPath == false && tileDistance < 4) {
-//            int i = new Random().nextInt(100) + 1;
-//            if(i > 50) {
-//                onPath = true;
-//            }
-//        }
-//        if(onPath == true && tileDistance > 7) {
-//            onPath = false;
-//        }
-//    }
+        public void update() {
+        super.update();
+
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance) / gp.tileSize;
+
+        if(onPath == false && tileDistance < 4) {
+            int i = new Random().nextInt(100) + 1;
+            if(i > 50) {
+                onPath = true;
+            }
+        }
+        if(onPath == true && tileDistance > 7) {
+            onPath = false;
+        }
+    }
     public void setAction() {
         if(onPath) {
             actionCounter++;
@@ -87,6 +86,11 @@ public class MST_MegaEnemy extends Entity {
             } else {
                 actionCounter = 0;
                 onPath = false;
+            }
+            if (shotCounter == delay) {
+                projectile.set(worldX + gp.tileSize / 2, worldY + gp.tileSize, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotCounter = 0;
             }
         } else {
 
@@ -107,9 +111,8 @@ public class MST_MegaEnemy extends Entity {
                 actionCounter = 0;
             }
         }
-        int i = new Random().nextInt(100) + 1;
-        if (i > 99 && !projectile.alive && shotCounter == 30) {
-            projectile.set(worldX, worldY, direction, true, this);
+        if (shotCounter == delay) {
+            projectile.set(worldX + gp.tileSize / 2, worldY + gp.tileSize, direction, true, this);
             gp.projectileList.add(projectile);
             shotCounter = 0;
         }

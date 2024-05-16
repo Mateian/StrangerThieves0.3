@@ -18,7 +18,7 @@ public class NPC_Fen extends Entity {
         solidArea.x = 0;
         solidArea.y = 20;
         solidArea.width = 48;
-        solidArea.height = 16;
+        solidArea.height = 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
