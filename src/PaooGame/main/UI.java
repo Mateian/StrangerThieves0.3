@@ -217,7 +217,9 @@ public class UI {
         graph2.setFont(new Font("Consolas", Font.BOLD, 40));
         graph2.setColor(Color.white);
         graph2.drawString("Congratulations! You saved, Fen!", xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2);
+        graph2.drawString(String.format("Time: %.2f", playTime), xCenterText(String.format("Time: %.2f", playTime)), gp.screenHeight / 2 + 50);
     }
+//    dFormat.format(playTime)
     public void setPaperText(String text) {
         paperText = text;
     }
