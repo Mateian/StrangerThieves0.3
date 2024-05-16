@@ -18,13 +18,13 @@ public class MST_HEAD extends Entity {
 
         spriteNumber = 1;
         name = "HEAD";
-        speed = 3;
-        maxLife = 10;
+        speed = 2;
+        maxLife = 40;
         life = maxLife;
         type = type_monster;
         projectile = new OBJ_MegaBullet(gp);
-        attack = 2;
-        difficulty = 2;
+        attack = 4;
+        difficulty = 5;
         projectile.attack = 3;
         scale = 3;
         size = gp.tileSize * scale;
@@ -69,7 +69,7 @@ public class MST_HEAD extends Entity {
                 onPath = false;
             }
             int i = new Random().nextInt(100) + 1;
-            if (i > 99 && !projectile.alive && shotCounter == 30) {
+            if (i > 99 && !projectile.alive && shotCounter == delay) {
                 projectile.set(worldX + gp.tileSize, worldY + gp.tileSize * 2, direction, true, this);
                 gp.projectileList.add(projectile);
                 shotCounter = 0;
@@ -93,7 +93,7 @@ public class MST_HEAD extends Entity {
                 actionCounter = 0;
             }
             int i = new Random().nextInt(100) + 1;
-            if (i > 99 && !projectile.alive && shotCounter == 30) {
+            if (i > 99 && !projectile.alive && shotCounter == delay) {
                 projectile.set(worldX + gp.tileSize, worldY + gp.tileSize * 2, direction, true, this);
                 gp.projectileList.add(projectile);
                 shotCounter = 0;

@@ -16,10 +16,10 @@ public class NPC_HEAD extends Entity {
         name = "HEAD NPC";
 
         size = gp.tileSize * 2;
-        solidArea.x = 3;
-        solidArea.y = 10;
-        solidArea.width = 42;
-        solidArea.height = 32;
+        solidArea.x = gp.tileSize;
+        solidArea.y = 0;
+        solidArea.width = gp.tileSize;
+        solidArea.height = 2 * gp.tileSize;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

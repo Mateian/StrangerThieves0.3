@@ -204,12 +204,21 @@ public abstract class Entity {
                 double hpBar = oneScale * life;
 
                 // Background bar
-                graph2.setColor(new Color(0, 0, 0));
-                graph2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
+                if(name == "HEAD") {
+                    graph2.setColor(new Color(0, 0, 0));
+                    graph2.fillRect(screenX - 1 + gp.tileSize, screenY - 16, gp.tileSize + 2, 12);
 
-                // Health bar
-                graph2.setColor(new Color(255, 0, 0));
-                graph2.fillRect(screenX, screenY - 15, (int)hpBar, 10);
+                    // Health bar
+                    graph2.setColor(new Color(255, 0, 0));
+                    graph2.fillRect(screenX + gp.tileSize, screenY - 15, (int)hpBar, 10);
+                } else {
+                    graph2.setColor(new Color(0, 0, 0));
+                    graph2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
+
+                    // Health bar
+                    graph2.setColor(new Color(255, 0, 0));
+                    graph2.fillRect(screenX, screenY - 15, (int)hpBar, 10);
+                }
 
                 barCounter++;
                 if(barCounter > 300) {

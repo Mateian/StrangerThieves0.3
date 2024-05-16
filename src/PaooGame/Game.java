@@ -33,7 +33,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 2;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
@@ -55,7 +55,7 @@ public class Game extends JPanel implements Runnable {
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
-    public Entity[][] obj = new Entity[maxMap][60];
+    public Entity[][] obj = new Entity[maxMap][80];
     public Entity[][] NPC = new Entity[maxMap][20];
     public Entity[][] mst = new Entity[maxMap][20];
     ArrayList<Entity> entityList = new ArrayList<>();

@@ -19,7 +19,11 @@ public class OBJ_HealPotion extends Entity {
 
     public void use(Entity entity) {
         gp.ui.showMessage("Healing Potion used!");
-        entity.life += value;
+        if(gp.currentMap == 2) {
+            entity.life += entity.maxLife / 3;
+        } else {
+            entity.life += entity.maxLife / 2;
+        }
         if(gp.player.life > gp.player.maxLife) {
             gp.player.life = gp.player.maxLife;
         }

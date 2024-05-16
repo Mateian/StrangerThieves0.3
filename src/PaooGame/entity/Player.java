@@ -360,7 +360,9 @@ public class Player extends Entity {
         invincible = false;
     }
     public void resetInventory() {
-        inventory.clear();
+        if(gp.currentMap != 2) {
+            inventory.clear();
+        }
         keyNumber = 0;
     }
     public void pickUpObject(int i) {

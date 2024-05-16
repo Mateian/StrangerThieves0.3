@@ -18,7 +18,7 @@ public class MST_Ally extends Entity {
         spriteNumber = 1;
         name = "Ally";
         speed = 2;
-        maxLife = 6;
+        maxLife = 21;
         life = maxLife;
         type = type_monster;
         projectile = new OBJ_AllyBullet(gp);
@@ -137,16 +137,13 @@ public class MST_Ally extends Entity {
     }
     public void checkDrop() {
         int n = new Random().nextInt(100) + 1;
-        if (gp.currentMap == 1) {
-            dropItem(new OBJ_Card(gp));
-        }
         if(n < 5) {
             dropItem(new OBJ_Snaipa(gp));
         }
         if(n >= 5 && n < 10) {
             dropItem(new OBJ_KTPY(gp));
         }
-        if(n >= 10 && n < 50) {
+        if(n >= 10 && n < 70) {
             dropItem(new OBJ_HealPotion(gp));
         }
     }

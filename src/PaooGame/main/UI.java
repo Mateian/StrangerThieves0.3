@@ -504,7 +504,7 @@ public class UI {
         graph2.setColor(Color.white);
         graph2.setFont(console_40B);
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 24));
-        graph2.drawString(String.valueOf(gp.player.life), containerWidth / 2, y);
+        graph2.drawString(String.valueOf(gp.player.life), containerWidth / 2 + gp.tileSize / 2, y);
     }
     public void drawMenu() {
         // Background

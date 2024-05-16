@@ -10,6 +10,7 @@ import PaooGame.entity.NPC_Fen;
 import PaooGame.entity.NPC_HEAD;
 import PaooGame.objects.*;
 
+import java.awt.print.Paper;
 import java.util.ArrayList;
 import java.util.stream.Collector;
 
@@ -40,11 +41,21 @@ public class AssetSetter {
         gp.obj[mapNum][k].worldX = 21 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
         ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "Las aceasta notita pentru\npersoanele care vor trece aici.\nSuntem atacati de XT-24!\nVa trebui sa ne aparam cu ce\navem.\nAm o arma in cufarul de sub\nscandurile prispei!");
+        gp.obj[mapNum][k].worldX = 25 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 30 * gp.tileSize;
+        ++k;
 
         // Level 2 Objects
         k = 0;
         mapNum++;
         gp.spawnedDoors = 0;
+
+        // Papers
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "Numele meu nu conteaza, sunt\ndoar un detectiv.\n\nInvestigatie XT-24:\n\nAm reusit sa ma infiltrez in\nnava.\nIti voi lasa notite in urma mea.\nIti recomand sa le citesti,\npoate iti vor fi de folos.\nAm observat ca niste\nextraterestrii de rang inalt\npoarta la ei carduri.\nPoate acele carduri deschid\nanumite usi.\nUpdate: Camera catre HEAD\nare 3 usi. Pentru a ajunge la el,\neste nevoie de minim 3 carduri.\nRestul de carduri iti poti\nfi de folos pentru a deschide\nalte usi,dar atentie,\nnu toate usile aduc\nfericire.");
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
+        ++k;
 
         // Weapons
 
@@ -324,6 +335,55 @@ public class AssetSetter {
         gp.obj[mapNum][k] = new OBJ_Bottle(gp);
         gp.obj[mapNum][k].worldX = 36 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 43 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 44 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 44 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 42 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 43 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 42 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 38 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 43 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 40 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 43 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 34 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 39 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 29 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 24 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 20 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_HealPotion(gp);
+        gp.obj[mapNum][k].worldX = 43 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 20 * gp.tileSize;
         ++k;
 
         // Paper
