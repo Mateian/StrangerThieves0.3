@@ -45,6 +45,7 @@ public class UI {
     // String - Messages
     public String message = "";
     public String dialogText = "";
+    public String paperText = "";
 
     // Counters
     int messageCounter = 0;
@@ -187,9 +188,28 @@ public class UI {
             if(gp.gameState == gp.gameFinished) {
                 drawFinish();
             }
+            if(gp.gameState == gp.paperState) {
+                drawPaper(paperText);
+            }
 //            if(gp.gameState == gp.chestState) {
 //                openChest();
 //            }
+    }
+    public void drawPaper(String text) {
+        int x = gp.tileSize * 5;
+        int y = gp.tileSize;
+        int width = gp.tileSize * 6;
+        int height = gp.tileSize * 8;
+        graph2.setColor(Color.white);
+        graph2.fillRect(x, y, width, height);
+        graph2.setColor(Color.black);
+        x += gp.tileSize / 2;
+        y += gp.tileSize / 2 + 10;
+        graph2.setFont(new Font("Consolas", Font.ITALIC, 14));
+        for(String line : text.split("\n")) {
+            graph2.drawString(line, x, y);
+            y += 15;
+        }
     }
     public void drawFinish() {
         graph2.setColor(Color.darkGray);
@@ -197,6 +217,9 @@ public class UI {
         graph2.setFont(new Font("Consolas", Font.BOLD, 40));
         graph2.setColor(Color.white);
         graph2.drawString("Congratulations! You saved, Fen!", xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2);
+    }
+    public void setPaperText(String text) {
+        paperText = text;
     }
     public void drawInventory() {
 
@@ -441,7 +464,9 @@ public class UI {
 
         // Black Heart
         graph2.setColor(Color.black);
-        graph2.fillRect(x, y, gp.tileSize * gp.player.maxLife + 10, gp.tileSize);
+        int containerWidth = gp.tileSize * 5 + 10;
+//        graph2.fillRect(x, y, gp.tileSize * gp.player.maxLife + 10, gp.tileSize);
+        graph2.fillRect(x, y, containerWidth + 10, gp.tileSize);
 //
 //        while(i < gp.player.maxLife / 2) {
 //              graph2.drawImage(black_heart, x, y, null);
@@ -456,7 +481,7 @@ public class UI {
 
         // Current Life
         graph2.setColor(Color.red);
-        graph2.fillRect(x + 5, y + 5, gp.player.life * gp.tileSize, gp.tileSize - 10);
+        graph2.fillRect(x + 5, y + 5, (int)(((double)gp.player.life / gp.player.maxLife * containerWidth)), gp.tileSize - 10);
 
 //        while(i < gp.player.life) {
 ////            graph2.drawImage(half_heart, x, y, null);
@@ -475,12 +500,11 @@ public class UI {
         if(gp.player.life < 0) {
             gp.player.life = 0;
         }
-        String hp = (int)((double)gp.player.life / (double)gp.player.maxLife * 100) + "%";
         // HP Text
         graph2.setColor(Color.white);
         graph2.setFont(console_40B);
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 24));
-        graph2.drawString(hp, x, y);
+        graph2.drawString(String.valueOf(gp.player.life), containerWidth / 2, y);
     }
     public void drawMenu() {
         // Background

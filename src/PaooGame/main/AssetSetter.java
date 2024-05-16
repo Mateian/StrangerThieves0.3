@@ -148,6 +148,10 @@ public class AssetSetter {
         // Level 3 Objects
         k = 0;
         mapNum++;
+        gp.obj[mapNum][k] = new OBJ_Electron(gp);
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 9 * gp.tileSize;
+        ++k;
         gp.obj[mapNum][k] = new OBJ_BrokenChest(gp);
         gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 6 * gp.tileSize;
@@ -319,6 +323,40 @@ public class AssetSetter {
         gp.obj[mapNum][k] = new OBJ_Bottle(gp);
         gp.obj[mapNum][k].worldX = 36 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+
+        // Paper
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "Preferabil ar fi sa urmezi\ninstructiunile in ordine, nu pot\nsa-ti spun aici de ce. Am lasat\no notita langa scaun. ");
+        gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 11 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "Mesajele pe care ti le voi oferi\nvor fi impartite pentru a\ningreuna descifrarea mesajului.\nNu toti ar trebui sa cunoasca\nmesajul pe care urmeaza sa ti-l\ntransmit. Indicat ar fi sa\nurmezi instructiunile mele\npentru a intelege mesajul.\nVerifica notita de langa cele 2\nplante ascunse in camera\nde langa.");
+        gp.obj[mapNum][k].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 5 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "Am observat ceva straniu in\naceasta camera... Simt ca nu\neste acesta sfarsitul.\nAud ... (verifica cufarul\ndistrus)");
+        gp.obj[mapNum][k].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 12 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "... voci prin crapaturi,\nca si cum s-ar pregati un plan\nde atac...\nun furt?... nu reusesc\nsa inteleg... usile par\nsa fie blocate de mult timp,\ndar ... (vezi usa)");
+        gp.obj[mapNum][k].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 7 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "... in ciuda zgomotelor,\nsimt ca mai este ceva,\nca nu sunt blocat aici...\npoate sunt eu paranoic, dar\nunele...(vezi piatra din\ncapatul holului)");
+        gp.obj[mapNum][k].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "... obiecte nu sunt ceea\nce par. Obiectele...\n(vezi sticla albastra\nde la inceput)");
+        gp.obj[mapNum][k].worldX = 40 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 8 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "... nu sunt... (vezi\ncele 3 plante");
+        gp.obj[mapNum][k].worldX = 14 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 13 * gp.tileSize;
+        ++k;
+        gp.obj[mapNum][k] = new OBJ_Paper(gp, "... ad..");
+        gp.obj[mapNum][k].worldX = 10 * gp.tileSize;
+        gp.obj[mapNum][k].worldY = 5 * gp.tileSize;
         ++k;
     }
     public void setNPC() {

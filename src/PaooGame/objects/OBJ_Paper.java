@@ -9,12 +9,14 @@ public class OBJ_Paper extends Entity {
 
     // Base
     Game gp;
+    String paperText;
 
-    public OBJ_Paper(Game gp, String paperText) {
+    public OBJ_Paper(Game gp, String text) {
         super(gp);
         this.gp = gp;
 
-        type = type_obstacle;
+        type = type_pickup;
+
         name = "Paper";
         down = image = setup(23, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         collision = true;
@@ -24,5 +26,12 @@ public class OBJ_Paper extends Entity {
         solidArea.height = 5;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        this.paperText = text;
+    }
+    public void use(Entity entity) {
+        gp.paperDraw = true;
+        gp.gameState = gp.paperState;
+        gp.ui.setPaperText(this.paperText);
     }
 }

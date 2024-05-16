@@ -348,8 +348,8 @@ public class Player extends Entity {
                 worldY = gp.tileSize * 42;
                 break;
             case 2:
-                worldX = gp.tileSize * 15; // 15 - 8 - 40
-                worldY = gp.tileSize * 42; // 42 - 13 - 40
+                worldX = gp.tileSize * 8; // 15 - 8 - 40
+                worldY = gp.tileSize * 13; // 42 - 13 - 40
                 break;
         }
         direction = "down";
@@ -390,7 +390,7 @@ public class Player extends Entity {
                             gp.ui.showMessage("You need a Key.");
                         }
                     }
-                } else {
+                } else{
                     gp.obj[gp.currentMap][i].interact();
                 }
             }

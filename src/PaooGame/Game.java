@@ -33,7 +33,7 @@ public class Game extends JPanel implements Runnable {
     public final int maxWorldColumn = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 5;
-    public int currentMap = 0;
+    public int currentMap = 2;
 
     // FPS
     int FPS = 60;
@@ -55,7 +55,7 @@ public class Game extends JPanel implements Runnable {
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
-    public Entity[][] obj = new Entity[maxMap][50];
+    public Entity[][] obj = new Entity[maxMap][60];
     public Entity[][] NPC = new Entity[maxMap][20];
     public Entity[][] mst = new Entity[maxMap][20];
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -72,7 +72,8 @@ public class Game extends JPanel implements Runnable {
     public final int inventoryState = 6;
     public final int chestState = 7;
     public final int cutsceneState = 8;
-    public final int gameFinished = 9;
+    public final int paperState = 9;
+    public final int gameFinished = 10;
 
     public int gameState = menuState;
 
@@ -89,6 +90,8 @@ public class Game extends JPanel implements Runnable {
     public int levelScore;
     public int levelCounter;
 
+    // Booleans
+    public boolean paperDraw = false;
 
     // Debug
     int contor = 0;

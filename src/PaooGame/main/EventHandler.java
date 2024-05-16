@@ -60,6 +60,10 @@ public class EventHandler {
                 gp.player.teleport(2, 8, 13);
                 gp.player.keyNumber--;
             }
+            if(hit(2, 8, 13, "any")) {
+                gp.player.maxLife = 20;
+                gp.player.life = gp.player.maxLife;
+            }
 //            if(hit(1, 40, 40, "any")) {
 //                found();
 //            }

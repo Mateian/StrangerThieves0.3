@@ -120,6 +120,11 @@ public class KeyHandler implements KeyListener {
                 gp.tileMng.loadMap("/maps/level0" + (gp.currentMap + 1) + ".txt", gp.currentMap);
             }
         }
+        else if(gp.gameState == gp.paperState) {
+            if(code == KeyEvent.VK_E) {
+                gp.gameState = gp.playState;
+            }
+        }
         // Chest State
         else if(gp.gameState == gp.chestState) {
             if(code == KeyEvent.VK_ESCAPE) {
