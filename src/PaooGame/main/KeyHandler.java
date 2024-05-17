@@ -35,7 +35,6 @@ public class KeyHandler implements KeyListener {
 
         // Menu State
         if(gp.gameState == gp.menuState) {
-            gp.stopMusic();
             if(code == KeyEvent.VK_W) {
                 gp.ui.commandNumber--;
                 if(gp.ui.commandNumber < 0) {

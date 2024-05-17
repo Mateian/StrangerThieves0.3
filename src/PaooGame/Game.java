@@ -229,15 +229,16 @@ public class Game extends JPanel implements Runnable {
     public void saveData() {
 
         // Entities
-        String monsters = "";
-        for(int i = 0; i < currentMap; ++i) {
-            for(int j = 0; j < mst[i].length; ++j) {
-                monsters += mst[i][j].name + ", " + mst[i][j].worldX + ", " + mst[i][j].worldY + ", " + mst[i][j].life + ", ";
-            }
-        }
-        if(!monsters.isEmpty()) {
-            monsters = monsters.substring(0, monsters.length() - 2);
-        }
+//        String monsters = "";
+//        for(int i = 0; i < currentMap; ++i) {
+//            for(int j = 0; j < mst[i].length; ++j) {
+//                monsters += mst[i][j].worldX + ", " + mst[i][j].worldY + ", " + mst[i][j].life + ", ";
+//            }
+//        }
+//        if(!monsters.isEmpty()) {
+//            monsters = monsters.substring(0, monsters.length() - 2);
+//        }
+//        System.out.println(monsters);
 
         // Inventory
         String inventory = "";
@@ -283,8 +284,8 @@ public class Game extends JPanel implements Runnable {
         fields.add("TEXT");
         fields.add("INVENTORY");
         fields.add("TEXT");
-        fields.add("MONSTERS");
-        fields.add("TEXT");
+//        fields.add("MONSTERS");
+//        fields.add("TEXT");
         dbMng.createPlayerTable(tableName, fields);
         // Adaugare date in tabel
         fields.clear();
@@ -303,7 +304,7 @@ public class Game extends JPanel implements Runnable {
         fields.add("LEVELSCORE");
         fields.add("LEVELCOUNTER");
         fields.add("INVENTORY");
-        fields.add("MONSTERS");
+//        fields.add("MONSTERS");
         ArrayList<String> values = new ArrayList<>();
         values.add(String.valueOf(player.worldX));
         values.add(String.valueOf(player.worldY));
@@ -320,7 +321,7 @@ public class Game extends JPanel implements Runnable {
         values.add(String.valueOf(levelScore));
         values.add(String.valueOf(levelCounter));
         values.add(inventory);
-        values.add(monsters);
+//        values.add(monsters);
         dbMng.insertPlayerTable(tableName, fields, values);
 
         restart();

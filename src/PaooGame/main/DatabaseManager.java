@@ -110,7 +110,7 @@ public class DatabaseManager {
             int levelScore = 0;
             int levelCounter = 0;
             String inventory = "";
-            String monsters = "";
+//            String monsters = "";
 
             while(rs.next()) {
                 playerX = Integer.parseInt(rs.getString("PLAYERPOSX"));
@@ -128,7 +128,7 @@ public class DatabaseManager {
                 levelScore = rs.getInt("LEVELSCORE");
                 levelCounter = rs.getInt("LEVELCOUNTER");
                 inventory = rs.getString("INVENTORY");
-                monsters = rs.getString("MONSTERS");
+//                monsters = rs.getString("MONSTERS");
             }
             gp.player.worldX = playerX;
             gp.player.worldY = playerY;
@@ -164,6 +164,15 @@ public class DatabaseManager {
                         break;
                 }
             }
+            System.out.println(inventory);
+//            String[] arrayMonsters = monsters.split(", ");
+//            int k = 0;
+//            System.out.println(arrayMonsters.length);
+//            for(int i = 0; i < arrayMonsters.length; i += 3) {
+//                gp.mst[currentMap][k].worldX = Integer.parseInt(arrayMonsters[i + 1]);
+//                gp.mst[currentMap][k].worldY = Integer.parseInt(arrayMonsters[i + 2]);
+//                k++;
+//            }
             rs.close();
             stmt.close();
             conn.close();
