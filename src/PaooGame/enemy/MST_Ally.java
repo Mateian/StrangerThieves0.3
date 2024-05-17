@@ -10,13 +10,15 @@ public class MST_Ally extends Entity {
     // Base Settings
     Game gp;
 
-    public MST_Ally(Game gp) {
+    public MST_Ally(Game gp, String enemyName, int worldX, int worldY) {
         super(gp);
 
         this.gp = gp;
 
+        this.name = enemyName;
+        this.worldX = worldX;
+        this.worldY = worldY;
         spriteNumber = 1;
-        name = "Ally";
         speed = 2;
         maxLife = 21;
         life = maxLife;

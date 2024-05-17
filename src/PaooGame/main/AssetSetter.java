@@ -138,7 +138,7 @@ public class AssetSetter {
         gp.obj[mapNum][k].worldY = 44 * gp.tileSize;
         ++k;
         chestNum++;
-        chest[chestNum].add(new MST_Enemy(gp));;
+        chest[chestNum].add(gp.eMng.createEnemy("Enemy", 8, 25));;
         gp.obj[mapNum][k] = new OBJ_Chest(gp, chest[chestNum]);
         gp.obj[mapNum][k].worldX = 8 * gp.tileSize;
         gp.obj[mapNum][k].worldY = 25 * gp.tileSize;
@@ -461,17 +461,17 @@ public class AssetSetter {
 
         // Zona 1
         for(int i = 0; i < 5; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (23 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 15;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 23 + i, 15);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (23 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 15;
             k++;
         }
 
         // Zona 2
         for(int i = 0; i < 5; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (15 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 19;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 15 + i, 19);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (15 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 19;
             k++;
         }
         gp.level1Score = k;
@@ -482,37 +482,37 @@ public class AssetSetter {
 
         // Zona 1
         for(int i = 0; i < 5; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * (31 + i);
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 19 + i, 31 + i);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * (31 + i);
             k++;
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * (32 + i);
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 19 + i, 32 + i);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (19 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * (32 + i);
             k++;
         }
 
         // Zona 2
         for(int i = 0; i < 4; ++i) {
-            gp.mst[mapNum][k] = new MST_MegaEnemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (17 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Mega Enemy", 17 + i, 20);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (17 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
             k++;
         }
 
         // Zona 3
         for(int i = 0; i < 2; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (31 + i + 1);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 31 + i + 1, 20);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (31 + i + 1);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 20;
             k++;
         }
 
         // Zona 4
         for(int i = 0; i < 2; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (14 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 7;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 14 + i, 7);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (14 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 7;
             k++;
         }
         gp.level2Score = k;
@@ -522,21 +522,21 @@ public class AssetSetter {
         k = 0;
 
         for(int i = 0; i < 3; ++i) {
-            gp.mst[mapNum][k] = new MST_Ally(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * 20;
-            gp.mst[mapNum][k].worldY = gp.tileSize * (29 + i);
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Ally", 20, 29 + i);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * 20;
+//            gp.mst[mapNum][k].worldY = gp.tileSize * (29 + i);
             k++;
         }
         for(int i = 0; i < 6; ++i) {
-            gp.mst[mapNum][k] = new MST_Enemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 26;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Enemy", 10 + i, 26);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 26;
             k++;
         }
         for(int i = 0; i < 4; ++i) {
-            gp.mst[mapNum][k] = new MST_MegaEnemy(gp);
-            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
-            gp.mst[mapNum][k].worldY = gp.tileSize * 27;
+            gp.mst[mapNum][k] = gp.eMng.createEnemy("Mega Enemy", 10 + i, 27);
+//            gp.mst[mapNum][k].worldX = gp.tileSize * (10 + i);
+//            gp.mst[mapNum][k].worldY = gp.tileSize * 27;
             k++;
         }
         gp.level3Score = k;
@@ -547,9 +547,9 @@ public class AssetSetter {
         ++k;
 
         // HEAD
-        gp.mst[mapNum][k] = new MST_HEAD(gp);
-        gp.mst[mapNum][k].worldX = 41 * gp.tileSize;
-        gp.mst[mapNum][k].worldY = 24 * gp.tileSize;
+        gp.mst[mapNum][k] = gp.eMng.createEnemy("HEAD", 41, 24);
+//        gp.mst[mapNum][k].worldX = 41 * gp.tileSize;
+//        gp.mst[mapNum][k].worldY = 24 * gp.tileSize;
         ++k;
     }
 }

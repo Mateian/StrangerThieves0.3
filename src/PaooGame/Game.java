@@ -1,6 +1,7 @@
 package PaooGame;
 
 import PaooGame.ai.PathFinder;
+import PaooGame.entity.EnemyManager;
 import PaooGame.entity.Entity;
 import PaooGame.entity.Player;
 import PaooGame.main.*;
@@ -42,7 +43,6 @@ public class Game extends JPanel implements Runnable {
     public KeyHandler keyH = new KeyHandler(this);
     public Sound music = new Sound();
     public Sound fx = new Sound();
-    public UI ui = new UI(this);
     public EventHandler eventH = new EventHandler(this);
     public Thread gameThread;
     public CollisionChecker colChecker = new CollisionChecker(this);
@@ -51,6 +51,8 @@ public class Game extends JPanel implements Runnable {
     public PathFinder pather = new PathFinder(this);
     public CutsceneManager cutsceneMng = new CutsceneManager(this);
     public DatabaseManager dbMng = new DatabaseManager("database.db", this);
+    public EnemyManager eMng = new EnemyManager(this);
+    public UI ui = new UI(this);
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);

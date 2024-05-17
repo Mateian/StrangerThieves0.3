@@ -13,13 +13,15 @@ public class MST_Enemy extends Entity {
     // Base Settings
     Game gp;
 
-    public MST_Enemy(Game gp) {
+    public MST_Enemy(Game gp, String enemyName, int worldX, int worldY) {
         super(gp);
 
         this.gp = gp;
 
+        this.name = enemyName;
+        this.worldX = worldX;
+        this.worldY = worldY;
         spriteNumber = 1;
-        name = "Enemy";
         speed = 2;
         maxLife = 4;
         life = maxLife;

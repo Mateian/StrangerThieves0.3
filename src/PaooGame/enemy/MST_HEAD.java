@@ -12,12 +12,14 @@ public class MST_HEAD extends Entity {
     Game gp;
     int scale;
 
-    public MST_HEAD(Game gp) {
+    public MST_HEAD(Game gp, String enemyName, int worldX, int worldY) {
         super(gp);
         this.gp = gp;
 
+        this.name = enemyName;
+        this.worldX = worldX;
+        this.worldY = worldY;
         spriteNumber = 1;
-        name = "HEAD";
         speed = 2;
         maxLife = 40;
         life = maxLife;

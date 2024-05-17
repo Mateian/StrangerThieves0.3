@@ -66,7 +66,7 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
         // Images
-        MST_Enemy enemy = new MST_Enemy(gp);
+        MST_Enemy enemy = (MST_Enemy) gp.eMng.createEnemy("Enemy", 0, 0);
         enemyImage = enemy.down1;
         OBJ_Door door = new OBJ_Door(gp);
         doorImage = door.image;
