@@ -113,6 +113,8 @@ public class DatabaseManager {
             String monsters = "";
             String npc = "";
             String objects = "";
+            int music = 0;
+            int fx = 0;
 
             while(rs.next()) {
                 playerX = Integer.parseInt(rs.getString("PLAYERPOSX"));
@@ -134,6 +136,8 @@ public class DatabaseManager {
                 monsters = rs.getString("MONSTERS");
                 npc = rs.getString("NPC");
                 objects = rs.getString("OBJECTS");
+                music = rs.getInt("MUSIC");
+                fx = rs.getInt("FX");
             }
             gp.player.worldX = playerX;
             gp.player.worldY = playerY;
@@ -150,6 +154,8 @@ public class DatabaseManager {
             gp.level3Score = level3Score;
             gp.levelScore = levelScore;
             gp.levelCounter = levelCounter;
+            gp.music.volumeScale = music;
+            gp.fx.volumeScale = fx;
 
             // Parse
             String[] arrayInventory = inventory.split(", ");

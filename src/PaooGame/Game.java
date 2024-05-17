@@ -106,7 +106,7 @@ public class Game extends JPanel implements Runnable {
     public void setupGame() {
         wnd = new GameWindow("Stranger Thieves", tileSize * maxScreenColumn, tileSize * maxScreenRow, this);
         wnd.BuildGameWindow();
-        config.loadConfig();
+//        config.loadConfig();
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
@@ -323,6 +323,10 @@ public class Game extends JPanel implements Runnable {
         fields.add("TEXT");
         fields.add("OBJECTS");
         fields.add("TEXT");
+        fields.add("MUSIC");
+        fields.add("TEXT");
+        fields.add("FX");
+        fields.add("TEXT");
         dbMng.createPlayerTable(tableName, fields);
         // Adaugare date in tabel
         fields.clear();
@@ -345,6 +349,8 @@ public class Game extends JPanel implements Runnable {
         fields.add("MONSTERS");
         fields.add("NPC");
         fields.add("OBJECTS");
+        fields.add("MUSIC");
+        fields.add("FX");
         ArrayList<String> values = new ArrayList<>();
         values.add(String.valueOf(player.worldX));
         values.add(String.valueOf(player.worldY));
@@ -365,6 +371,8 @@ public class Game extends JPanel implements Runnable {
         values.add(monsters);
         values.add(npc);
         values.add(objects);
+        values.add(String.valueOf(music.volumeScale));
+        values.add(String.valueOf(fx.volumeScale));
         dbMng.insertPlayerTable(tableName, fields, values);
 
         restart();

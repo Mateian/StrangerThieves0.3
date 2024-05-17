@@ -13,7 +13,7 @@ public class Sound {
 
     // Control
     FloatControl fc;
-    int volumeScale = 3;
+    public int volumeScale = 3;
     float volume;
 
     // Array of all sounds used in the game
