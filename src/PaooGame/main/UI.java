@@ -337,7 +337,7 @@ public class UI {
             graph2.setFont(graph2.getFont().deriveFont(25F));
             graph2.drawString("->", textX - 30, textY);
             if(gp.keyH.enterPressed) {
-                commandNumber = 1;
+                commandNumber = 0;
                 gp.saveData();
                 gp.gameState = gp.menuState;
             }
