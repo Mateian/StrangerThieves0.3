@@ -96,13 +96,13 @@ public class UI {
         this.graph2 = graph2;
 
             // Menu
-            if(gp.gameState == gp.menuState) {
+            if(gp.sc.stateEqualTo(gp.menuState)) {
                 drawMenu();
             }
-            if(gp.gameState == gp.optionsState) {
+            if(gp.sc.stateEqualTo(gp.optionsState)) {
                 drawOptionsScreen();
             }
-            if(gp.gameState == gp.playState) {
+            if(gp.sc.stateEqualTo(gp.playState)) {
                 int levelScore;
                 int levelCounter;
                 switch(gp.currentMap) {
@@ -172,26 +172,26 @@ public class UI {
                 currentWeaponFrame();
                 drawCurrentWeapon();
             }
-            if(gp.gameState == gp.pauseState) {
+            if(gp.sc.stateEqualTo(gp.pauseState)) {
                 drawPauseScreen();
             }
             // Dialog State
-            if(gp.gameState == gp.dialogState) {
+            if(gp.sc.stateEqualTo(gp.dialogState)) {
                 drawDialogScreen();
             }
-            if(gp.gameState == gp.deadState) {
+            if(gp.sc.stateEqualTo(gp.deadState)) {
                 drawDeathScreen();
             }
-            if(gp.gameState == gp.inventoryState) {
+            if(gp.sc.stateEqualTo(gp.inventoryState)) {
                 drawInventory();
             }
-            if(gp.gameState == gp.gameFinished) {
+            if(gp.sc.stateEqualTo(gp.gameFinished)) {
                 drawFinish();
             }
-            if(gp.gameState == gp.paperState) {
+            if(gp.sc.stateEqualTo(gp.paperState)) {
                 drawPaper(paperText);
             }
-//            if(gp.gameState == gp.chestState) {
+//            if(gp.sc.stateEqualTo(gp.chestState)) {
 //                openChest();
 //            }
     }
@@ -339,7 +339,7 @@ public class UI {
             if(gp.keyH.enterPressed) {
                 commandNumber = 0;
                 gp.saveData();
-                gp.gameState = gp.menuState;
+                gp.sc.changeState(gp.menuState);
             }
         }
         graph2.setFont(graph2.getFont().deriveFont(30F));
@@ -356,7 +356,7 @@ public class UI {
             graph2.setFont(graph2.getFont().deriveFont(25F));
             graph2.drawString("->", textX - 30, textY);
             if(gp.keyH.enterPressed) {
-                gp.gameState = gp.playState;
+                gp.sc.changeState(gp.playState);
                 commandNumber = 0;
             }
         }

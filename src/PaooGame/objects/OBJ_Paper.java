@@ -31,7 +31,7 @@ public class OBJ_Paper extends Entity {
     }
     public void use(Entity entity) {
         gp.paperDraw = true;
-        gp.gameState = gp.paperState;
+        gp.sc.changeState(gp.paperState);
         gp.ui.setPaperText(this.paperText);
     }
 }

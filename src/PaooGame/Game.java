@@ -50,12 +50,13 @@ public class Game extends JPanel implements Runnable {
     public Config config = new Config(this);
     public PathFinder pather = new PathFinder(this);
     public CutsceneManager cutsceneMng = new CutsceneManager(this);
-    public DatabaseManager dbMng = new DatabaseManager("database.db", this);
-    public EnemyManager eMng = new EnemyManager(this);
+    public DatabaseManager dbMng = new DatabaseManager("database.db", this);  // Builder Pattern
+    public EnemyManager eMng = new EnemyManager(this);  // Factory Pattern
     public UI ui = new UI(this);
+    public StateChanger sc = new StateChanger(this);  // State Pattern
 
     // Entities & Objects
-    public Player player = Player.CreatePlayer(this, keyH);
+    public Player player = Player.CreatePlayer(this, keyH);  // Singleton
     public Entity[][] obj = new Entity[maxMap][80];
     public Entity[][] NPC = new Entity[maxMap][20];
     public Entity[][] mst = new Entity[maxMap][20];
@@ -138,7 +139,7 @@ public class Game extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if(delta >= 1) {
-                if(gameState == pauseState) {
+                if(sc.stateEqualTo(pauseState)) {
                     ui.drawPauseScreen();
                 }
                 update();
@@ -155,7 +156,7 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(gameState == playState) {
+        if(sc.stateEqualTo(playState)) {
             player.update();
             for(int i = 0; i < NPC[1].length; ++i) {
                 if(NPC[currentMap][i] != null) {
@@ -184,7 +185,7 @@ public class Game extends JPanel implements Runnable {
                 }
             }
         }
-        if(gameState == pauseState) {
+        if(sc.stateEqualTo(pauseState)) {
             ui.drawPauseScreen();
         }
         if(currentMap == 2 && levelCounter == levelScore) {
@@ -198,22 +199,21 @@ public class Game extends JPanel implements Runnable {
             }
             levelCounter = 0;
         }
-
         // Level 1 Completion
         if(currentMap == 0 && levelCounter == levelScore) {
-          gameState = levelCompleteState;
+          sc.changeState(levelCompleteState);
 //            currentMap = 1;
         }
 
         // Level 2 Completion
         if(currentMap == 1 && level2HeadInteraction) {
-            gameState = levelCompleteState;
+            sc.changeState(levelCompleteState);
             player.keyNumber = 0;
         }
 
         // Level 3 Completion
         if(currentMap == 2 && level3Eliminated) {
-            gameState = gameFinished;
+            sc.changeState(gameFinished);
         }
 
         // Debug
@@ -226,7 +226,7 @@ public class Game extends JPanel implements Runnable {
 
         // Extragere date din tabel
         dbMng.selectPlayerTable(tableName);
-        gameState = playState;
+        sc.changeState(playState);
     }
     public void saveData() {
 
@@ -403,7 +403,7 @@ public class Game extends JPanel implements Runnable {
         }
 
         // Menu
-        if(gameState == menuState) {
+        if(sc.stateEqualTo(menuState)) {
             ui.draw(graph2);
         } else {
 
@@ -458,7 +458,7 @@ public class Game extends JPanel implements Runnable {
             ui.draw(graph2);
         }
 
-        if(gameState == levelCompleteState) {
+        if(sc.stateEqualTo(levelCompleteState)) {
             ui.drawWin();
         }
 
@@ -500,7 +500,7 @@ public class Game extends JPanel implements Runnable {
     }
 
     void levelSettings() {
-        gameState = menuState;
+        sc.changeState(menuState);
         levelCounter = 0;
         switch(currentMap) {
             case 0:

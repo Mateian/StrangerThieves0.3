@@ -226,7 +226,7 @@ public class Player extends Entity {
         }
 
         if (life <= 0) {
-            gp.gameState = gp.deadState;
+            gp.sc.changeState(gp.deadState);
         }
         if(!canPickup) {
             actionCounter++;
@@ -464,7 +464,7 @@ public class Player extends Entity {
     public void intersectNPC(int i) {
         if(gp.keyH.ePressed) {
             if(i != invalidIndex) {
-                gp.gameState = gp.dialogState;
+                gp.sc.changeState(gp.dialogState);
                 gp.NPC[gp.currentMap][i].talk();
             } else {
                 attacking = true;

@@ -73,13 +73,13 @@ public class EventHandler {
     }
 
     public void giveDamage(int column, int row, int gameState) {
-        gp.gameState = gameState;
+        gp.sc.changeState(gameState);
         gp.ui.dialogText = "Ai luat damage!";
         gp.player.life--;
         canTouchEvent = false;
     }
     public void heal(int column, int row, int gameState) {
-        gp.gameState = gameState;
+        gp.sc.changeState(gameState);
         gp.ui.dialogText = "Ai luat heal!";
         gp.player.life = gp.player.maxLife;
         canTouchEvent = false;
@@ -119,7 +119,7 @@ public class EventHandler {
         canTouchEvent = false;
     }
     public void found() {
-        gp.gameState = gp.cutsceneState;
+        gp.sc.changeState(gp.cutsceneState);
         gp.cutsceneMng.sceneNum = gp.cutsceneMng.HEAD;
     }
 }
