@@ -251,7 +251,7 @@ public class Game extends JPanel implements Runnable {
                 if(NPC[i][j] != null) {
                     npc += NPC[i][j].worldX + ", " + NPC[i][j].worldY + ", ";
                 } else {
-                    npc += -1 + ", " + -1 + ", " + -1 + ", ";
+                    npc += -1 + ", " + -1 + ", ";
                 }
             }
         }
@@ -265,7 +265,7 @@ public class Game extends JPanel implements Runnable {
                 if(obj[i][j] != null) {
                     objects += obj[i][j].worldX + ", " + obj[i][j].worldY + ", ";
                 } else {
-                    objects += -1 + ", " + -1 + ", " + -1 + ", ";
+                    objects += -1 + ", " + -1 + ", ";
                 }
             }
         }
