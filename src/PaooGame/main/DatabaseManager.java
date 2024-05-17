@@ -144,6 +144,8 @@ public class DatabaseManager {
             gp.level3Score = level3Score;
             gp.levelScore = levelScore;
             gp.levelCounter = levelCounter;
+
+            // Parse
             String[] arrayInventory = inventory.split(", ");
             for(int i = 0; i < arrayInventory.length; ++i) {
                 switch(arrayInventory[i]) {
