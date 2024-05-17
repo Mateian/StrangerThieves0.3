@@ -35,6 +35,7 @@ public class KeyHandler implements KeyListener {
 
         // Menu State
         if(gp.gameState == gp.menuState) {
+            gp.stopMusic();
             if(code == KeyEvent.VK_W) {
                 gp.ui.commandNumber--;
                 if(gp.ui.commandNumber < 0) {
@@ -49,11 +50,12 @@ public class KeyHandler implements KeyListener {
             }
             if(code == KeyEvent.VK_ENTER) {
                 if(gp.ui.commandNumber == 0) {
+                    gp.currentMap = 0;
                     gp.gameState = gp.playState;
                     gp.playMusic(0);
                 }
                 if(gp.ui.commandNumber == 1) {
-                    // mai tarziu
+                    gp.loadData();
                 }
                 if(gp.ui.commandNumber == 2) {
                     System.exit(0);
@@ -190,9 +192,11 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_E) {
                 gp.gameState = gp.playState;
                 int index = gp.colChecker.checkEntity(gp.player, gp.NPC);
-                if(gp.NPC[gp.currentMap][index] != null) {
-                    if(index != Entity.invalidIndex && gp.NPC[gp.currentMap][index].name.equals("HEAD NPC")) {
-                        gp.level2HeadInteraction = true;
+                if(index != Entity.invalidIndex) {
+                    if(gp.NPC[gp.currentMap][index] != null) {
+                        if(gp.NPC[gp.currentMap][index].name.equals("HEAD NPC")) {
+                            gp.level2HeadInteraction = true;
+                        }
                     }
                 }
             }

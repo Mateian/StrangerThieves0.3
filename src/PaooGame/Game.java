@@ -4,13 +4,11 @@ import PaooGame.ai.PathFinder;
 import PaooGame.entity.Entity;
 import PaooGame.entity.Player;
 import PaooGame.main.*;
-import PaooGame.objects.OBJ_KTPY;
 import PaooGame.objects.OBJ_Key;
 import PaooGame.tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,6 +50,7 @@ public class Game extends JPanel implements Runnable {
     public Config config = new Config(this);
     public PathFinder pather = new PathFinder(this);
     public CutsceneManager cutsceneMng = new CutsceneManager(this);
+    public DatabaseManager dbMng = new DatabaseManager("database.db", this);
 
     // Entities & Objects
     public Player player = Player.CreatePlayer(this, keyH);
@@ -83,7 +82,6 @@ public class Game extends JPanel implements Runnable {
     public int destroyedStone = 0;
     public boolean level2HeadInteraction = false;
     public boolean level3Eliminated = false;
-
     public int level1Score;
     public int level2Score;
     public int level3Score;
@@ -219,6 +217,115 @@ public class Game extends JPanel implements Runnable {
         // Debug
 
     }
+    public void loadData() {
+
+        // Player Settings
+        String tableName = "PLAYER_SETTINGS";
+
+        // Extragere date din tabel
+        dbMng.selectPlayerTable(tableName);
+        gameState = playState;
+    }
+    public void saveData() {
+
+        // Entities
+        String monsters = "";
+        for(int i = 0; i < currentMap; ++i) {
+            for(int j = 0; j < mst[i].length; ++j) {
+                monsters += mst[i][j].name + ", " + mst[i][j].worldX + ", " + mst[i][j].worldY + ", " + mst[i][j].life + ", ";
+            }
+        }
+        if(!monsters.isEmpty()) {
+            monsters = monsters.substring(0, monsters.length() - 2);
+        }
+
+        // Inventory
+        String inventory = "";
+        for(int i = 0; i < player.inventory.size(); ++i) {
+            inventory += player.inventory.get(i).name + ", ";
+        }
+        if(!inventory.isEmpty()) {
+            inventory = inventory.substring(0, inventory.length() - 2);
+        }
+
+        // Player Settings
+        String tableName = "PLAYER_SETTINGS";
+
+        // Creare tabel daca nu exista
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("PLAYERPOSX");
+        fields.add("TEXT");
+        fields.add("PLAYERPOSY");
+        fields.add("TEXT");
+        fields.add("CURRENTMAP");
+        fields.add("TEXT");
+        fields.add("DIRECTION");
+        fields.add("TEXT");
+        fields.add("SPAWNEDDOORS");
+        fields.add("TEXT");
+        fields.add("OPENEDDOORS");
+        fields.add("TEXT");
+        fields.add("DESTROYEDSTONE");
+        fields.add("TEXT");
+        fields.add("LEVEL2HEADINTERACTION");
+        fields.add("TEXT");
+        fields.add("LEVEL3ELIMINATED");
+        fields.add("TEXT");
+        fields.add("LEVEL1SCORE");
+        fields.add("TEXT");
+        fields.add("LEVEL2SCORE");
+        fields.add("TEXT");
+        fields.add("LEVEL3SCORE");
+        fields.add("TEXT");
+        fields.add("LEVELSCORE");
+        fields.add("TEXT");
+        fields.add("LEVELCOUNTER");
+        fields.add("TEXT");
+        fields.add("INVENTORY");
+        fields.add("TEXT");
+        fields.add("MONSTERS");
+        fields.add("TEXT");
+        dbMng.createPlayerTable(tableName, fields);
+        // Adaugare date in tabel
+        fields.clear();
+        fields.add("PLAYERPOSX");
+        fields.add("PLAYERPOSY");
+        fields.add("CURRENTMAP");
+        fields.add("DIRECTION");
+        fields.add("SPAWNEDDOORS");
+        fields.add("OPENEDDOORS");
+        fields.add("DESTROYEDSTONE");
+        fields.add("LEVEL2HEADINTERACTION");
+        fields.add("LEVEL3ELIMINATED");
+        fields.add("LEVEL1SCORE");
+        fields.add("LEVEL2SCORE");
+        fields.add("LEVEL3SCORE");
+        fields.add("LEVELSCORE");
+        fields.add("LEVELCOUNTER");
+        fields.add("INVENTORY");
+        fields.add("MONSTERS");
+        ArrayList<String> values = new ArrayList<>();
+        values.add(String.valueOf(player.worldX));
+        values.add(String.valueOf(player.worldY));
+        values.add(String.valueOf(currentMap));
+        values.add(player.direction);
+        values.add(String.valueOf(spawnedDoors));
+        values.add(String.valueOf(openedDoors));
+        values.add(String.valueOf(destroyedStone));
+        values.add(String.valueOf(level2HeadInteraction));
+        values.add(String.valueOf(level3Eliminated));
+        values.add(String.valueOf(level1Score));
+        values.add(String.valueOf(level2Score));
+        values.add(String.valueOf(level3Score));
+        values.add(String.valueOf(levelScore));
+        values.add(String.valueOf(levelCounter));
+        values.add(inventory);
+        values.add(monsters);
+        dbMng.insertPlayerTable(tableName, fields, values);
+
+        restart();
+    }
+
     public void restart() {
         player.setDefaultPosition();
         player.restoreLife();

@@ -12,7 +12,7 @@ public class OBJ_KTPY extends Entity {
         type = type_weapon;
         isWeapon = true;
         name = "KTPY";
-        image = setup(14, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
+        down = image = setup(14, 0, "/objects/object_spritesheet", gp.originalTileSize, gp.originalTileSize);
         projectile = new OBJ_MegaBullet(gp);
         setAmmoProps();
     }
