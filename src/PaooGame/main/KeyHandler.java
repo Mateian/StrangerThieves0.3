@@ -31,6 +31,8 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        // Apasare tasta - control
         int code = e.getKeyCode();
 
         // Menu State

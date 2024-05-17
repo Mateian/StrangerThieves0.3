@@ -196,6 +196,8 @@ public class UI {
 //            }
     }
     public void drawPaper(String text) {
+
+        // Desenare hartie - HUD
         int x = gp.tileSize * 5;
         int y = gp.tileSize;
         int width = gp.tileSize * 6;
@@ -212,6 +214,8 @@ public class UI {
         }
     }
     public void drawFinish() {
+
+        // Desenare ecran final
         graph2.setColor(Color.darkGray);
         graph2.fillRect(xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2, graph2.getFontMetrics().getWidths()[0], graph2.getFontMetrics().getHeight());
         graph2.setFont(new Font("Consolas", Font.BOLD, 40));
@@ -219,11 +223,12 @@ public class UI {
         graph2.drawString("Congratulations! You saved, Fen!", xCenterText("Congratulations! You saved, Fen!"), gp.screenHeight / 2);
         graph2.drawString(String.format("Time: %.2f", playTime), xCenterText(String.format("Time: %.2f", playTime)), gp.screenHeight / 2 + 50);
     }
-//    dFormat.format(playTime)
     public void setPaperText(String text) {
         paperText = text;
     }
     public void drawInventory() {
+
+        // Desenare inventar
 
         // Window
         int frameX = gp.tileSize * 10;
@@ -267,6 +272,8 @@ public class UI {
         graph2.drawRoundRect(selectX, selectY, selectWidth, selectHeight, 10, 10);
     }
     public void drawOptionsScreen() {
+
+        // Desenare ecran optiuni
         graph2.setColor(Color.white);
         graph2.setFont(graph2.getFont().deriveFont(30F));
 
@@ -288,6 +295,8 @@ public class UI {
         gp.keyH.enterPressed = false;
     }
     public void options_draw(int frameX, int frameY) {
+
+        // Desenare ecran optiuni
         int textX;
         int textY;
         graph2.setFont(console_40B);
@@ -382,6 +391,8 @@ public class UI {
         gp.config.saveConfig();
     }
     public void controls_draw(int frameX, int frameY) {
+
+        // Desenare ecran controale
         int textX;
         int textY;
         graph2.setFont(console_40B);
@@ -431,15 +442,19 @@ public class UI {
         }
     }
     public void drawCurrentWeapon() {
+
+        // Desenare arma curenta
         if(gp.player.hasWeapon) {
             graph2.drawImage(gp.player.currentWeapon.image, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
         }
     }
     public void currentWeaponFrame() {
+        // Desenare chenar arma
         graph2.drawImage(weaponFrame, gp.screenWidth - gp.tileSize * 3, gp.screenHeight - gp.tileSize * 3, 75, 75,null);
-
     }
     public void drawDeathScreen() {
+
+        // Desenare ecran sfarsit joc
         String text = "You are dead";
         int x = xCenterText(text);
         int y = gp.screenHeight / 2;
@@ -449,18 +464,20 @@ public class UI {
         graph2.setFont(console_40B);
         graph2.drawString(text, x, y);
         text = "Press Enter to restart";
-        y += 10;
+        y += 50;
         x += xCenterText(text);
         graph2.drawString(text, x, y);
-
     }
     public void drawWin() {
+
+        // Desenare nivel complet
         graph2.setFont(new Font("Consolas", Font.PLAIN, 40));
         graph2.setColor(Color.white);
         graph2.drawString("Level Completed", xCenterText("Level Completed"), gp.screenHeight / 2);
     }
     public void drawLife() {
 
+        // Desenare viata
         int x = gp.tileSize / 2;
         int y = gp.screenHeight - gp.tileSize * 2;
         int i = 0;
@@ -609,6 +626,8 @@ public class UI {
 
     }
     public void drawSubWindow(int x, int y, int width, int height) {
+
+        // Desenare chenar subwindow
         Color clr = new Color(0, 0 ,0, 210);
         graph2.setColor(clr);
         graph2.fillRoundRect(x, y, width, height, 35, 35);
@@ -620,6 +639,8 @@ public class UI {
         graph2.setColor(Color.white);
     }
     public void drawPauseScreen() {
+
+        // Desenare ecran pauza
         graph2.setColor(Color.white);
         graph2.setFont(graph2.getFont().deriveFont(Font.PLAIN, 80));
         String text = "PAUSED";
@@ -638,11 +659,15 @@ public class UI {
         graph2.drawString(text, gp.screenWidth - 2 * gp.tileSize, gp.originalTileSize);
     }
     public int xCenterText(String text) {
+
+        // Coordonate x pentru mijlocul textului
         int length = (int)graph2.getFontMetrics().getStringBounds(text, graph2).getWidth();
         int x = gp.screenWidth / 2 - length / 2;
         return x;
     }
     public int getItemIndexOnSlot() {
+
+        // Returnare index item selectie curenta din inventar
         return slotCol + (slotRow * 3);
     }
     public void openChest(Entity entity) {

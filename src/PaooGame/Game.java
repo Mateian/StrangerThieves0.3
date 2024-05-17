@@ -98,6 +98,8 @@ public class Game extends JPanel implements Runnable {
     int contor = 0;
 
     public Game() {
+
+        // Setari fereastra + joc - initializare
         wnd = new GameWindow("Stranger Thieves", screenWidth, screenHeight, this);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -107,6 +109,8 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+
+        // Setup joc
         wnd = new GameWindow("Stranger Thieves", tileSize * maxScreenColumn, tileSize * maxScreenRow, this);
         wnd.BuildGameWindow();
 //        config.loadConfig();
@@ -117,6 +121,8 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void startGame() {
+
+        // Initializare joc
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -125,6 +131,8 @@ public class Game extends JPanel implements Runnable {
     // instructiunile din aceasta pana cand se va inchide
     @Override
     public void run() {
+
+        // Bucla joc
         double drawInterval = (double) 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
@@ -133,6 +141,8 @@ public class Game extends JPanel implements Runnable {
         int drawCount = 0;
 
         while(gameThread != null) {
+
+            // Setare FPS
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             timer += currentTime - lastTime;
@@ -156,7 +166,10 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void update() {
+
+        // Update Game
         if(sc.stateEqualTo(playState)) {
+            // Update player, npc, monstrii, obiecte, proiectile etc. - Entitati
             player.update();
             for(int i = 0; i < NPC[1].length; ++i) {
                 if(NPC[currentMap][i] != null) {
@@ -185,9 +198,12 @@ public class Game extends JPanel implements Runnable {
                 }
             }
         }
+        // Pause State
         if(sc.stateEqualTo(pauseState)) {
             ui.drawPauseScreen();
         }
+
+        // Spawnare cheie in harta 3 dupa eliminarea tuturor inamicilor
         if(currentMap == 2 && levelCounter == levelScore) {
             for(int i = 0; i < obj[currentMap].length; ++i) {
                 if(obj[currentMap][i] == null) {
@@ -330,6 +346,7 @@ public class Game extends JPanel implements Runnable {
         fields.add("FX");
         fields.add("TEXT");
         dbMng.createPlayerTable(tableName, fields);
+
         // Adaugare date in tabel
         fields.clear();
         fields.add("PLAYERPOSX");
@@ -377,10 +394,13 @@ public class Game extends JPanel implements Runnable {
         values.add(String.valueOf(fx.volumeScale));
         dbMng.insertPlayerTable(tableName, fields, values);
 
+        // Resetare joc dupa salvare in baza de date
         restart();
     }
 
     public void restart() {
+
+        // Resetare nivel
         player.setDefaultPosition();
         player.restoreLife();
         aSetter.setNPC();
@@ -485,6 +505,8 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void playMusic(int i) {
+
+        // Play - muzica
         music.setFile(i);
         music.play();
         music.loop();
@@ -495,11 +517,15 @@ public class Game extends JPanel implements Runnable {
     }
 
     public void playFX(int i) {
+
+        // Play - FX
         fx.setFile(i);
         fx.play();
     }
 
     void levelSettings() {
+
+        // Setari nivel
         sc.changeState(menuState);
         levelCounter = 0;
         switch(currentMap) {

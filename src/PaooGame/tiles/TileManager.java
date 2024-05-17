@@ -36,12 +36,14 @@ public class TileManager {
 
         mapTile = new int[gp.maxMap][gp.maxWorldColumn][gp.maxWorldRow];
 
+        // Imagini
         getImage();
+
+        // Incarcare harti
         loadMap("/maps/level01.txt", 0);
         loadMap("/maps/level02.txt", 1);
         loadMap("/maps/level03.txt", 2);
     }
-
     public void getImage() {
         setup(13, 0, 0, spriteSheetMap1, false);    // flower_bush - 0
         setup(0, 1, 0, spriteSheetMap1, false);     // grass - 1
@@ -71,8 +73,9 @@ public class TileManager {
         setup(25, 7, 0, spriteSheetMap3, false);    // black-tile - 25
         setup(26, 8, 0, spriteSheetMap3, false);    // pyramid-floor - 26
     }
-
     public void setup(int index, int indexX, int indexY, BufferedImage image, boolean collision) {
+
+        // Functie incarcare imagini
         Tools tool = new Tools();
         try {
             tile[index] = new Tile();
@@ -83,7 +86,6 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
     public void loadMap(String path, int map) {
         try{
             InputStream in = getClass().getResourceAsStream(path);
@@ -109,7 +111,6 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
     public void draw(Graphics2D graph2) {
         int worldColumn = 0;
         int worldRow = 0;
