@@ -5,6 +5,7 @@ import PaooGame.objects.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DatabaseManager {
 
@@ -32,7 +33,6 @@ public class DatabaseManager {
             }
             sql = sql.substring(0, sql.length() - 2);
             sql += ");";
-            System.out.println(sql);
             stmt.execute(sql);
             stmt.close();
             conn.close();
@@ -68,8 +68,8 @@ public class DatabaseManager {
             for(int i = 0; i < fields.size(); ++i) {
                 sql += "\"" + fields.get(i) + "\"" + "=" + "\"" + values.get(i) + "\"" + ", ";
             }
+
             sql = sql.substring(0, sql.length() - 2);
-            System.out.println(sql);
             stmt.executeUpdate(sql);
             conn.commit();
             stmt.close();
@@ -82,7 +82,6 @@ public class DatabaseManager {
             System.out.println("Eroare: Eroare la inserarea in tabel.");
             e.printStackTrace();
         }
-
     }
     public void selectPlayerTable(String tableName){
         conn = null;
@@ -99,6 +98,7 @@ public class DatabaseManager {
             int playerY = 0;
             int currentMap = 0;
             String direction = "";
+            int life = 0;
             int spawnedDoors = 0;
             int openedDoors = 0;
             int destroyedStone = 0;
@@ -110,13 +110,16 @@ public class DatabaseManager {
             int levelScore = 0;
             int levelCounter = 0;
             String inventory = "";
-//            String monsters = "";
+            String monsters = "";
+            String npc = "";
+            String objects = "";
 
             while(rs.next()) {
                 playerX = Integer.parseInt(rs.getString("PLAYERPOSX"));
                 playerY = Integer.parseInt(rs.getString("PLAYERPOSY"));
                 currentMap = rs.getInt("CURRENTMAP");
                 direction = rs.getString("DIRECTION");
+                life = rs.getInt("LIFE");
                 spawnedDoors = rs.getInt("SPAWNEDDOORS");
                 openedDoors = rs.getInt("OPENEDDOORs");
                 destroyedStone = rs.getInt("DESTROYEDSTONE");
@@ -128,12 +131,15 @@ public class DatabaseManager {
                 levelScore = rs.getInt("LEVELSCORE");
                 levelCounter = rs.getInt("LEVELCOUNTER");
                 inventory = rs.getString("INVENTORY");
-//                monsters = rs.getString("MONSTERS");
+                monsters = rs.getString("MONSTERS");
+                npc = rs.getString("NPC");
+                objects = rs.getString("OBJECTS");
             }
             gp.player.worldX = playerX;
             gp.player.worldY = playerY;
             gp.currentMap = currentMap;
             gp.player.direction = direction;
+            gp.player.life = life;
             gp.spawnedDoors = spawnedDoors;
             gp.openedDoors = openedDoors;
             gp.destroyedStone = destroyedStone;
@@ -166,15 +172,40 @@ public class DatabaseManager {
                         break;
                 }
             }
-            System.out.println(inventory);
-//            String[] arrayMonsters = monsters.split(", ");
-//            int k = 0;
-//            System.out.println(arrayMonsters.length);
-//            for(int i = 0; i < arrayMonsters.length; i += 3) {
-//                gp.mst[currentMap][k].worldX = Integer.parseInt(arrayMonsters[i + 1]);
-//                gp.mst[currentMap][k].worldY = Integer.parseInt(arrayMonsters[i + 2]);
-//                k++;
-//            }
+            String[] arrayMonsters = monsters.split(", ");
+            int k = 0;
+            for(int i = 0; i < gp.mst.length; ++i) {
+                for(int j = 0; j < gp.mst[i].length; ++j) {
+                    if(gp.mst[i][j] != null) {
+                        gp.mst[i][j].worldX = Integer.parseInt(arrayMonsters[k]);
+                        gp.mst[i][j].worldY = Integer.parseInt(arrayMonsters[k + 1]);
+                        gp.mst[i][j].life = Integer.parseInt(arrayMonsters[k + 2]);
+                    }
+                    k += 3;
+                }
+            }
+            String[] arrayNPC = npc.split(", ");
+            k = 0;
+            for(int i = 0; i < gp.NPC.length; ++i) {
+                for(int j = 0; j < gp.NPC[i].length; ++j) {
+                    if(gp.NPC[i][j] != null) {
+                        gp.NPC[i][j].worldX = Integer.parseInt(arrayNPC[k]);
+                        gp.NPC[i][j].worldY = Integer.parseInt(arrayNPC[k + 1]);
+                    }
+                    k += 2;
+                }
+            }
+            String[] arrayObjects = objects.split(", ");
+            k = 0;
+            for(int i = 0; i < gp.obj.length; ++i) {
+                for(int j = 0; j < gp.obj[i].length; ++j) {
+                    if(gp.obj[i][j] != null) {
+                        gp.obj[i][j].worldX = Integer.parseInt(arrayObjects[k]);
+                        gp.obj[i][j].worldY = Integer.parseInt(arrayObjects[k + 1]);
+                    }
+                    k += 2;
+                }
+            }
             rs.close();
             stmt.close();
             conn.close();

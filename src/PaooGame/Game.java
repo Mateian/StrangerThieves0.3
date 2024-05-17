@@ -229,16 +229,47 @@ public class Game extends JPanel implements Runnable {
     public void saveData() {
 
         // Entities
-//        String monsters = "";
-//        for(int i = 0; i < currentMap; ++i) {
-//            for(int j = 0; j < mst[i].length; ++j) {
-//                monsters += mst[i][j].worldX + ", " + mst[i][j].worldY + ", " + mst[i][j].life + ", ";
-//            }
-//        }
-//        if(!monsters.isEmpty()) {
-//            monsters = monsters.substring(0, monsters.length() - 2);
-//        }
-//        System.out.println(monsters);
+        String monsters = "";
+        for(int i = 0; i < maxMap; ++i) {
+            for(int j = 0; j < mst[i].length; ++j) {
+                if(mst[i][j] != null) {
+                    monsters += mst[i][j].worldX + ", " + mst[i][j].worldY + ", " + mst[i][j].life + ", ";
+                } else {
+                    monsters += -1 + ", " + -1 + ", " + -1 + ", ";
+                }
+            }
+        }
+        if(!monsters.isEmpty()) {
+            monsters = monsters.substring(0, monsters.length() - 2);
+        }
+
+        String npc = "";
+        for(int i = 0; i < maxMap; ++i) {
+            for(int j = 0; j < NPC[i].length; ++j) {
+                if(NPC[i][j] != null) {
+                    npc += NPC[i][j].worldX + ", " + NPC[i][j].worldY + ", ";
+                } else {
+                    npc += -1 + ", " + -1 + ", " + -1 + ", ";
+                }
+            }
+        }
+        if(!npc.isEmpty()) {
+            npc = npc.substring(0, npc.length() - 2);
+        }
+
+        String objects = "";
+        for(int i = 0; i < maxMap; ++i) {
+            for(int j = 0; j < obj[i].length; ++j) {
+                if(obj[i][j] != null) {
+                    objects += obj[i][j].worldX + ", " + obj[i][j].worldY + ", ";
+                } else {
+                    objects += -1 + ", " + -1 + ", " + -1 + ", ";
+                }
+            }
+        }
+        if(!objects.isEmpty()) {
+            objects = objects.substring(0, objects.length() - 2);
+        }
 
         // Inventory
         String inventory = "";
@@ -262,6 +293,8 @@ public class Game extends JPanel implements Runnable {
         fields.add("TEXT");
         fields.add("DIRECTION");
         fields.add("TEXT");
+        fields.add("LIFE");
+        fields.add("TEXT");
         fields.add("SPAWNEDDOORS");
         fields.add("TEXT");
         fields.add("OPENEDDOORS");
@@ -284,8 +317,12 @@ public class Game extends JPanel implements Runnable {
         fields.add("TEXT");
         fields.add("INVENTORY");
         fields.add("TEXT");
-//        fields.add("MONSTERS");
-//        fields.add("TEXT");
+        fields.add("MONSTERS");
+        fields.add("TEXT");
+        fields.add("NPC");
+        fields.add("TEXT");
+        fields.add("OBJECTS");
+        fields.add("TEXT");
         dbMng.createPlayerTable(tableName, fields);
         // Adaugare date in tabel
         fields.clear();
@@ -293,6 +330,7 @@ public class Game extends JPanel implements Runnable {
         fields.add("PLAYERPOSY");
         fields.add("CURRENTMAP");
         fields.add("DIRECTION");
+        fields.add("LIFE");
         fields.add("SPAWNEDDOORS");
         fields.add("OPENEDDOORS");
         fields.add("DESTROYEDSTONE");
@@ -304,12 +342,15 @@ public class Game extends JPanel implements Runnable {
         fields.add("LEVELSCORE");
         fields.add("LEVELCOUNTER");
         fields.add("INVENTORY");
-//        fields.add("MONSTERS");
+        fields.add("MONSTERS");
+        fields.add("NPC");
+        fields.add("OBJECTS");
         ArrayList<String> values = new ArrayList<>();
         values.add(String.valueOf(player.worldX));
         values.add(String.valueOf(player.worldY));
         values.add(String.valueOf(currentMap));
         values.add(player.direction);
+        values.add(String.valueOf(player.life));
         values.add(String.valueOf(spawnedDoors));
         values.add(String.valueOf(openedDoors));
         values.add(String.valueOf(destroyedStone));
@@ -321,7 +362,9 @@ public class Game extends JPanel implements Runnable {
         values.add(String.valueOf(levelScore));
         values.add(String.valueOf(levelCounter));
         values.add(inventory);
-//        values.add(monsters);
+        values.add(monsters);
+        values.add(npc);
+        values.add(objects);
         dbMng.insertPlayerTable(tableName, fields, values);
 
         restart();
