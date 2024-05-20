@@ -204,7 +204,7 @@ public class Game extends JPanel implements Runnable {
         }
 
         // Spawnare cheie in harta 3 dupa eliminarea tuturor inamicilor
-        if(currentMap == 2 && levelCounter == levelScore) {
+        if(currentMap == 2 && levelCounter >= levelScore) {
             for(int i = 0; i < obj[currentMap].length; ++i) {
                 if(obj[currentMap][i] == null) {
                     obj[currentMap][i] = new OBJ_Key(this);
@@ -216,7 +216,7 @@ public class Game extends JPanel implements Runnable {
             levelCounter = 0;
         }
         // Level 1 Completion
-        if(currentMap == 0 && levelCounter == levelScore) {
+        if(currentMap == 0 && levelCounter >= levelScore) {
           sc.changeState(levelCompleteState);
 //            currentMap = 1;
         }
@@ -241,7 +241,7 @@ public class Game extends JPanel implements Runnable {
         String tableName = "PLAYER_SETTINGS";
 
         // Extragere date din tabel
-        dbMng.selectPlayerTable(tableName);
+        dbMng.selectTable(tableName);
         sc.changeState(playState);
     }
     public void saveData() {
@@ -345,7 +345,9 @@ public class Game extends JPanel implements Runnable {
         fields.add("TEXT");
         fields.add("FX");
         fields.add("TEXT");
-        dbMng.createPlayerTable(tableName, fields);
+        fields.add("KEYS");
+        fields.add("TEXT");
+        dbMng.createTable(tableName, fields);
 
         // Adaugare date in tabel
         fields.clear();
@@ -370,6 +372,7 @@ public class Game extends JPanel implements Runnable {
         fields.add("OBJECTS");
         fields.add("MUSIC");
         fields.add("FX");
+        fields.add("KEYS");
         ArrayList<String> values = new ArrayList<>();
         values.add(String.valueOf(player.worldX));
         values.add(String.valueOf(player.worldY));
@@ -392,7 +395,8 @@ public class Game extends JPanel implements Runnable {
         values.add(objects);
         values.add(String.valueOf(music.volumeScale));
         values.add(String.valueOf(fx.volumeScale));
-        dbMng.insertPlayerTable(tableName, fields, values);
+        values.add(String.valueOf(player.keyNumber));
+        dbMng.insertTable(tableName, fields, values);
 
         // Resetare joc dupa salvare in baza de date
         restart();

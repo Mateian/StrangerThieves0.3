@@ -274,8 +274,7 @@ public abstract class Entity {
     public void changeAlpha(Graphics2D graph2, float alpha) {
         graph2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
     }
-    public void setAction() {
-    }
+    public void setAction() {}
     public void dmgReact() {}
 //    Functie de adaugat in clasele in care se doreste implementarea AI-ului
 

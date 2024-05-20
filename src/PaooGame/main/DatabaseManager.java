@@ -5,7 +5,6 @@ import PaooGame.objects.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DatabaseManager {
 
@@ -20,7 +19,7 @@ public class DatabaseManager {
         this.gp = gp;
     }
 
-    public void createPlayerTable(String tableName, ArrayList<String> fields) {
+    public void createTable(String tableName, ArrayList<String> fields) {
         conn = null;
         stmt = null;
         try {
@@ -46,7 +45,7 @@ public class DatabaseManager {
         }
     }
 
-    public void insertPlayerTable(String tableName, ArrayList<String> fields, ArrayList<String> values) {
+    public void insertTable(String tableName, ArrayList<String> fields, ArrayList<String> values) {
         conn = null;
         stmt = null;
         try {
@@ -83,7 +82,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-    public void selectPlayerTable(String tableName){
+    public void selectTable(String tableName){
         conn = null;
         stmt = null;
         try {
@@ -115,6 +114,7 @@ public class DatabaseManager {
             String objects = "";
             int music = 0;
             int fx = 0;
+            int key = 0;
 
             while(rs.next()) {
                 playerX = Integer.parseInt(rs.getString("PLAYERPOSX"));
@@ -138,6 +138,7 @@ public class DatabaseManager {
                 objects = rs.getString("OBJECTS");
                 music = rs.getInt("MUSIC");
                 fx = rs.getInt("FX");
+                key = rs.getInt("KEYS");
             }
             gp.player.worldX = playerX;
             gp.player.worldY = playerY;
@@ -156,6 +157,7 @@ public class DatabaseManager {
             gp.levelCounter = levelCounter;
             gp.music.volumeScale = music;
             gp.fx.volumeScale = fx;
+            gp.player.keyNumber = key;
 
             // Parse
             String[] arrayInventory = inventory.split(", ");

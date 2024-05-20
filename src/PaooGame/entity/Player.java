@@ -80,8 +80,7 @@ public class Player extends Entity {
         difficulty = 4;
 //        inventory.add(new OBJ_Snaipa(gp));
     }
-    public void setItems() {
-    }
+    public void setItems() {}
     public void getImage() {
         // Moving Images
         up = setup(8, 0, "/player/skar_spritesheet", gp.originalTileSize, gp.originalTileSize);
@@ -381,7 +380,7 @@ public class Player extends Entity {
                     }
                 } else
                 if(gp.obj[gp.currentMap][i].name.equals("Door")) {
-                    if(gp.levelCounter == gp.levelScore || gp.spawnedDoors - gp.openedDoors == 8)
+                    if(gp.levelCounter >= gp.levelScore || gp.spawnedDoors - gp.openedDoors == 8)
                     {
                         int oldKeyNumber = keyNumber;
                         gp.obj[gp.currentMap][i].interact();
